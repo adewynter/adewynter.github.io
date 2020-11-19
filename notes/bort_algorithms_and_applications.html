@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Adrian de Wynter</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="dewynter.jpg"/>
+<script type="text/javascript", src="render_markdown.js"></script>
+
+</head>
+
+<meta name="keywords" content="Bort">
+<meta name="description" content="Bort - Algorithms and Applications.">
+
+
+<body>
+
+<emph>This is an extended version of a post that will be appearing somewhere soon. All the opinions expressed here are my own. Angry mail should be directed at me. Happy mail too--I'd rather receive that one.</emph>
+
+<p>A few weeks ago, my colleague Danny Perry and I released <a href="https://github.com/alexa/bort">Bort</a>, a highly optimized BERT-large model BERT-large that is 20x faster, 84% smaller, and consistently outperforms it in 20/23 natural-language understanding tasks.
+</p>
+<p>While the papers and model received their share of attention (I was not expecting that), I think that the density behind the two papers dealing with the algorithms keeps many people from reading them. Sure, math has to be precise, and statements need to be backed with proofs (you can't go around saying "bOrT iS oPtImAl" without a proof of that!).
+</p>
+<p> 
+Still, I love math, and I love computer science, and I'd very much like to offer you a window into the research done to obtain Bort, eschewing some of the long-winded lemmas and proofs, but emphasizing the ideas. Indeed, I personally believe that the ideas behind this research (concretely, the algorithms I developed) are far more interesting than the places on the leaderboard or the numbers attained. 
+</p>
+<p>
+In this post I will informally introduce you to these ideas, and share some of my passion for this field. I apologize beforehand for any omissions and handwaving (which is absolutely necessary in this case) and lack of images (because I don't know how licensing works).
+</p>
+<p>Following the great W. Hodges, in this post, "I" means "I", and "we" means "we".
+</p>
+
+<div class="tip", markdown="1">
+# Outline:
+- Background:
+  - Language models, architectural parameters
+  - P, NP, and FPTAS.
+- Model compression - the Bort way
+  - Optimal subarchitecture extraction (OSE)
+  - An FPTAS for OSE
+- Fine-tuning with algebraic topology
+  - Agora
+- Conclusion
+
+
+# Background
+## Language models and architectural parameters
+
+Some of y'all probably already know what a language model is, but the notion of an architectural parameter is new. I'll introduce here the notion of an _architectural parameter_ by using BERT as an example, since it is the use case for the algorithms I'll talk about.
+
+A _language model_ is, very informally, a mapping between strings and vectors. While one could build a big matrix of all words and assign a number based on the frequency of the words appearing together for each entry, it has become clear that a non-linear model (i.e., a neural network) works far better. Language models usually just return the _embedding_ (vectors), and it is the downstream model's problem to make sense of them and output something for the task. As an example, I want to do sentiment classification, so my input is a single sentence and my output is `happy` and `sad`. Then a standard pipeline would have a _pre-trained_ language model, usually trained to output good vectors with huge datasets, and then a small classifier that takes in the language model's output and returns `happy`/`sad`.
+
+The quality of the language model will directly impact the performance of the classifier, and normally you need to "specialize" (_fine-tune_) your language-model-and-classifier combination so that it knows what to do. 
+
+There is A LOT of things we can say about this field, but, since we are mostly talking about something else, we'll leave it for another time. All you need to know is that the most popular, successful, and--at the time--best performing language model out there is [BERT](https://arxiv.org/abs/1810.04805). Let's just skip the details about this language model, and just remark two things about it:
+- This is a large and slow model for production-level use, and
+- There are many variants of it.
+
+We'll focus on _parametric_ variants of BERT, because, as I said, BERT is a _use case_ of the algorithms from this post. To do this, think of BERT as a function that takes in four _architectural_ parameters: the depth, the number of attention heads, and the hidden and intermediate sizes. When you set these four architectural parameters to specific things, you get different variations on the architecture (e.g., BERT-large, BERT-base, TinyBERT, MicroBERT), etc, with interesting results. 
+A general trend is that smaller models aren't better, but they are significantly faster. I'll explain why later. Right now, I also would like to emphasize that BERT was considered underfit by its authors, and it wasn't until [RoBERTa](https://arxiv.org/abs/1907.11692) that a highly optimized version of the _same_ architecture was found. This means that RoBERTa has the same architectural parameters as BERT-large, but is better performing because it uses a different training scheme. I greatly recommend you check out these models if you're interested, since they are both quite important for the field. I think they are taught in school now! Also, note that other non-parametric variants (i.e., alterations on the graph) work really well, like [ALBERT](https://arxiv.org/abs/1909.11942). But our problem is different, so we'll just give credit where its due and move on.
+
+If you're still confused about architectural parameters, think of a single linear layer, $f(x) = ReLU(Ax + b)$, where $A$ is a $m \time sn$ real-valued matrix. The _trainable_ parameters are all the (uncountably infinite) values that $A$ can take. The _architectural_ parameters are $m$ and $n$. [By definition](https://arxiv.org/abs/2010.08512), these are non-trainable and cannot be found without meta-learning methods. However, they also form a space, since it's the set of all valid combinations of $m$ and $n$. This has more implications than you think, and we'll cover them one or two sections from now. 
+
+At the time of the release of the original BERT paper, the influence of specific combinations of architectural parameters was poorly understood. Nowadays, it's a bit better understood by the [work](https://arxiv.org/pdf/1908.08593.pdf) of many great researchers. For our use case, we'll forego the clever, specialized research mentioned before, and take it in a different, more primitive direction: _can a computer tell us what is the best combination, for an arbitrary model (not just BERT)?_
+
+Ok, let's forget about BERT for a moment, and get to the (more) fun stuff.
+
+
+## P, NP, and FPTAS
+
+Computational complexity theory, broadly speaking, studies and categorizes problems based on how "hard" they are. The definition of _hardness_ is very precise. We mostly care about polynomial-time solutions to problems, which may or may not be feasible to attain. Why polynomial? Well, mostly because polynomials compose well (so calling a poly-time algorithm from another poly-time algorithm will remain poly-time), and they do not grow too fast. This last part is quite important when talking about time and space of an algorithm--and for this post, we will be only talking about time.
+
+Think about sorting a collection of objects by trying out random permutations. Sure, if your collection of objects is $\{A, C, B\}$, there's only $3! = 6$ ways you can randomly arrange it. With luck, you'll be done "quickly". Or so it seems. This "algorithm" runs in a time that is a _factorial_ function of the input. I.e., a really large input will break it. 
+Think of doing the same thing with the words of the dictionary. A quick Google search says that there are 273,000 words in the English dictionary. That means that you will have $273,000! \sim 1.33 \times 10^{1365513}$ permutations. That exponent is HUGE! To put this number in perspective, another quick (Wolframalpha this time) search on the number of _atoms_ in the universe points it at a measly $6 \times 10^{79}$ atoms.
+
+So polynomial-time algorithms are nice. Besides, most natural problems have solutions in terms of "small" polynomials (i.e., rarely you'll see a solution bounded by $n^{50,000}$).
+
+Ok, back to complexity. The class of problems that can be solved with a polynomial-time algorithm is called **P**. The class of problems that can be solved by "trying out" multiple possible paths in the solution is called **NP** (for **N**on-deterministic **P**olynomial). A key component of problems in this class is that it's incredibly easy to verify a solution to the problem--e.g., testing whether a trained neural network generalizes well is as easy as just feeding a new dataset through it. _Training the network_, however, is another story.
+
+Some problems in **NP** are especially interesting, as they appear to be analogous to the rest of the problems in **NP**. We say that a problem is in **NP**-complete if any other problem can be transformed in polynomial time to it. Think of coloring a graph with three colors--you could just build (in polynomial time) a matrix with a bunch of boolean formulae and solve that instead. The final class is **NP**-Hard, which is roughly like **NP**-complete, except that, in this case, ALL problems in **NP** must be reducible to a problem in **NP**-Hard.
+
+If you're confused about this, take a look at [this](https://en.wikipedia.org/wiki/NP-completeness) diagram.
+
+Since a polynomial-time solution to **NP**-complete/hard problems appears to be impossible (i.e., unless **P**=**NP** you're never going to find one), we normally _approximate_ these problems. Sometimes, it is possible to approximate a problem to within a desired approximation parameter, $\epsilon$. 
+
+Turns out that you can also categorize problems (surprise!) based on their approximability. The class of problems that admit a solution in this form is called **APX**. However, the runtime may **not** be polynomial with respect to this $\epsilon$, e.g., your solution could be of the form $$poly(n^\epsilon)$$ (or worse).
+When your solution is a polynomial on $\epsilon$, it's called a Fully Polynomial-Approximation Scheme, or FPTAS. FPTAS is a class of problems, and it's also the type of algorithm, so we usually refer to either as such. In page 5 of [this](https://www.win.tue.nl/~gwoegi/papers/ptas.pdf) there's a diagram for the classes. The overall paper is worth diving into if you're interested in this field :)
+
+From now on, we will only use FPTAS to refer to the type of algorithm, and not the class. They are both acceptable.
+
+
+# Model Compression -- The Bort Way
+
+## Model Compression
+
+In general, training a neural network is known to be **NP**-complete. However, we approximate it ok-ishly for breakfast, all thanks to SGD, back-propagation, and a _healthy_ disregard of hardness in favor of GPU cycles. 
+
+It is not hard to see, however, that model compression is at least **NP**-hard: you must ensure generalizability of a target model, which means you need to train it, which means you need to train at least multiple nets, which implies hardness beyond what SGD is able to handle. 
+
+Indeed, many approximation approaches exist that are heuristic in nature, such as:
+- Knowledge distillation (which requires a fixed architecture)
+- Neural architecture search (where many approaches are problem-dependent)
+- Weight pruning (this one is my favorite)
+The question, which we will be going back to frequently, is:
+
+**Can we do better?**
+
+Yes!
+
+Now, the second question is **can we obtain a general-purpose, polynomial-time algorithm with provable optimality guarantees**?
+
+Errrr... Sure!
+
+## Optimal Subarchitecture Extraction (OSE)
+
+The problem we are solving can be informally stated as follows: given an input network, and two search spaces (architectural parameters and hyperparameter sets to try out), find an optimal subarchitecture such that its inference speed, parameter size, and error rate are all minimal accross all possible architectures.
+
+Note that OSE is different from weight pruning: weight pruning takes in a trained network and returns a pruned network that is faster, smaller, and generalizes well. OSE takes in an _untrained_ network, along with the architectural parameters, and returns an _untrained_ network with optimal guarantees (more on this in a bit). Just as a side note, this comparison is highlighted in the original OSE [paper](https://arxiv.org/abs/2010.08512)--indeed, the existence of the Lottery Ticket Hypothesis was a partial inspiration towards my work on OSE, and it's highlighted there. The authors later (roughly at the time I was done with OSE) applied some algorithms to solve weight pruning via the Lottery Ticket Hypothesis to [BERT](https://arxiv.org/abs/2007.12223) with great results. I personally think that either approach is valid depending on the user, since it's more about having the right tool for the job.
+
+Back to OSE, this is a multi-objective optimization problem over a humongous-dimensional space. Yet, it is an easy problem to solve when you only care about inference speed and parameter size: it's in **P** via a reduction from MST, but it's non-trivial when it's all three. However, OSE admits an FPTAS. 
+
+## An FPTAS for OSE
+
+To be clear, OSE admits an FPTAS. However, the paper only describes an FPTAS for a (admittedly large) specific class of inputs. It is beyond my skills as a computer scientist to find an FPTAS for ALL inputs!
+The algorithm itself is quite simple (I'd say disappointingly short; check the paper), and it runs in polynomial time--as desired. To be honest, the proof of "FPTAS-ness" is relatively straightforward given a few definitions, but it's quite long.
+
+The key observation behind the algorithm is that neural networks present a polynomial correlation between the parameter size and the architectural parameters; and also between the inference speed and their architectural parameters. As an example, think of a linear layer $f(x) = ReLU(Ax + b)$. The dimensionality of the matrix $A$ is, say, $m \times n$. Then the parameter size of this layer (in terms of the architectural parameters) is $p(f) = m(n + 1)$--a polynomial! The same argument can be done with the inference speed, since computation is asymptotically the same regardless of the, well, computer.
+
+This is good, but not enough to have an FPTAS. To completely claim an efficient solution, we need to also have the error rate expressable as a function of the architectural parameters (the proof of this is a bit hard), and some inherent _ordering_ in the input. This can be achieved if the first layer and the last layer of an arbitrary network are "cheaper" than the middle layers.
+
+Concretely, for a network of the form $f(x) = C(B_n(\dots(B_1(A(x)))\dots))$, if the parameter size of $C$ and $A$ doesn't grow as fast as any of the $B_i$ layers, we can claim that there exists an ordering over all networks. The same argument goes for the inference speed. If on top of that, we use the right loss and our model is, in a certain sense, "compact", we can claim an ordering of the error rate across all architectural parameters. All of this together is what I call the $AB^nC$ property.
+
+Networks that present the $AB^nC$ property have an intrinsic ordering that allows us to say that partitioning the space every $\epsilon$ architectures, and picking the best of these partitioned architectures, returns an $\epsilon$-optimal solution. Thanks to the error correspondence, _we do not need to fully train any network_, and it follows that the algorithm runs in polynomial time, and it's an FPTAS.
+
+It turns out that the family of BERT architectures, as parametrized by their depth, attention heads, inference speed, and hidden size, presents the $AB^nC$ property. This is not hard to see, but it does require you sit down with a pencil and paper. The proof is also [here](https://arxiv.org/pdf/2010.10499.pdf).
+
+We ran the FPTAS on BERT, and obtained Bort. Given that the solution is a multi-objective optimization problem, any solution that is considered (Pareto)-optimal is essentially a tradeoff between all three objective functions. However, Bort is $20\times$ faster, and $95\%$ smaller (effective). It only remained to see whether it generalized as well as BERT, which will be the topic of the next section.
+
+Two last things: why do we say _effective_ compression? Well, parameter size is a bit inaccurate. By the $AB^nC$ property, the middle layers matter more than the input/output layers. It follows that even though Bort is $16\%$ the (net) size of BERT-large ($51$M vs $340$M parameters), the _proportion_ of parameters that are worth counting are the ones in the encoders, as they are the ones that actually effect an asymptotically signifcant change on the inference time/parameter size/error rate. Hence Bort is around $5\%$ the size of BERT-large, which is also a nice inverse correlation with the speedup ($20\times$ faster $= 1/0.05$).
+
+Before moving on, we should ask ourselves:
+
+**can we do better?**
+
+Probably, yes, since as I mentioned, the FPTAS is somewhat limited. In terms of an efficient solution to OSE, probably not unless someone can find an LPTAS (i.e., something that runs in logarithmic time). That would be AWESOME.
+
+## Fine-tuning with algebraic topology
+
+Fine-tuning Bort is really hard via conventional means. This is probably due to the fact that it is a small, relatively shallow model. This means that it is unable to learn a good hierarchical feature representation of the data; plus, I mean, the combinations of learning rate, scheduler, and optimizers I used were probably too aggressive. On the other hand, a model like Bort should be able to perform well on downstream tasks... if you are able to find the right starting point, learning rate, decay, etc. Plus, the data might be too scare or hard to learn (more on that later) quickly.
+
+Nobody can wait that long!
+
+So, instead, I designed another algorithm that involves _meta-learning_ and **data expansion**. This algorithm is called [Agora](https://arxiv.org/abs/2010.07990), and unlike the FPTAS, it's a fairly complicated algorithm. It takes in as an input the untrained model, a trained, ok-ish model (accuracy $> 2/3$), the dataset, and a set of hyperparameter sets that you want to use as your search space.
+
+Assume that at every iteration, we have $t$ hyperparameter sets left to search through. Then Agora:
+
+- Fine tunes $t$ models, one per hyperparameter. Map the accuracies to the hyperparameters for later.
+- **Picks the highest performing model, and output the predictions from dev**
+- **Selects all the mistakes, and generates new points via a transformation function**
+- **Uses the ok-ish model to label the new points and concatenates them to the training set**
+- _Sorts all hyperparameters mapped to their accuracies._
+- _Removes the hyperparameters belonging to the longest common sequence, rooted at the first element._
+- If the set of hyperparameters is non-empty, it goes back to the start. Else it returns the best model.
+
+Does it work? Yes! It's actually remarkably high-performing. For a _random_ classifier, Agora will return a model that, at best, will double the accuracy of the model. In theory, you could get $100\%$ accuracy _on test_ this way (except that, you know, you won't, since it is an asymptotic result). It's better to say that at iteration $k$, you'll have accuracy $1 - 2^{-k}$. 
+
+Now, you will get mad and say that attaching dev to train is dumb. Actually, attaching dev to train **is** dumb. Think about it: you aren't learning anything; just memorizing everything. But we aren't doing that--we are, instead, creating _similar_ points. As long as they look similar enough (but not too similar or too distinct), we will actually be learning the original distribution. Here's where things get technical and we need to use algebraic topology.
+
+We aren't going to go into too much detail, and, as a matter of fact, I just want to give you the intuition behind Agora. Algebraic topology is by far one of my favorite subjects: it is usually applied to data analysis (i.e., the field of topological data analysis, or TDA), but I think it's beautiful on its own. I highly recommend you go over Larry Wasserman's [survey](https://arxiv.org/abs/1609.08227) of TDA if you're interested on diving deeper, and Hatcher's [book](http://pi.math.cornell.edu/~hatcher/AT/ATpage.html) is really good as a first introduction to the subject.
+
+We'll not go too into the math, or into TDA. We'll focus on _learning_ and its geometry. For this, let's introduce some brief definitions:
+- A _manifold_ is a space that looks locally Euclidean. I.e., zoom enough and you'll get the normal $L_p$ metric. We will only deal with compact, Riemannian manifolds--if you don't know what that means, it's ok. It's mostly so I don't get lots of angry topologist mail later.
+- The _homology_ of a manifold is, intuitively, the number of $n$-dimensional holes it has. Here's a [nice](https://en.wikipedia.org/wiki/Homology_(mathematics)#Informal_examples) visualization. There's many kinds of homology groups, but we won't go into detail on this. Now I will get lots of angry topologist mail. Sorry y'all!
+- Equivalence of manifolds up to homology is easy to compute, and carries out a few invariants that are of interest. It's not the only type of equivalence that exists or we care about, but some stronger equivalences are undecidable (e.g., homeomorphism). 
+- We say that a task (represented by a dataset) is _learnable_ if a model with good accuracy on dev will have good accuracy in test/further unseen samples.
+- We say "homology between A and B" to denote that the _manifolds_ (or the manifolds described by balls drawn around the points) where A and B lie are equivalent up to homology. 
+
+We will make the (admittedly strong) assumption that the task we are trying to learn lies on (or around) a manifold. It is [known](http://people.cs.uchicago.edu/~niyogi/papersps/NiySmaWeiHom.pdf) that given enough samples we can reconstruct the original manifold. 
+What the Agora paper proves is a correspondence between TDA and learnability, and uses that to prove the correctness of Agora. It goes as follows: 
+- Homology between the sampled dataset and the task, implies learnability of the dataset (i.e., a dataset that is equivalent up to homology to the original distribution is learnable)
+- Learnability of a dataset implies homology between the task and the dataset (i.e., a datase that is learnable can be used to reconstruct the original probability distribution)
+- Noisy sampling and labeling still guarantee this correspondence.
+- Hence, building a manifold equivalent up to homology to the task will make the problem learnable, _regardless of the model_.
+
+At every step, Agora is basically selecting the model most likely to converge (a "greedy" meta-learning step), and also reconstructing the original distribution, hence making the problem progressively easier to learn.
+
+Agora works best (or rather, my brain could only be squeezed that hard for proofs) when the task is a binary classification task, with balanced labels, and _the dev set is representative of the task_. This last part is super important. One can cast regression problems as binary classification tasks, and can artificially balance labels, but if the dev set and the train set are not representative, _there is insufficient data for a meaningful answer_.
+
+The results for Bort in [GLUE](https://gluebenchmark.com/leaderboard), [SuperGLUE](https://super.gluebenchmark.com/leaderboard), and [RACE](http://www.qizhexie.com/data/RACE_leaderboard.html) support the proofs above. It is also not surprising that Bort rarely outperformed RoBERTa--again, Pareto-optimal point!--but it is nice to see such a massive increase in performance over BERT-large. So, let us ask ourselves once more:
+
+**can we do better?**
+
+Absolutely! Agora is a greedy algorithm with a non-constant approximation ratio, so it belongs to **NPO**. It remains an open problem to find more precise algorithms (if they even exist) or heuristics. Plus, the application of algebraic-topological methods to learning algorithms sounds fun enough (to me).
+
+# Conclusion
+
+Bort is basically an exercise on applying two algorithms backed by rigorous proofs of optimality. The numbers give us a pretty good idea of the performance of these algorithms. 
+
+There is still a lot of room for improvement (**we can do better!**), however. Choosing different losses in the FPTAS and other models will definitely smash Bort's record. As mentioned earlier, Agora is also a sub-optimal model.
+
+On the other hand, algorithm design is fun, and computation (and mathematics in general) is beautiful. Understanding the intrinisci hardness of a problem can yield very interesting and fruitful rewards, so you can never lose by adding some rigor on your algorithm design. It's all about the right tool for the job.
+
+Ultimately, what matters is asking ourselves: **can we do better?**
+</div>
+</body>
+
+</html>
