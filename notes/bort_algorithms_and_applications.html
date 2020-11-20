@@ -75,7 +75,7 @@
 </p>
   
 <p>A few weeks ago, my colleague Danny Perry and I released <a href="https://github.com/alexa/bort">Bort</a>, a highly optimized BERT-large model that is \(20\times\) faster, \(84\%\) smaller, and consistently outperforms it in \(20/23\) natural-language understanding tasks. 
-While the papers and model received an unexpected amount of attention , I think that the density behind the two theoretical papers dealing with the algorithms keeps many people from reading them. Sure, math has to be precise, and statements need to be backed with proofs (you can't go around saying "bOrT iS oPtImAl" without a proof of that!). However, the ideas are fairly intuitive without the need of a strong mathematics background. 
+While the papers and model received an unexpected amount of attention, I think that the density behind the two theoretical papers dealing with the algorithms keeps many people from reading them. Sure, math has to be precise, and statements need to be backed with proofs (you can't go around saying "bOrT iS oPtImAl" without a proof of that!). However, the ideas are fairly intuitive without the need of a strong mathematics background. 
 Besides, I love math, and I love computer science. I'd very much like to offer you a window into the research done to obtain Bort, eschewing some of the long-winded lemmas and proofs, but emphasizing the ideas. Indeed, I personally believe that the ideas behind this research (concretely, the algorithms I developed) are far more interesting than the places on the leaderboard or the numbers attained. 
 </p>
 <p>
@@ -167,7 +167,7 @@ When your solution is a polynomial on \(\epsilon\) (i.e., \(poly(n, \epsilon)\))
 <ul>
 <li>Knowledge distillation (which requires a fixed architecture, so it's suboptimal from a meta-learning point of view)</li>
 <li>Neural architecture search (where many approaches are problem-dependent, which is suboptimal from a computational point of view)</li>
-<li>Weight pruning (which fixes is not meta-learning suboptimal but might be computationally hard. This one is my favorite)
+<li>Weight pruning (which is not meta-learning suboptimal, but might be computationally hard. This one is my favorite)
 </li>
 </ul>
 <p>
