@@ -69,7 +69,7 @@
 <body>
 <h1>Bort: Algorithms and Applications</h1>
 <p class="p2">
-<em>This is an extended version of a post that will be appearing somewhere soon. 
+<em>This is an extended version of a post that was shared <a href="https://www.amazon.science/blog/a-version-of-the-bert-language-model-thats-20-times-as-fast">here</a>. 
   All the opinions expressed here are my own. Angry mail should be directed at me. Happy mail too--I'd rather receive that one.
 </em>
 </p>
@@ -222,7 +222,7 @@ Concretely, for a network of the form \(f(x) = C(B_n(\dots(B_1(A(x)))\dots))\), 
 
 <h2 id="the-agora-algorithm">The Agora Algorithm</h2>
 
-<p>Fine-tuning Bort is really hard via conventional means. This is probably due to the fact that it is a small, relatively shallow model. Deep networks rely on, well, their depth to learn automatically a good hierarchical feature representation of the input data. Plus the combinations of learning rate, scheduler, and optimizers I used were probably too aggressive. On the other hand, from the correctness proofs of the FPTAS we know that a model like Bort should be able to perform well on downstream tasks... assuming you have found the right starting point, learning rate, decay, etc. On top of that, the dataset might be too scare or hard to learn (more on that later) quickly.</p>
+<p>Fine-tuning Bort is really hard via conventional means. This is probably due to the fact that it is a small, relatively shallow model. Deep networks rely on, well, their depth to learn automatically a good hierarchical feature representation of the input data. Plus the combinations of learning rate, scheduler, and optimizers I used were probably too aggressive. On the other hand, from the correctness proofs of the FPTAS we know that a model like Bort should be able to perform well on downstream tasks... assuming you have found the right starting point, learning rate, decay, etc. On top of that, the dataset might be too scarce or hard to learn (more on that later) quickly.</p>
 
 <p>This means we have a theory-practice gap: we <em>know</em> it should be good, but in practice nobody can wait that long to find out!</p>
 
