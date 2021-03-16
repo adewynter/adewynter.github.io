@@ -91,22 +91,26 @@ Throughout my math education, I was always taught to remember that the objects s
 
 <h1 id="outline-">Outline</h1>
 <ul>
-  <li><a href="#background">Background</a><ul>
-    <li><a href="#language-models-and-architectural-parameters">Language Models, Architectural Parameters</a></li>
-    <li><a href="#p-np-and-fptas"><strong>P</strong>, <strong>NP</strong>, and FPTAS</a></li>
-  </ul></li>
-  <li><a href="#model-compression-the-bort-way">Model Compression - the Bort way</a><ul>
-    <li><a href="#model-compression">Model Compression</a></li>
-    <li><a href="#optimal-subarchitecture-extraction-ose-">Optimal Subarchitecture Extraction (OSE)</a></li>
-    <li><a href="#an-fptas-for-ose">An FPTAS for OSE</a></li>
-  </ul></li>
-  <li><a href="#fine-tuning-with-algebraic-topology">Agora: Fine-tuning with Algebraic Topology</a><ul>
-    <li><a href="#the-agora-algorithm">The Agora Algorithm</a></li>
-    <li><a href="#why-does-agora-work">Why Does Agora Work?</a></li>
-  </ul></li>
+  <li><a href="#background">Background</a>
+    <ul>
+      <li><a href="#language-models-and-architectural-parameters">Language Models, Architectural Parameters</a></li>
+      <li><a href="#p-np-and-fptas"><strong>P</strong>, <strong>NP</strong>, and FPTAS</a></li>
+    </ul></li>
+  <li><a href="#model-compression-the-bort-way">Model Compression - the Bort way</a>
+    <ul>
+      <li><a href="#model-compression">Model Compression</a></li>
+      <li><a href="#optimal-subarchitecture-extraction-ose-">Optimal Subarchitecture Extraction (OSE)</a></li>
+      <li><a href="#an-fptas-for-ose">An FPTAS for OSE</a></li>
+    </ul></li>
+  <li><a href="#fine-tuning-with-algebraic-topology">Agora: Fine-tuning with Algebraic Topology</a>
+    <ul>
+      <li><a href="#the-agora-algorithm">The Agora Algorithm</a></li>
+      <li><a href="#why-does-agora-work">Why Does Agora Work?</a></li>
+    </ul></li>
   <li><a href="#conclusion">Conclusion</a></li>
 </ul>
 
+<p></p>
 <hr>
 
 <h1 id="background">Background</h1>
@@ -162,6 +166,7 @@ When your solution is a polynomial on \(\epsilon\) (i.e., \(poly(n, \epsilon)\))
 
 <p>FPTAS is a class of problems, and it&#39;s also the type of algorithm (since, by definition, a problem is in the class FPTAS if it admits an FPTAS-type algorithm). We (computer scientists) usually refer to either as such. They are both acceptable.</p>
 
+<p></p>
 <hr>
 
 <h1 id="model-compression-the-bort-way">Model Compression -- The Bort Way</h1>
@@ -225,6 +230,7 @@ Concretely, for a network of the form \(f(x) = C(B_n(\dots(B_1(A(x)))\dots))\), 
 <p><strong>Q: Can we do better?</strong></p>
 <p>A: Probably yes, since as I mentioned, the FPTAS is somewhat limited with respect to what OSE can admit. In terms of an efficient solution to OSE, probably not unless someone can find an "LPTAS" (I made that class up, but something that would run in logarithmic time). That would be AWESOME.</p>
 
+<p></p>
 <hr>
 
 <h1 id="fine-tuning-with-algebraic-topology">Agora: Fine-tuning with Algebraic Topology</h1>
@@ -290,6 +296,7 @@ What the Agora paper proves is a correspondence between TDA and learning theory 
 <p><strong>Q: Can we do better?</strong></p>
 <p>A: Absolutely! Agora is a greedy algorithm with a non-constant approximation ratio. It remains an open problem to find more precise algorithms (if they even exist) or heuristics. Plus, the application of algebraic-topological methods to learning algorithms sounds fun enough (to me).</p>
 
+<p></p>
 <hr>
 
 <h1 id="conclusion">Conclusion</h1>
