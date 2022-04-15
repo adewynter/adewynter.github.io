@@ -1,80 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Some Computational Aspects of NAS</title>
-  <meta name="viewport" content="width=device-width">
-  <meta name="keywords" content="NAS, HPO, decidability, Turing machine, Adrian de Wynter">
-  <meta name="description" content="Some Computational Aspects of NAS">
-  <meta name="author" content="Adrian de Wynter">
-  <link rel="icon" type="image/png" href="../dewynter.jpg"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Some Computational Aspects of NAS</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="NAS, HPO, decidability, Turing machine, Adrian de Wynter">
+    <meta name="description" content="Some Computational Aspects of NAS">
+    <meta name="author" content="Adrian de Wynter">
+    <link rel="icon" type="image/png" href="../dewynter.jpg"/>
 
-  <!-- stuff for equations -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
-  <!-- readability -->
-  <style>
-    p {
-      margin-top: 2.5%;
-      margin-right: 2.5%;
-      margin-left: 2.5%;
-      margin-bottom: 2.5%;
-    }
-    li {
-      margin-top: 1.5%;
-      margin-right: 3.5%;
-      margin-left: 3.5%;
-    }
-    .p2 {
-      margin-top: 1.5%;
-      margin-right: 1.5%;
-      margin-left: 1.5%;
-      margin-bottom: 1.5%;
-    }
-    .p3 {
-      margin-top: 1.5%;
-      margin-right: 1.5%;
-      margin-left: 1.5%;
-      margin-bottom: 1.5%;
-      text-align: right;
-    }
-    h1 {
-      font-family:helvetica;
-      margin-top: 2.5%;
-    }
-    h2 {
-      font-family:helvetica;
-      margin-top: 1.5%;
-    }
-    .img_center_p {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 60%;
-    }
-    .img_center_h {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 55%;
-    }
-    .img_center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 30%;
-    }
-  </style>
+    <!-- stuff for equations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <!-- readability -->
+    <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
 <h1>Some Computational Aspects of NAS</h1>
-<p class="p2"><em>
-This is an extended version of a post that was shared <a href="https://www.amazon.science/blog/how-to-construct-the-optimal-neural-architecture-for-your-machine-learning-task">here</a>. All the opinions expressed here are my own. Angry mail should be directed at me. Happy mail too--I'd rather receive that one.
+<p class="note">
+<em>This is an extended version of a post that was shared <a href="https://www.amazon.science/blog/how-to-construct-the-optimal-neural-architecture-for-your-machine-learning-task">here</a>. All the opinions expressed here are my own. Angry mail should be directed at me. Happy mail too--I'd rather receive that one.
 </em></p>
   
+<div class="text_div">
 <p>About a year ago, I published a paper called <a href="https://arxiv.org/abs/1908.09942">"On the Bounds of Function Approximations"</a>. It was a fun project (and an even more fun conference, I think that the organizers at ICANN really put their hearts into it), which was based on my original research from graduate school. It deals with a theoretical approach to analyzing neural architecture search (NAS), but in such a way that, in 100 years, if someone decided to throw neural networks out the window, these results would still hold. 
 However, I've always felt that the vague title, the lengthy discussion, and the (shortened) conclusion section always cause it to be misinterpreted, even though I think the subject is fairly straightforward with some (extra) space to write.</p>
 
@@ -89,6 +39,7 @@ However, I've always felt that the vague title, the lengthy discussion, and the 
 </p>
 
 <p>This topic is very close to my heart--in fact, it's why I started my work in machine learning!--so hopefully I can get you as excited as I was when I wrote the paper (even though the dry style of academic writing will not convey it). Ultimately, computation is fun, and you can't lose anything by adding some rigor on your algorithmic design!</p>
+</div>
 
 <h1 id="outline-">Outline</h1>
 <ul>
@@ -117,96 +68,131 @@ However, I've always felt that the vague title, the lengthy discussion, and the 
 
 <h1 id="tms-decidability">Background: Turing Machines, Decidability</h1>
 
+<div class="text_div">
 <p>In this section we will develop the language needed to understand the results of the other sections: namely, why NAS is the best way to solve a machine learning problem, and why NAS algorithms don't often outperform random search. We'll begin by thinking of computation as an abstract process (series of steps), rather than a calculation.</p>
+</div>
 
 <h2 id="tms">Turing Machines, Spherical Cows, and Models of Computation</h2>
 
+<div class="text_div">
 <p>A <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing Machine</a> is the theoretical abstraction to model the "physics" of computers. This means that whatever your laptop can do, can also be done by a Turing machine. But, on the other hand, like a very lame Spiderman, your laptop can't do all what a Turing Machine can. 
 I always like to explain it as the physics analogy of "spherical cows": if you try to, say, throw a cow with a catapult and figure out where it is going to fall, you need to make a <em>lot</em> of assumptions. Indeed, it simplifies your life mathematically if you assume that the air resistance is zero; or if the cow is spherical, and/or massless, and/or just a point flying through the air. At the end you'll get a very idealized way to describe cows that actually works out pretty well. Turing Machines are the spherical cows of the computer world.</p>
 
-<img src="img/spherical_cows.jpg" class="img_center_p">
+<div class="img_div">
+<div class="polaroid">
+<img src="img/spherical_cows.jpg" class="img_center_w">
+<div class="caption">
+Turing Machines are a lot like cows.
+</div>
+</div>
+</div>
 
-<p>To be fair, the analogy of spherical cows is mostly to describe how idealized is a Turing Machine. Unlike our massless bovine friend, Turing Machines are far more powerful than "realistic" computers, since they have things like infinite storage space. We won't go into detail into the rigorous definition, since for the purposes of this post it suffices to know three things:
+<p>To be fair, the analogy of spherical cows is mostly to describe how idealized is a Turing Machine. Unlike our massless bovine friend, <span class="highlight">Turing Machines are far more powerful than "realistic" computers</span>, since they have things like infinite storage space. We won't go into detail into the rigorous definition, since for the purposes of this post it suffices to know three things:
 <ol>
     <li>A Universal Turing Machine (UTM) is the most powerful model of computation there is, since it is able to simulate any other Turing Machine.</li>
-    <li>Any other model (theory) of computation that is able to simulate a UTM is called Turing complete.</li>
-    <li>The set of problems that can be solved by a UTM are precisely the set of problems solved by an algorithm. Doesn't matter how it's written (Python, binary, or an abacus), and doesn't matter <em>what</em> the algorithm is. <em>The set of problems solvable with a Turing complete model of computation are the set of problems solvable with a computer</em>. This is known as the Church-Turing Thesis.</li>
+    <li>Any other model (theory) of computation that is able to simulate a UTM is called Turing-complete.</li>
+    <li>The set of problems that can be solved by a UTM are precisely the set of problems solved by an algorithm. Doesn't matter how it's written (Python, binary, or an abacus), and doesn't matter <em>what</em> the algorithm is. <em>The set of problems solvable with a Turing-complete model of computation are the set of problems solvable with a computer</em>. This is known as the Church-Turing Thesis.</li>
     </li>
 </ol></p>
 
-<p>If your laptop had infinite storage, you could say that your Python <strike>compiler</strike> interpreter is a UTM. Why? Well, can you write a Turing Machine in Python? Yes! Hence, it is able to simulate it, and it follows that your Python interpreter (i.e., all the rules and executions written in C) along with your hypothetical infinite memory is a Turing complete model of computation.</p>
+<p>If your laptop had infinite storage, you could say that your Python <strike>compiler</strike> interpreter is a UTM. Why? Well, can you write a Turing Machine in Python? Yes! Hence, it is able to simulate it, and it follows that your Python interpreter (i.e., all the rules and executions written in C) along with your hypothetical infinite memory is a Turing-complete model of computation.</p>
 
-<p>Note that Turing completeness and the Church-Turing Thesis, for the purposes of this post, imply that the models of computation that are Turing complete are "essentially" equivalent. What other models of computation are there, and that are Turing complete? Quite a bit, actually. The λ-Calculus is one. <a href="https://arxiv.org/abs/1904.09828">Magic: The Gathering</a> is another. <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1788462873">Portal 2</a> is another (this one is not Turing complete but functionally complete, which is a much weaker statement). The recursively enumerable functions is another. Crucially, <b>neural networks also happen to be Turing complete.</b> This last part has a few ifs and buts, but the key is that with the right architecture, you can simulate <em>any</em> function to an arbitrary degree of error. Indeed, this class of functions include those that can be simulated by a Turing Machine. Why does that matter? Well, for one, because in computation, <b>functions are programs</b>, and viceversa. So theoretically a neural network could be used to write the entire Sid Meier's Civilization VI (desktop icon, TOAs and all), or to generate a program to determine whether an input image is either a cat or a dog. This latter use ("generating programs from data") is a very useful perspective on what machine learning actually is, but a bit beyond what we are discussing. Just keep it under your hat.</p>
+<p>Note that Turing-completeness and the Church-Turing Thesis, for the purposes of this post, imply that the models of computation that are Turing-complete are "essentially" equivalent. What other models of computation are there, and that are Turing-complete? Quite a bit, actually. The λ-Calculus is one. <a href="https://arxiv.org/abs/1904.09828">Magic: The Gathering</a> is another. <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1788462873">Portal 2</a> is another (this one is not Turing-complete but functionally complete, which is a much weaker statement). The recursively enumerable functions is another. Crucially, <b>neural networks also happen to be Turing-complete.</b> This last part has a few ifs and buts, but the key is that with the right architecture, you can simulate <em>any</em> function to an arbitrary degree of error. Indeed, this class of functions include those that can be simulated by a Turing Machine. Why does that matter? Well, for one, because in computation, <b>functions are programs</b>, and viceversa. So theoretically a neural network could be used to write the entire Sid Meier's Civilization VI (desktop icon, TOAs and all), or to generate a program to determine whether an input image is either a cat or a dog. This latter use ("generating programs from data") is a very useful perspective on what machine learning actually is, but a bit beyond what we are discussing. Just keep it under your hat.</p>
 
-<em>Update: It turns out Civilization is also Turing complete. I wrote a paper on this <a href="https://arxiv.org/abs/2104.14647v1">here</a>. Another thing I want to point out is that laptops follow a slightly different model of computation known as the Random Access model; it so happens this is also Turing complete, so we won't discuss it further.</em>
+<p class="note"><em>Update: It turns out Civilization is also Turing-complete. I wrote a paper on this <a href="https://arxiv.org/abs/2104.14647v1">here</a>. Another thing I want to point out is that laptops follow a slightly different model of computation known as the Random Access model; it so happens this is also Turing-complete, so we won't discuss it further.</em></p>
 
 <p>As always, there's WAY more than can be said around this. Like, tons more (here there be dragons!). I tend to go on tangents a lot, so let's stay focused. If you're interested on this topic, you can start by reading <a href="https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis#Philosophical_implications">this</a>.
 </p>
+</div>
 
 <h2 id="decidability">(Un)Decidability</h2>
 
-<p>All sufficiently powerful models of computation are, as we discussed, equivalent in a certain sense. And, all sufficiently powerful models of computation have one strong limitation: <em>the Halting Problem</em>: Mathematicians would very much like to know whether a certain proof is, well, provable. Software engineers would like to know if their program is bug-free. And theoretical computer scientists are weird because they like to ask whether you can write a program that takes in programs (which is fine), and says whether the input program will terminate or loop forever.
+<div class="text_div">
+<p>All sufficiently powerful models of computation are, as we discussed, equivalent in a certain sense. And, <span class="highlight">all sufficiently powerful models of computation have one strong limitation: <em>the Halting Problem</em></span>: Mathematicians would very much like to know whether a certain proof is, well, provable. Software engineers would like to know if their program is bug-free. And theoretical computer scientists are weird because they like to ask whether you can write a program that takes in programs (which is fine), and says whether the input program will terminate or loop forever.
 
 <p>As you probably have guessed, you can't write a program that can answer this question, for any input. This question is called the <a href="https://en.wikipedia.org/wiki/Halting_problem">Halting problem</a>. That's why, for example, when you write code you have to wait until after it's compiled to find out all the bugs that you, your editor, and your compiler never caught. Or, in the case of Python, until you're three hours into the experimentation and suddenly it tells you "NaMe 'x' iS nOt DeFiNed". Note that it is a "problem" insofar as it is a <em>computational</em> problem (i.e., a question to a computer) for which you cannot write an algorithm. This also means that a lot of (computational) problems in computer science are equivalent to the Halting problem. We say that a problem that cannot be solved with a Turing Machine is <em>undecidable</em>.</p>
 
-<p>More annoyingly, since by the Church-Turing Thesis any Turing complete model of computation equivalent to a UTM, this means that your chosen model of computation will be limited by the Halting Problem. This means your laptop, BERT, Presburger arithmetic, and your Ti-80 are all effectively limited in the same sense. In fact, most of these are actually much weaker than a UTM! Can you tell why? (As a warmup, note that BERT runs <em>on your laptop</em>).</p>
+<p>More annoyingly, since by the Church-Turing Thesis any Turing-complete model of computation equivalent to a UTM, this means that your chosen model of computation will be limited by the Halting Problem. This means your laptop, BERT, Presburger arithmetic, and your Ti-80 are all effectively limited in the same sense. In fact, most of these are actually much weaker than a UTM! Can you tell why? (As a warmup, note that BERT runs <em>on your laptop</em>).</p>
 
 <p></p>
+</div>
+
 <hr>
 
 <h1 id="reformulating-nas">Reformulating NAS and ML</h1>
 
+<div class="text_div">
 <p>In this section we will develop the theoretical tools to analyze NAS and ML from a rigorous standpoint. There aren't any proofs, but the ideas are here. We'll use these ideas to show that NAS, as a computational problem (so an abstract model), is the best possible solution to your standard machine learning problem. Then, in the next section, we'll further develop these ideas to show why random search outperforms most NAS algorithms.</p>
+</div>
 
 <h2 id="ml-nas">ML, NAS</h2>
 
+<div class="text_div">
 <p>Right, so let's forget about decidability for a bit and talk about ML. Let \(D \sim \mathcal{P} \) be a dataset sampled from some unknown probability distribution \(\mathcal{P}\), and for simplicity, let us assume we've got a binary classification task. <b>The central problem of machine learning</b> is to come up with a function 
-    $$f: D \times W \rightarrow \{0, 1\}$$ 
+    $$f \colon D \times W \rightarrow \{0, 1\}$$ 
 that can generalize well to any possible dataset sampled from \(\mathcal{P}\) (not just \(D\)). It could be said that you're trying to <em>approximate the function </em> \(\mathcal{P}\) with \(f\). </p>
 
 <p>As an example, if you were trying to learn to distinguish images of cats and dogs, your model has only a limited subset of data (say, the top 100 results from looking up "dog" and "cat" in Google). You have to train your chosen model \(f\) (say, a 3-layer convolutional neural network) by <em>searching</em> through some assignments of \(W\) (the weights of the network, in this case) until you find something that works well and minimizes your test error. In this case, \(\mathcal{P}\) is either the real function that returns all of Google's images of cats and dogs (and says that they are either cats or dogs); or an assumed function that takes in all possible images of cats and dogs that have existed and will ever exist, and returns their label. This is mostly a modeling question and we will not care about it. What matters is that under some technical assumptions, the test error of \(f\) with respect to \(\mathcal{P}\) will be roughly the same for any other sample of the graph of \(\mathcal{P}\). Note that this doesn't need to be a binary problem, or a classification task--the results work the same. Also note that there exists at least one function with zero error: the function itself.</p>
 
-<p>But what is your problem, really? Is it to find a good set of weights for your 3-layer CNN, or is it to classify cats and dogs properly and with high probability? Normally, the answer is the latter. It follows then that we do not need to be sold on a choice of \(f\) and we can relax these assumptions even further. Assume there is a "bag" of all possible functions from which we can draw the "best" possible function--then our problem of approximating the right function for the problem is not just globally optimal (as in, within the search space), but universally optimal. After all, being Turing complete is for the <em>family</em> of machine learning models, and not for a specific one.</p>
+<p>But what is your problem, really? Is it to find a good set of weights for your 3-layer CNN, or is it to classify cats and dogs properly and with high probability? Normally, the answer is the latter. It follows then that we do not need to be sold on a choice of \(f\) and we can relax these assumptions even further. Assume there is a "bag" of all possible functions from which we can draw the "best" possible function--then our problem of approximating the right function for the problem is not just globally optimal (as in, within the search space), but universally optimal. After all, being Turing-complete is for the <em>family</em> of machine learning models, and not for a specific one.</p>
 
-<p>It turns out that all models of computation are built from a few basic functions (let's call them "elementary functions"). There's no need to go into detail as to <em>what</em> those elementary functions are (since they vary from one model of computation to another); it's just sufficient to note that as long as you glue them together, you get more and more complex functions that are able to express ALL possible algorithms (since we chose a model of model of computation that is, after all, Turing complete). So, picture them as very abstract LEGOs. Combining a sequence of elementary functions in the right way will give you the absolute best function to solve the problem.</p>
+<p>It turns out that <span class="highlight">all models of computation are built from a few basic functions</span> (let's call them "elementary functions"). There's no need to go into detail as to <em>what</em> those elementary functions are (since they vary from one model of computation to another); it's just sufficient to note that as long as you glue them together, you get more and more complex functions that are able to express ALL possible algorithms (since we chose a model of model of computation that is, after all, Turing-complete). So, picture them as very abstract LEGO. Combining a sequence of elementary functions in the right way will give you the absolute best function to solve the problem.</p>
 
-<p>We'll refer to the problem of finding the right sequence of functions that also generalizes well to any possible dataset as the Function Approximation problem, or <b>FA</b>. This is mostly a notational convenience, but from a rigorous standpoint we want to be precise on what our problem is. You can also think about it as a sort of generalized NAS problem. One key result of the paper (which we will discuss next) is that <b>there is no algorithm to solve FA to zero error</b>. The proof is not hard, but we want to talk more about the good stuff: NAS and ML, and nonzero error.</p>
+<p>We'll refer to the problem of finding the right sequence of functions that also generalizes well to any possible dataset as the Function Approximation problem, or <b>FA</b>. This is mostly a notational convenience, but from a rigorous standpoint we want to be precise on what our problem is. You can also think about it as a sort of generalized NAS problem. One key result of the paper (which we will discuss next) is that <span class="highlight"><b>there is no algorithm to solve FA to zero error</b></span>. The proof is not hard, but we want to talk more about the good stuff: NAS and ML, and nonzero error.</p>
+</div>
 
 <h2 id="generalized-nas">(Generalized) NAS is the best ML Algorithm (and it Doesn't Exist)</h2>
 
+<div class="text_div">
 <p>There is one key distinction on talking about fitting weights <em>and sequences of functions</em> to a given dataset (the <b>FA</b> problem), and fitting weights to a <em>fixed</em> function to minimize the dataset error, which is what ML normally does (let's call it the <b>ML</b> problem, and note that it is a way to solve <b>FA</b>). Technically both things will give you "a" function that approximates the error, but there's no guarantee fixing some function and minimizing its weights will be the best (ever tried to beat the GLUE benchmarks with a two-layer MLP of hidden size = 300?). On the other hand, finding a fixed-length sequence doesn't "force" your solution to assume anything beyond bitstring length. Let's call this solution strategy the architecture search problem, or <b>ASP</b>. We've dropped the "neural" part because we don't need to work with neural nets--this result is so general, that it could be done with <a href="https://arxiv.org/abs/1904.09828">Magic: The Gathering cards!</a>. Yes, you could in theory have a cat/dog classifier made entirely of MTG.</p>
 
 <p>The distinction between <b>ASP</b> and <b>FA</b> is more of a technical nature: <b>FA</b> admits infinite-length sequences (which we don't want), while <b>ASP</b> finds the best solution to the problem within a fixed sequence length. Why don't we want infinite-length sequences? Well, for one, it would break computation, and even if it were finite, you still have the zero-error problem. You can't verify that your function has zero-error for ALL functions because it reduces to the Halting problem.</p>
 
 <p>Unlike <b>ML</b>, <b>ASP</b> will guarantee the absolute best solution as long as you have the elementary functions of your favorite model of computation in your search space. Think about it: your search space has ALL the weights, and ALL the functions. So from a mathematical standpoint, it is the best you can do.</p>
 
-<img src="img/asp_ml_summary.jpg" class="img_center_p">
+<div class="img_div">
+<div class="polaroid">
+<img src="img/asp_ml_summary.jpg" class="img_center_w" style="width: 85%">
+<div class="caption">
+Summary: ASP versus ML.
+</div>
+</div>
+</div>
 
-<p>"The best you can do" is A LOT, since computers are quite powerful. If you had an algorithm that could solve <b>ASP</b>, you could approximate any function to an arbitrary degree of error. It really doesn't matter which one, because you will be "fitting" the best possible architecture/program/proof automatically. On the other hand, <b>ML</b> would have a fixed function of fixed sequence length (which is also in <b>ASP</b>'s search space), and it has a remarkably low probability of being the best function in the space.</p>
+<p>"The best you can do" is A LOT, since computers are quite powerful. <span class="highlight">If you had an algorithm that could solve <b>ASP</b>, you could approximate any function to an arbitrary degree of error</span>. It really doesn't matter which one, because you will be "fitting" the best possible architecture/program/proof automatically. On the other hand, <b>ML</b> would have a fixed function of fixed sequence length (which is also in <b>ASP</b>'s search space), and it has a remarkably low probability of being the best function in the space.</p>
 
 <p>Put it in another way, an efficient algorithm for <b>ASP</b> would imply that the <em>process</em> by which a scientist/practicioner picks a new architecture can be automated. Mind you, we haven't shown that we can solve it, but if we could, it would be amazing. This would have massive implications, too: by the correspondence between models of computation, one could see that we could automate literally anything that involves some semblance of computation. Not just (generalized) theorem proving, but things like zero-generalization-error compilers, near-perfect language understanding, and so on. I'd be out of a job!</p>
 
 <p>Suspicious yet? Yes? Well, of course! This sounds too good to be true, and indeed, it can't be done efficiently. Without going into too much detail, it is <b>NP</b>-Hard. Yuck. So <b>ASP</b> is the best you can do within computable bounds, and <b>ML</b> is the "bare minimum" you can do (but as we know, it is relatively efficient to solve). Can we get somewhere in between?</p>
+</div>
 
 <h2 id="nas-hardness">NAS Doesn't Have to be Hard (but can be Optimal)</h2>
 
+<div class="text_div">
 <p>Yes! This is where contemporary NAS algorithms fall. Instead, what we will do is say that we want to only look at a subset of <b>ASP</b>'s search space. As long as it is "small enough", we will get a relatively easier problem to solve. As a thought experiment, a subset of size one makes the problem equivalent to <b>ML</b>, and a subset of size "all possible combinations of length \(n\) in the search space of <b>ASP</b>", reduces--for lack of a better word--to <b>ASP</b>. Let's call that the "approximate" <b>ASP</b> problem, or <b>a-ASP</b>.</p>
 
-<p>We said earlier that <b>ASP</b> would be optimal as long as we kept the LEGOs (elementary functions) of our model of computation IN the search space. It's the same here. We "build" our search space in such a way that the LEGOs stay in the set, and then we just enforce length. It's not globally optimal, but it's way better than <b>ML</b>: since all the functions we want are in the search space, we have a good shot at getting a much better function with better optimality guarantees. Big ifs and buts here, which we'll talk about in the next section. If our set builder function retains a polynomial size (i.e., it doesn't try out all combinations), this is only slower than <b>ML</b> by a polynomial factor, which is always nice. We can think of <b>a-ASP</b> as a "theoretical NAS".</p>
+<p>We said earlier that <b>ASP</b> would be optimal as long as we kept the LEGO (elementary functions) of our model of computation IN the search space. It's the same here. We "build" our search space in such a way that the LEGO stay in the set, and then we just enforce length. It's not globally optimal, but it's way better than <b>ML</b>: since all the functions we want are in the search space, we have a good shot at getting a much better function with better optimality guarantees. Big ifs and buts here, which we'll talk about in the next section. If our set builder function retains a polynomial size (i.e., it doesn't try out all combinations), this is only slower than <b>ML</b> by a polynomial factor, which is always nice. We can think of <b>a-ASP</b> as a "theoretical NAS".</p>
+</div>
 
 <h2 id="summary">To Sum Up</h2>
 
+<div class="text_div">
 <p>So, to sum up this section: fitting a probability distribution is best done when you have multiple function choices, and (obviously) to zero error, a.k.a the <b>FA</b> problem; however, this problem is undecidable. If you allow non-zero error, you get <b>ASP</b>, but it's still a very hard problem to solve, even when having the elementary functions in your search space guarantees a universally optimal result. If you fix the sequence length, you get <b>ML</b>, but, as we saw, it's a naive way to solve <b>FA</b> knowing what we know now. So we pulled out of our computational hat another rigorous computational problem, <b>a-ASP</b>, that looks for a <em>subset</em> of the sequence lengths. If we put some constraints in the subset, we retain the theoretical goodness of <b>ASP</b> with only a relative polynomial slow-down with respect to <b>ML</b>.</p>
 
 <p></p>
+</div>
+
 <hr>
 
 <h1 id="nfl">Near-Optimal NAS Solutions, or How To Find The Optimal Architecture For Your Problem</h2>
 
+<div class="text_div">
 <p>We've reached what I think it's the most important result of this post: how to find the optimal architecture for a neural network <em>efficiently</em>. The main takeaway is: you can find it, it can be good enough, and it can beat random search. To show all of this, we need a bit more background material. Let's get started.</p>
+</div>
 
 <h2 id="randomsearch">Why Most NAS Algorithms Don't Outperform Random Search</h2>
 
+<div class="text_div">
 <p><em>Note: I keep claiming this without actually proving it. We'll have the proof in this section, but if you didn't know this was a thing, here's a <a href="https://arxiv.org/abs/1902.07638"> very famous paper</a> on the subject.</em></p>
 
 <p>In ML/Optimization there's this very famous result called the No Free Lunch theorem, or NFL. There's quite a few versions of it, from the one by <a href="https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/understanding-machine-learning-theory-algorithms.pdf">Shalev-Shwartz and Ben-David</a> to the ones by <a href="https://ieeexplore.ieee.org/document/585893/?arnumber=585893">Wolpert and Macready</a>. Both results are equivalent in interpretation, but (formally) are related to different problems. I am particularly fond of this result (either one is fine), because it does hit some deep questions about what it means to learn well from a computational perspective (i.e., reasoning). <a href="http://no-free-lunch.org/">Here's</a> a good intro on the subject. Patrick Winston's <a href="http://dspace.mit.edu/bitstream/handle/1721.1/6884/AITR-231.pdf">doctoral thesis</a> also talked about this from a different angle.</p>
@@ -219,35 +205,51 @@ that can generalize well to any possible dataset sampled from \(\mathcal{P}\) (n
 
 <p>The class of optimization algorithms that present a free lunch are referred to in the paper as those that have the "self-play" property. I won't give a rigorous definition of it, but the gist of it is that the candidates in the search space "talk" to one another. The easiest way to think about it is with a genetic algorithm: you could just evolve architectures separately, and kill/grow them by randomizing their genomes until you get something good, or you could ask them to exchange information somehow. "Somehow" is a massively tricky subject, believe it or not, and one day I'll write a separate post about it because it's wicked interesting. For now, just know that algorithms where the candidates talk to one another do outperform random search, and are said to have the <em>self-play property</em>. Some examples of algorithms with the self-play property are coevolutionary algorithms and variations on bandit algorithms.</p>
 
-<p>So most NAS algorithms do not outperform random search because they attempt to solve <b>a-ASP</b>, but this problem and its more complex siblings are too close to the NFL horizon: the amount of tests (say, \(n\) architectures) you have to do mean that your average performance is much lower than if you only tested one (like in classical ML), since you're dividing by \(n\) in NAS. Another way to think about it is that writing a general-purpose algorithm that surpasses random search for a single architecture is way easier than a general-purpose algorithm that surpasses random search for an <em>exponential</em> number of possible architectural candidates (as in <b>ASP</b>), and for an arbitrary input problem. Even for a polynomial number of candidates (<b>a-ASP</b>, a.k.a NAS for neural networks) this result will have a linear dependence on your average performance.</p>
+<p><span class="highlight">So most NAS algorithms do not outperform random search because they attempt to solve <b>a-ASP</b></span>, but this problem and its more complex siblings are "too close" to the NFL horizon: the amount of tests (say, \(n\) architectures) you have to do mean that your average performance is much lower than if you only tested one (like in classical ML), since you're dividing by \(n\) in NAS. Another way to think about it is that writing a general-purpose algorithm that surpasses random search for a single architecture is way easier than a general-purpose algorithm that surpasses random search for an <em>exponential</em> number of possible architectural candidates (as in <b>ASP</b>), and for an arbitrary input problem. Even for a polynomial number of candidates (<b>a-ASP</b>, a.k.a NAS for neural networks) this result will have a linear dependence on your average performance.</p>
+</div>
 
 <h2 id="applying-learnings">Applying What We've Learned</h2>
 
+<div class="text_div">
 <p>So without the self-play property, there's no valuable information exchanged across tests, and all you can hope is to sort-of-hit some sort of spike in performance at some point. Average that average (of architectural performances) across possible tasks, and you've got yourself a giant problem in the form of a lowered confidence interval. However, as we saw, algorithms that have the self-play property are able to outperform it relatively well.</p>
 
 <p>Designing said algorithms is a bit hard if you don't know what the problem looks like, right? I mean, you want your candidates to talk to one another, which in CS terms it means that your algorithm needs to <b>exploit the substructure</b> of the problem. It so happens that, from what we've learned, NAS has an inherent substructure. Indeed, in <b>ASP</b>/<b>a-ASP</b> the substructure is <em>right there</em> in the problem definition. Don't believe me? Look again!</p>
+</div>
 
-<img src="img/asp_substructure.jpg" class="img_center_p">
+<div class="img_div">
+<div class="polaroid">
+<img src="img/asp_substructure.jpg" class="img_center_w">
+<div class="caption">
+A very short explanation on patterns within neural networks (and other functions, really).
+</div>
+</div>
+</div>
 
+<div class="text_div">
 <p>Ok, if you didn't see it that's also fine--it took me a while to figure it out. It's the sequence of functions. The sequence of functions, since it's, well, <em>a sequence</em>, does have an intrinsic substructure: one function always follows another, so if, say, \(A\) after \(B\) doesn't work well, you might want to avoid using them--and you can code that into an algorithm!</p>
 
-<p>And, finally, the second-most important result of my paper: if you were to put the set of elementary functions in the search space, and if your algorithm to solve <b>a-ASP</b> has the self-play property, <b>you will get a much better result than doing plain ML, and in polynomial time, and beating random search.</b> This is a general-purpose solution: it doesn't need to be related to neural networks, and it doesn't need to be related to a specific problem. Finally, <b>this is the best you can do</b>.</p>
+<p>And, finally, the second-most important result of my paper: if you were to put the set of elementary functions in the search space, and if your algorithm to solve <b>a-ASP</b> has the self-play property, <b>you will get a much better result than doing plain ML, and in polynomial time, and beating random search.</b> This is a general-purpose solution: it doesn't need to be related to neural networks, and it doesn't need to be related to a specific problem. Finally, <span class="highlight">this is the best you can do</span>.</p>
 
 <p></p>
+</div>
+
 <hr>
 
 <h1 id="conclusion">Conclusion: So What Does This All Mean, Really?</h1>
-<p>The first conclusion from all of this should be that you can't write a program that will find the right (optimal, zero error) architecture for <em>any</em> problem. However, by relaxing some constraints and by using some technical results, we can immediately see that some classes of algorithms offer the "best-you-can-do" answer that can still be computed in polynomial time. They will not be as powerful as a general-purpose algorithm, but they will get fairly close. In fact, it would be the best you can theoretically hope for in a generalized setting. One thing we did not discuss much is what happens when you are only trying to solve <em>one</em> problem, as opposed to say, an infinite number, like a service or a library would. In that case, these results do not hold! Doing a fine-grained analysis of NAS would require more information about your problem and your search space, and would not yield the same results in all settings.</p>
 
-<p>Indeed, some of the most successful NAS algorithms out there, like the <a href="http://proceedings.mlr.press/v97/so19a/so19a.pdf">Evolved Transformer</a>, rely on some sort of self-play property. By the results we saw earlier, this class of algorithms will outperform a random search, and hence they would be "best-you-can-do". Of course--and this is very important--self-play is not the only thing. For full optimality, you need your elementary functions in the search space. This is more of a theoretical result, but in practice any sufficiently small and diverse search space should do it. I didn't discuss it much, but "a" good set of elementary functions includes recursion, identity, and composition, which are a subset of the so-called <a href="https://en.wikipedia.org/wiki/General_recursive_function">μ-recursive functions</a>. For example, allowing skip-connections in neural networks is (a composition of) identity and (another) composition. Adding these functions into your search space guarantees a much more expressive set of candidates, and hence increases the chances of your algorithm getting a near-optimal solution.</p>
+<div class="text_div">
+<p>The first conclusion from all of this should be that you can't write a program that will find the right (optimal, zero error) architecture for <em>any</em> problem. This isn't superduper surprising: one of the definitions of computable functions is "all functions approximable to arbitrary error". However, this still works as a strong exploration of using NAS as a computability resource. Also, by relaxing some constraints and by using some technical results, we can immediately see that some classes of algorithms offer the "best-you-can-do" answer that can still be computed in polynomial time. They will not be as powerful as a general-purpose algorithm, but they will get fairly close. In fact, it would be the best you can theoretically hope for in a generalized setting. One thing we did not discuss much is what happens when you are only trying to solve <em>one</em> problem, as opposed to say, an infinite number, like a service or a library would. In that case, <span class="highlight">these results do not hold!</span> Doing a fine-grained analysis of NAS would require more information about your problem and your search space, and would not yield the same results in all settings.</p>
+
+<p>Indeed, some of the most successful NAS algorithms out there, like the <a href="http://proceedings.mlr.press/v97/so19a/so19a.pdf">Evolved Transformer</a>, rely on some sort of self-play property. By the results we saw earlier, <span class="highlight">this class of algorithms</span> will outperform a random search, and hence they <span class="highlight">would be "best-you-can-do"</span>. Of course--and this is very important--self-play is not the only thing. For full optimality, you need your elementary functions in the search space. This is more of a theoretical result, but in practice any sufficiently small and diverse search space should do it. I didn't discuss it much, but "a" good set of elementary functions includes recursion, identity, and composition, which are a subset of the so-called <a href="https://en.wikipedia.org/wiki/General_recursive_function">μ-recursive functions</a>. For example, allowing skip-connections in neural networks is (a composition of) identity and (another) composition. Adding these functions into your search space guarantees a much more expressive set of candidates, and hence increases the chances of your algorithm getting a near-optimal solution.</p>
 
 <p>Finally, this is a more broadly applicable result than "tHe ThEoRy oF nAs". NAS is a very, very expensive problem to solve, because you have to train multiple variants across multiple hyperparameters. Having good algorithms means having good ways to solve the problem <em>efficiently</em>: fast, and in a cost-effective fashion. Conversely, if you do not understand the intrinsic limitations of computation, you will design algorithms that--with luck--will perform well in one problem but will not transfer to the next. This is ok, unless someone else (or you yourself) attempt to use your algorithm on a separate problem. As we saw earlier, this is a common issue in NAS, where most algorithms do not generalize well.</p>
 
 <p>So by now you have hopefully learned some of the deepest secrets of what the machine learning problem is trying solve, and how it ties to the study of computation. You have also seen how we can "work backwards", and use the foundational results of computer science to study neural architecture search and <em>generalized, model-free</em> function approximation. Next time you want to build a classifier of cats you know that, in depths beyond the "deep neural nets", there be dragons!</p>
 
 <p>I hope you enjoyed reading this as much as I enjoyed writing it! Till next time,</p>
+</div>
 
-<p class="p3">Adrian de Wynter</br>
+<p class="raligned">Adrian de Wynter</br>
 March 15, 2021</p>
 </body>
 

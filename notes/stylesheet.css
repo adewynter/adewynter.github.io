@@ -1,0 +1,136 @@
+@charset "UTF-8";
+p {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  margin-top: 2.5%;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  margin-bottom: 2.5%;
+  font-size: 18px;
+}
+
+li {
+  margin-top: 1.0%;
+  margin-right: 3.5%;
+  margin-left: 3.5%;
+  font-size: 18px;
+}
+
+.note {
+  margin-top: 1.5%;
+  margin-right: 1.5%;
+  margin-left: 2.5%;
+  margin-bottom: 1.5%;
+  font-size: 18px;
+}
+
+.raligned {
+  margin-top: 1.5%;
+  margin-right: 1.5%;
+  margin-left: 1.5%;
+  margin-bottom: 1.5%;
+  text-align: right;
+  font-size: 18px;
+}
+
+h1 {
+  font-family:helvetica;
+  margin-top: 2.5%;
+  margin-left: 1.75%;
+  margin-bottom: 2.5%;
+}
+
+h2 {
+  font-family:helvetica;
+  margin-top: 1.5%;
+  margin-left: 2.0%;
+  margin-bottom: 1.5%;
+}
+
+h3 {
+  font-family:helvetica;
+  margin-top: 1.5%;
+  margin-left: 4.0%;
+  margin-bottom: 1.5%;
+}
+
+.highlight {
+  display: inline;
+  padding: .15 0;
+  background: #FFC107;
+  box-shadow: .15m 0 0 #FFC107, -.15em 0 0 #FFC107;
+}
+
+.text_div {
+  margin-left: 3.5%;
+  margin-right: 3.5%;  
+}
+
+.img_div {
+  margin-left: 8.5%;
+  margin-right: 8.5%;
+  padding: 1em 5em;
+}
+
+.polaroid {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  background-color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.caption {
+  font-family: helvetica;
+  text-align: center;
+  padding: 1em 2em;
+  margin-bottom: 1.5%;
+  background-color: white;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.comment {
+  -webkit-text-size-adjust: none;
+  font-size: 10px;
+}
+.img_center_w {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+
+.img_center_p {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+.img_center_h {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+}
+
+.img_center_hh {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 44%;
+}
+
+.img_center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+.img_smaller {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+}
