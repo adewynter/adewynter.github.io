@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="keywords" content="Adrian, de Wynter, Adrian de Wynter">
+  <meta name="description" content="Adrian de Wynter's home page, updated every two years!">
+  <meta name="google-site-verification" content="UhAhnWA093u8hR6zIezUozC_aTIl1dT1rPX8UEuOdDg" />
+  <title style="font-family:helvetica">Adrian de Wynter</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="dewynter.jpg"/>
+  <link href="notes/stylesheet.css" rel="stylesheet" type="text/css"/>
+
+  <style type="text/css">
+    .profile_pic {
+        float:right;
+        width:200px;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        background-color: white;
+        box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  </style>
+
+</head>
+
+
+<body>
+<h2 style="font-family:helvetica">How to spell "De Wynter" (in LaTeX!)</h2>
+
+<div class="text_div">
+<p style="font-family:helvetica">
+My last name has some <a href="https://en.wikipedia.org/wiki/Tussenvoegsel">weird spelling conventions</a> that you may or may not be familiar with. The very short, not very precise version of it is that if it's next to my first name, the "De" (the tussenvoegsel) should be lowercase, and otherwise in capitals. It is also alphabetized at the "W", not at the "D".</p>
+
+<p style="font-family:helvetica">Now, LaTeX struggles with this. So here's what I do when I cite my papers:
+<ul>
+  <li> <span style="font-family:helvetica">In the preamble of the document (the tex file, before "</span>\begin{document}"<span style="font-family:helvetica">) I define a new command: </span>\DeclareRobustCommand{\DE}[3]{#2} <span style="font-family:helvetica">and cite as usual. You can alter the argument (the #2) depending on what citation style you are using.</span></li>
+  <li> <span style="font-family:helvetica">I redefine it before calling </span>\bibliography<span style="font-family:helvetica"> as follows: </span>\DeclareRobustCommand{\DE}[3]{#2}</li>
+  <li> <span style="font-family:helvetica">In the citation (the bib file), I just make sure the entry has:</span> author={\DE{Wynter}{De{de}}} Wynter, Adrian and ... </li>
+</ul>
+<span style="font-family:helvetica">I have not modified the bib entriees because I'm not sure who's going to be checking this, but that's how I cite my papers (and any others that have tussenvoegsels in it).</span>
+</p>
+
+</body>

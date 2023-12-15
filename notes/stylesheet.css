@@ -1,18 +1,18 @@
 @charset "UTF-8";
 p {
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  font-family:helvetica;
   margin-top: 2.5%;
   margin-right: 2.5%;
   margin-left: 2.5%;
   margin-bottom: 2.5%;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 li {
   margin-top: 1.0%;
   margin-right: 3.5%;
   margin-left: 3.5%;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .note {
@@ -20,7 +20,7 @@ li {
   margin-right: 1.5%;
   margin-left: 2.5%;
   margin-bottom: 1.5%;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .raligned {
@@ -29,7 +29,7 @@ li {
   margin-left: 1.5%;
   margin-bottom: 1.5%;
   text-align: right;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 h1 {
