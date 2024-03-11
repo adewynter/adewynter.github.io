@@ -9,6 +9,7 @@ p {
 }
 
 li {
+  font-family:helvetica;
   margin-top: 1.0%;
   margin-right: 3.5%;
   margin-left: 3.5%;
@@ -16,6 +17,7 @@ li {
 }
 
 .note {
+  font-family:helvetica;
   margin-top: 1.5%;
   margin-right: 1.5%;
   margin-left: 2.5%;

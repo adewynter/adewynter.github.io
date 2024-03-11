@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Will GPT-4 Run DOOM?</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="keywords" content="GPT-4, DOOM, Adrian de Wynter">
+  <meta name="description" content="Will GPT-4 Run DOOM?">
+  <meta name="author" content="Adrian de Wynter">
+  <link rel="icon" type="image/png" href="dewynter.jpg"/>
+
+  <!-- stuff for equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <!-- readability -->
+    <link href="notes/stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Will GPT-4 Run DOOM?</h1>
+<h2>A.k.a. "Doomguy is all you need"</h2>
+<p class="note",style="font-family:helvetica">
+<em>
+This is the TL;DR of my paper <em><a href="https://arxiv.org/abs/2403.05468">Will GPT-4 Run DOOM?</a>. If you are looking for the code, it is <a href="https://github.com/adewynter/Doom">here</a>.</em>
+<br><br>
+All the opinions expressed here are my own. Angry mail should be directed at me. Happy mail too--I'd rather receive that one.
+<br>
+All products, company names, brand names, trademarks, and images are properties of their respective owners. The images are used here under Fair Use for the educational purpose of illustrating mathematical theorems.
+</em></p>
+
+<div class="text_div">
+<p></p>
+
+<h1 id="outline-",style="font-family:helvetica">Outline</h1>
+<ul>
+<li style="font-family:helvetica"><a href="#gist">The TL;DR</a></li>
+<li style="font-family:helvetica"><a href="#run">Will GPT-4 Run DOOM?</a></li>
+<li style="font-family:helvetica"><a href="#play">Will GPT-4 Play DOOM?</a></li>
+<li style="font-family:helvetica"><a href="#findings">Unexpected Findings: Reasoning in GPT-4</a></li>
+<li style="font-family:helvetica"><a href="#implications">Implications</a></li>
+<li style="font-family:helvetica"><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+<hr>
+
+<h1 id="gist",style="font-family:helvetica">The TL;DR</h1>
+
+<div class="text_div" style="font-family:helvetica">
+<p style="font-family:helvetica">
+    <ul>
+        <li style="font-family:helvetica">Under the paper's setup, GPT-4 (and GPT-4 with vision, or GPT-4V) <b>cannot really run Doom by itself</b>, because it is limited by its input size (and, obviously, that it probably will just make stuff up; you <em>really</em> don't want your compiler hallucinating every five minutes). <em>That said,</em> it can definitely act as a proxy for the engine, not unlike other "will it run Doom?" implementations, such as <a href="https://news.mit.edu/news-clip/popular-science-272">E. Coli</a> or <a href="https://arstechnica.com/gaming/2022/10/how-to-get-doom-running-in-windows-notepad-exe/">Notepad</a>.</li>
+        <li style="font-family:helvetica">That said, GPT-4 <b>can play Doom to a passable degree</b>. Now, "passable" here means "it actually does what it is supposed to, but kinda fails at the game and my grandma has played it wayyy better than this model". What is interesting is that indeed, more <em>complex call schemes</em> (e.g., having a "planner" generate short versions of what to do next; or polling experts) do lead to better results.</li>
+        <li style="font-family:helvetica">What does matter is that <b>the model seems to</b>, in spite of its super long context and claims about great retrieval/reasoning capabilities, <b>lack object permanence</b>. It's like a baby. It sees a zombie (the model, not the baby) and shoots it, but if the zombie goes out of frame--poof, no zombie ever existed. Most of the time the model died because it got stuck in a corner and ended up being shot in the back...
+          <ul><li>Also, remarkably, while complex prompts were effective at traversing the map, <em>the explanations</em> as to why it took some actions <em>were typically hallucinated</em>. So, are the reasoning claims spurious? Or the model only works well with memorised content? Or can the model <b>only reason under extremely short contexts</b> (a few frames)? (I subscribe to this latter hypothesis, by the way -- some reasoning, not great reasoning)</li></ul>
+        </li>
+        <li style="font-family:helvetica"><em>On the ethics department</em>, it is quite worrisome how easy it was for (a) me to build code to get the model to shoot something; and (b) for the model to accurately shoot something <em>without actually second-guessing the instructions</em>. So, while this is a very interesting exploration around planning and reasoning, and could have applications in automated videogame testing, <em>it is quite obvious that this model is not aware of what it is doing.</em> I <b>strongly urge everyone to think about what deployment of these models imply</b> for society and their potential misuse. For starters, the code is only available under a restricted licence.</li>
+    </ul>
+
+I will <em>always</em> link <a href="https://www.youtube.com/watch?v=_oNgyUAEv0Q">this fantastic monologue</a> when talking about ethics and ML.
+</p>
+</div>
+
+
+<div class="img_div">
+<div class="polaroid">
+<img src="notes/img/planner_8.gif" class="img_center_p" style="width: 65%" alt="A gif of GPT-4 playing Doom" longdesc="A gif of GPT-4 playing Doom.">
+<div class="caption">
+Best run for all experiments. Here "best" means "it got really far".
+</div>
+</div>
+</div>
+
+
+
+<h1 id="run",style="font-family:helvetica">Will GPT-4 Run DOOM?</h1>
+
+<div class="text_div",style="font-family:helvetica">
+<p style="font-family:helvetica">
+Doom is a 1993 shooter by id Software that has been hacked and put to run on like, everything for the past 30 years. It is only (somewhat) natural to ask whether GPT-4 can (a) run Doom, and (b) play Doom.</p>
+
+<p>So, under this setup (see the picture below), GPT-4 (and GPT-4 with vision, or GPT-4V) <b>cannot really run Doom by itself</b>. That's because it needs sufficient memory to keep track of the states and render stuff (first of all, GPT-4 doesn't even have image-rendering capabilities, so it'd have to have an encoding to <em>output</em> Doom in text). There are a couple of issues with that:
+<ul>
+  <li>A 40x72 display (smallest I could find) is 2880 bits (or 2880 black-and-white tokens, if you will). It's not bad, but seems well beyond GPT-4's capabilities. <em>After all, it was trained for natural language, not... <a href="https://github.com/wojciech-graj/doom-ascii">ASCII</a></em>. Again, it's not impossible (see below) but kinda pointless.</li>
+  <li>Then there's the issue of hallucinations. It can really throw us off when the model starts making stuff up. Since it is already outputting stuff that wasn't trained with, it will fail. So I'd have better luck <a href="https://hackaday.com/2020/10/13/the-potatoes-of-doom/">running it on a potato</a> (farm).</li>
+</ul></p>
+<p style="font-family:helvetica">
+But wait, if we can get it to act as a proxy for the engine (like E. Coli, mentioned above) we can definitely get it to "run" Doom. Also this allows us to interface with GPT-4 for play purposes, so it works peachily. So: GPT-4V "reads" Doom to GPT-4 in natural language, and we have covered the "will it run Doom" part (with a technicality) <em>and can use GPT-4's natural-language capabilities for play.</em>
+</p><p>
+Aside: we could have been able to get GPT-4 to "diffuse" a bunch of black and white frames and output the next one based on exemplars and a sequence (that'd probably need Turbo, not GPT-4-32k), but then we'd be relying on the model "guessing" what is the next game state based on the user commands, which isn't great--it would need access to the code determining enemy movement.
+</p>
+
+<div class="img_div">
+<div class="polaroid">
+<img src="notes/img/diagram.png" class="img_center_p" style="width: 65%" alt="Architecture of the system" longdesc="Setup for the paper: GPT-4/GPT-4V interface with Doom via a Python connector running on top of Matplotlib. The Manager (i.e., a Python class) sends screenshots to GPT-4V, which returns natural-language descriptions. These are then sent to the Manager, which sends this, history, and call parameters to GPT-4. Depending on the prompting scheme, it will also call the Planner (i.e., GPT-4 under a planning prompt) or Experts (3 separate calls to GPT-4) before the GPT-4 call.">
+<div class="caption">
+Setup for the paper: GPT-4/GPT-4V interface with Doom via a Python connector running on top of Matplotlib. The Manager (i.e., a Python class) sends screenshots to GPT-4V, which returns natural-language descriptions. These are then sent to the Manager, which sends this, history, and call parameters to GPT-4. Depending on the prompting scheme, it will also call the Planner (i.e., GPT-4 under a planning prompt) or Experts (3 separate calls to GPT-4) <em>before</em> the GPT-4 call.
+</div>
+</div>
+</div>
+
+</div>
+
+
+<h1 id="play">Will GPT-4 Play DOOM?</h1>
+
+<div class="text_div">
+<p>Okay, this is the fun part -- but let's start with a theoretical note BECAUSE THEORY IS FUN. A few years back (god I'm old) <a href="https://www.sciencedirect.com/science/article/pii/S0304397515001735">a paper</a> came out showing that a bunch of (a bunch = most) games are in PSPACE. This means that if you want a computer to play the game perfectly (find the best winning strategy every time), all you need is space <em>polynomial</em> on the size of the game to simulate all moves. Anyway, <em>the point is</em> that <b>GPT-4 can't really play Doom perfectly</b>: by the token argument above, it doesn't have sufficient memory to simulate all plays.</p>
+
+
+<p>
+That said, GPT-4 <b>can play Doom to a passable degree</b>. Now, "passable" here means "it actually does what it is supposed to, but kinda fails at the game and my grandma has played it wayyy better than this model". What is interesting is that indeed, <em>more complex call schemes</em> (e.g., having a "planner" generate short versions of what to do next; or polling experts) do lead to better results.
+
+<p>To elaborate a bit on "passable": the model can traverse the map, especially if it has a walkthrough. This is legit because people do use walkthroughs in games. <em>I</em> have used walkthroughs for some games (don't know how I'd have gotten most Halo MCC achievements without Maka's guides). Even then, however, GPT-4 does sometimes do really dumb things like getting stuck in corners and just punching the wall like an angsty teenager, or shooting point blank explosive barrels (blooper reel below).</p>
+
+<p>Generally, though, GPT-4 does well when it has an extra model outputting reasoning steps in a more fine-grained fashion. A walkthrough is a general plan, but if the model gets both the walkthrough and the immediate step-by-step plan on what to do next, it does much better <em>consistently</em>. This is called <em>hierarchical planning</em>. If we boost it (in the traditional sense) by polling a bunch of models on what step to take next, it works double better, though consistency is a bit of an issue.</p>
+
+<p>Aside from consistency, there are some caveats that I will cover in the next section, but the gist of it is that GPT-4 does better with less complex work. So if you can break down the task both in reasoning steps (think how chain-of-thought prompting works) <em>and</em> in time steps (i.e., have an orchestrator/planner having a wider view of the problem), the model works much better. It is actually pretty good at <em>in situ</em> decisions, like "here's a door, let's open it" or "there's a zombie, fire!" (though usually misses).</p>
+
+
+<div class="img_div">
+<div class="polaroid">
+<img src="notes/img/naive_1.gif" class="img_center_p" style="width: 65%" alt="GPT-4 shooting an explosive barrel point blank." longdesc="GPT-4 shooting an explosive barrel point blank.">
+<div class="caption">
+"hahah gun goes brr" --GPT-4
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+<h1 id="findings">Unexpected Findings: GPT-4 and Reasoning</h1>
+
+<div class="text_div">
+<p>
+Okay, so this is less of a "findings" section and more of a discussion. Reasoning in LLMs is a bit of a spicy topic because a lot of people think that these models are sentient (christ no), or that they are actually having a conversation with you (christ on a bike no). You probably can guess my position on this subject. 
+Generally LLMs are <em>very good</em> at giving the impression that they are intelligent (see image below), and without sufficient critical reasoning, people are easily fooled.
+</p>
+
+<p>That said, there is a massive different between reasoning in long, complex scenarios, Aristotleing/Newtoning/Turinging your way through life; and being able to solve simple problems by performing sufficient (abductive) inference. I do <b>not</b> expect GPT-4 to be able to develop a new, unseen insight in higher category theory, but hey, it can follow an instruction like "if you see a door, press SPACE to open". Maybe it just learnt to talk as a <a href="https://www.youtube.com/watch?v=87ZF8JMVlMM">parlour trick.</a></p>
+
+<div class="img_div">
+<div class="polaroid">
+<img src="notes/img/quigonmeme.png" class="img_center_p" style="width: 65%" alt="Extremely relevant meme." longdesc="Qui-Gon Jinn saying that being able to talk does not make you intelligent.">
+<div class="caption">
+</div>
+</div>
+</div>
+
+
+<p>
+Okay, so we will lower the bar a bit on what it means to reason <em>because we really should</em>--grandstanding aside, there are interesting things models can do by interpreting strings and returning strings. Better yet, are some fascinating things to observe about this scientific exercise (which is a grand term for "a paper that started as a shitpost"). Let's talk about some (negative) observations:
+<ul>
+  <li>The model <b>lacks object permanence</b>. You know, like how babies play peekaboo--you cover your face and you're back and the baby giggles and claps or whatever <small><small>I don't know babies</small></small>.
+    <ul>
+      <li>For example, it would be very common for the model to see a zombie on the screen, and start firing at it until it hit it (or died). Now, this is AI written to work with 1993 hardware, so I'm going to guess it doesn't have a super deep decision tree. So the zombie shoots at you and then starts running around the room. What's the issue here? Well, first that the zombie goes <em>out of view</em>. Worse, <b>it is still alive</b> and will whack you at some point. So you gotta go after it, right? After all, in Doom, it's whack or be whacked.</li>
+      <li>It turns out that GPT-4 forgets about the zombie and just keeps going. Note: <em>the prompt explicitly tells the model what to do if it is taking damage and it can't see an enemy</em>. Better yet, it just goes off on its merry way, gets stuck in a corner, and dies. It did turn around a couple of times, but in nearly 50-60 runs, I observed it... twice, I wanna say.</li></ul>
+  </li>
+  <li>
+    The model's <b>reasoning is flawed</b>. 
+    I've mentioned that complex prompts are effective at traversing the map. One trick to get the prompts to work (which is well-known in the literature; but also empirically in Doom it worked fantastically) was to ask GPT-4 to output an explanation on its rationale for taking some actions over others.
+    <ul><li>Now, I'm going to go on a limb here and expect that, for reasoning to be... you know, <em>reasoning as opposed to guessing</em>, there is some sort of <em>cause-and-effect</em> relationship that makes sense, either formally (of the form "p then q") or informally (e.g., commonsense reasoning like "I will skip this meeting because it is boring").</li>
+    <li>Actually, the flaws of reasoning are more common on <em>long/deep</em> reasoning contexts. For example, if the model fell into an acid pool, and then got stuck on a wall, it would "forget" that it is taking damage because of the acid and then get stuck and die. So its <b>reasoning is only effective in short/shallow contexts</b>; which in Doom terms it means "a few frames".</li></ul>
+  </li>
+</ul>
+</p>
+
+<p>Ok, but enough potshots at GPT-4. It's <em>absolutely remarkable</em> that this model has (hopefully, maybe, idk) not been trained to play Doom, and still does manage to get all the way to the last room (once). While I do believe that some level of prompting and calling schemes like planning and k-levels will get the model to play the game better (maybe even finish the map), to <em>reliably</em> play the game it is probable that it will need some fine-tuning.
+</p>
+
+<p>I should also point out that there is a massive difference between planning and reasoning in an academic setting (think Towers of Hanoi or box stacking or some benchmark problems like that, like in Big Bench) and planning in an applied setting (Doom falls into this category). It is much much much harder to get a model to play Doom than it is to get it to solve Towers of Hanoi. And also <b>far more interesting</b>.</p>
+
+<p>Same thoughts go for GPT-4V's zero-shot output. It is remarkably good, which is great! (do you really want to write a OCR model to sort of get it to work on Doom? Sounds expensive and too much work). The descriptions are exactly what the player model needs. There are some hallucinations here and there but overall I would argue it's more of a reasoning problem, not a parsing problem, that limits GPT-4's ability to play Doom.</p>
+</div>
+
+<h1 id="implications">Implications</h1>
+
+<div class="text_div">
+<p>
+  
+<em>On the ethics department</em>, it is quite worrisome how easy it was for (a) me to build code to get the model to shoot something; and (b) for the model to accurately shoot something <em>without actually second-guessing the instructions</em>. So, while this is a very interesting exploration around planning and reasoning, and could have applications in automated videogame testing, <em>it is quite obvious that this model is not aware of what it is doing.</em> I <b>strongly urge everyone to think about what deployment of these models imply</b> for society and their potential misuse. For starters, the code is only available under a restricted licence.
+</p>
+
+<p>That said, since it is a very commmon issue in videogames to get the game to be extensively playtested, this suggests that <em>eventually</em> some parts of the testing may be automated by an LLM. This means that you won't have to heavily train specialist models to play it, and it's very likely that <em>this can already be done</em> for non-real-time play (think Catan without turn time limits).</p>
+
+</div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<div class="text_div">
+<p>
+Right, so what have we learnt? For starters, that GPT-4 can run Doom (sort of). It also can play Doom (also sort of). But what matters the most here, in my opinion, is both that the model <em>can reason</em> a wee bit about its environment, or at least, follow verbatim instructions of the type "when you see this, do this". It fails more at the whole "when you see this, and this, and this has happened, do this", and it can't reason well about its history. So I'd argue that most of these claims around reasoning are more related to memorisation and semantic matching, and less about actual reasoning. <em>There is something there, though</em>, and I'd wager that we are just starting to see the beginning of it.
+</p>
+<p>
+From a benchmarking perspective, I think it is far more interesting to have evaluation benchmarks that can't be memorised. Let's get real, if I tried hard enough I'm pretty sure I can get GPT-4 to output the entire QQP dataset. It's not on purpose--it's just that its training corpus might have been contaminated one way or another. However, benchmarks that <em>test a phenomenon</em> as opposed to a fixed corpus are far more interesting <em>and realistic</em>. You really can't claim your test set is representative of the entire phenomenon you are modelling/learning--but if you have a genie that, when you pull its arm, gives you a new test set, you are definitely testing the real thing. It's also memorisation proof. Also, it's cool to see LLMs play videogames.
+</p>
+<p>
+But back to the "there is something there" thing. For this reason, and because <em>seriously</em> it was super easy to get GPT-4 to unquestionably follow instructions, I think that it is extremely dangerous how easy and fast this tech has widespread. It has its benefits, like automated playtesting, or, better, helping users <a href="https://dl.acm.org/doi/abs/10.1145/3517428.3544819">with dyslexia</a> (neurodiverse groups are aaaalways marginalised, just ask me how hard it's been to get products to do inclusion work), but it has massive potential for misuse.</p>
+
+<p>So I would very much like to repeat that <a href="https://www.youtube.com/watch?v=_oNgyUAEv0Q">Jurassic Park video</a> and note that technology isn't good or bad, it <em>just is</em>. A tool reflects the value set of its creators, and it typically is <em>people</em> who give it meaning.
+</p>
+</div>
+
+
+<p></p>
+<hr>
+<p></p>
+<p class="raligned">Adrian de Wynter</br>
+9 March 2024</p>
+</body>
+
+</html>
