@@ -65,7 +65,7 @@ I will <em>always</em> link <a href="https://www.youtube.com/watch?v=_oNgyUAEv0Q
 
 <div class="img_div">
 <div class="polaroid">
-<img src="notes/img/planner_8.gif" class="img_center_p" style="width: 65%" alt="A gif of GPT-4 playing Doom" longdesc="A gif of GPT-4 playing Doom.">
+<img src="https://github.com/adewynter/Doom/blob/main/sample_outputs/planner_run_8.gif?raw=true" class="img_center_p" style="width: 65%" alt="A gif of GPT-4 playing Doom" longdesc="A gif of GPT-4 playing Doom.">
 <div class="caption">
 Best run for all experiments. Here "best" means "it got really far".
 </div>
@@ -116,14 +116,14 @@ That said, GPT-4 <b>can play Doom to a passable degree</b>. Now, "passable" here
 
 <p>Generally, though, GPT-4 does well when it has an extra model outputting reasoning steps in a more fine-grained fashion. A walkthrough is a general plan, but if the model gets both the walkthrough and the immediate step-by-step plan on what to do next, it does much better <em>consistently</em>. This is called <em>hierarchical planning</em>. If we boost it (in the traditional sense) by polling a bunch of models on what step to take next, it works double better, though consistency is a bit of an issue.</p>
 
-<p>Aside from consistency, there are some caveats that I will cover in the next section, but the gist of it is that GPT-4 does better with less complex work. So if you can break down the task both in reasoning steps (think how chain-of-thought prompting works) <em>and</em> in time steps (i.e., have an orchestrator/planner having a wider view of the problem), the model works much better. It is actually pretty good at <em>in situ</em> decisions, like "here's a door, let's open it" or "there's a zombie, fire!" (though usually misses).</p>
+<p>Aside from consistency, there are some caveats that I will cover in the next section, but the gist of it is that GPT-4 does better with less complex work. So if you can break down the task both in reasoning steps (think how chain-of-thought prompting works) <em>and</em> in time steps (i.e., have an orchestrator/planner having a wider view of the problem), the model works much better. It is actually pretty good at <em>ad hoc</em> decisions, like "here's a door, let's open it" or "there's a zombie, fire!" (though usually misses).</p>
 
 
 <div class="img_div">
 <div class="polaroid">
-<img src="notes/img/naive_1.gif" class="img_center_p" style="width: 65%" alt="GPT-4 shooting an explosive barrel point blank." longdesc="GPT-4 shooting an explosive barrel point blank.">
+<img src="notes/img/naive_run_2.gif" class="img_center_p" style="width: 65%" alt="GPT-4 shooting an explosive barrel point blank." longdesc="GPT-4 shooting an explosive barrel point blank.">
 <div class="caption">
-"hahah gun goes brr" --GPT-4
+"hahah gun goes brr" --not GPT-4
 </div>
 </div>
 </div>
