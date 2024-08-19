@@ -143,6 +143,44 @@ body .img-responsive {
 }
 
 
+.banner2 {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  padding: 80px 0 0 0; 
+}
+.banner2 ul {
+  overflow: hidden;
+  background-color: #333;
+  width: 100%;
+  height: 320px;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px; 
+}
+.banner2 ul li {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  background-repeat: no-repeat; 
+}
+.banner2 ul li.mslide1 { background-image: url("../img/dewynter2.jpg"); }
+.banner2 ul li.mslide2 { background-image: url("../img/dewynter.jpg"); }
+.banner2 {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .banner2 {
+    display: inline-block;
+  }
+}
+
+
 /* List stuff */
 .section-item {
   display: flex;
