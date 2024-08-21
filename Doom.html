@@ -4,24 +4,34 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Will GPT-4 Run DOOM?</title>
-  <meta name="viewport" content="width=device-width">
   <meta name="keywords" content="GPT-4, DOOM, Adrian de Wynter">
   <meta name="description" content="Will GPT-4 Run DOOM?">
   <meta name="author" content="Adrian de Wynter">
-  <link rel="icon" type="image/png" href="dewynter.jpg"/>
+  <link rel="icon" type="image/png" href="img/dewynter.jpg"/>
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
 
-  <!-- stuff for equations -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
     <!-- readability -->
-    <link href="notes/stylesheet.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/main_index.css" media="screen" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
-<h1>Will GPT-4 Run DOOM?</h1>
+<div class="content">
+<div class="header-wrapper">
+  <header>
+    <div style="display: flex; justify-content: center; text-align: center; align-items: center;">
+      <h1>Will GPT-4 Run DOOM?</h1>
+    </div>
+  </header>
+</div>
+
+
+<div class="main-text">
 <h2>A.k.a. "Doomguy is all you need"</h2>
-<p class="note",style="font-family:helvetica">
+
+
+<div class="text_div" style="font-family:helvetica">
+
+<p>
 <em>
 This is the TL;DR of my paper <em><a href="https://arxiv.org/abs/2403.05468">Will GPT-4 Run DOOM?</a>. If you are looking for the code, it is <a href="https://github.com/adewynter/Doom">here</a>.</em>
 <br><br>
@@ -29,6 +39,8 @@ All the opinions expressed here are my own. Angry mail should be directed at me.
 <br>
 All products, company names, brand names, trademarks, and images are properties of their respective owners. The images are used here under Fair Use for the educational purpose of illustrating mathematical theorems.
 </em></p>
+
+</div>
 
 <div class="text_div">
 <p></p>
@@ -45,7 +57,15 @@ All products, company names, brand names, trademarks, and images are properties 
 
 <hr>
 
-<h1 id="gist",style="font-family:helvetica">The TL;DR</h1>
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="gist">The TL;DR</div>
+
+<p></p>
+
+
+<!--<h1 id="gist",style="font-family:helvetica">The TL;DR</h1>-->
 
 <div class="text_div" style="font-family:helvetica">
 <p style="font-family:helvetica">
@@ -65,16 +85,25 @@ I will <em>always</em> link <a href="https://www.youtube.com/watch?v=_oNgyUAEv0Q
 
 <div class="img_div">
 <div class="polaroid">
-<img src="https://github.com/adewynter/Doom/blob/main/sample_outputs/planner_run_8.gif?raw=true" class="img_center_p" style="width: 65%" alt="A gif of GPT-4 playing Doom" longdesc="A gif of GPT-4 playing Doom.">
+<img src="https://github.com/adewynter/Doom/blob/main/sample_outputs/planner_run_8.gif?raw=true" class="img_center_p" style="max-width: 100%" alt="A gif of GPT-4 playing Doom" longdesc="A gif of GPT-4 playing Doom.">
 <div class="caption">
 Best run for all experiments. Here "best" means "it got really far".
 </div>
 </div>
 </div>
+</div></div></div>
 
 
 
-<h1 id="run",style="font-family:helvetica">Will GPT-4 Run DOOM?</h1>
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="run">Will GPT-4 Run DOOM?</div>
+
+<p></p>
+
+
+<!--<h1 id="run",style="font-family:helvetica">Will GPT-4 Run DOOM?</h1>-->
 
 <div class="text_div",style="font-family:helvetica">
 <p style="font-family:helvetica">
@@ -93,7 +122,7 @@ Aside: we could have been able to get GPT-4 to "diffuse" a bunch of black and wh
 
 <div class="img_div">
 <div class="polaroid">
-<img src="notes/img/diagram.png" class="img_center_p" style="width: 65%" alt="Architecture of the system" longdesc="Setup for the paper: GPT-4/GPT-4V interface with Doom via a Python connector running on top of Matplotlib. The Manager (i.e., a Python class) sends screenshots to GPT-4V, which returns natural-language descriptions. These are then sent to the Manager, which sends this, history, and call parameters to GPT-4. Depending on the prompting scheme, it will also call the Planner (i.e., GPT-4 under a planning prompt) or Experts (3 separate calls to GPT-4) before the GPT-4 call.">
+<img src="notes/img/diagram.png" style="max-width: 100%" alt="Architecture of the system" longdesc="Setup for the paper: GPT-4/GPT-4V interface with Doom via a Python connector running on top of Matplotlib. The Manager (i.e., a Python class) sends screenshots to GPT-4V, which returns natural-language descriptions. These are then sent to the Manager, which sends this, history, and call parameters to GPT-4. Depending on the prompting scheme, it will also call the Planner (i.e., GPT-4 under a planning prompt) or Experts (3 separate calls to GPT-4) before the GPT-4 call.">
 <div class="caption">
 Setup for the paper: GPT-4/GPT-4V interface with Doom via a Python connector running on top of Matplotlib. The Manager (i.e., a Python class) sends screenshots to GPT-4V, which returns natural-language descriptions. These are then sent to the Manager, which sends this, history, and call parameters to GPT-4. Depending on the prompting scheme, it will also call the Planner (i.e., GPT-4 under a planning prompt) or Experts (3 separate calls to GPT-4) <em>before</em> the GPT-4 call.
 </div>
@@ -101,9 +130,18 @@ Setup for the paper: GPT-4/GPT-4V interface with Doom via a Python connector run
 </div>
 
 </div>
+</div></div></div>
+
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="play">Will GPT-4 Play DOOM?</div>
+
+<p></p>
+<p></p>
 
 
-<h1 id="play">Will GPT-4 Play DOOM?</h1>
+<!--<h1 id="play">Will GPT-4 Play DOOM?</h1>-->
 
 <div class="text_div">
 <p>Okay, this is the fun part -- but let's start with a theoretical note BECAUSE THEORY IS FUN. A few years back (god I'm old) <a href="https://www.sciencedirect.com/science/article/pii/S0304397515001735">a paper</a> came out showing that a bunch of (a bunch = most) games are in PSPACE. This means that if you want a computer to play the game perfectly (find the best winning strategy every time), all you need is space <em>polynomial</em> on the size of the game to simulate all moves. Anyway, <em>the point is</em> that <b>GPT-4 can't really play Doom perfectly</b>: by the token argument above, it doesn't have sufficient memory to simulate all plays.</p>
@@ -121,18 +159,25 @@ That said, GPT-4 <b>can play Doom to a passable degree</b>. Now, "passable" here
 
 <div class="img_div">
 <div class="polaroid">
-<img src="notes/img/naive_run_2.gif" class="img_center_p" style="width: 65%" alt="GPT-4 shooting an explosive barrel point blank." longdesc="GPT-4 shooting an explosive barrel point blank.">
+<img src="notes/img/naive_run_2.gif" style="max-width: 100%" alt="GPT-4 shooting an explosive barrel point blank." longdesc="GPT-4 shooting an explosive barrel point blank.">
 <div class="caption">
 "hahah gun goes brr" --not GPT-4
 </div>
 </div>
 </div>
 
-
 </div>
+</div></div></div>
 
 
-<h1 id="findings">Unexpected Findings: GPT-4 and Reasoning</h1>
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="findings">Unexpected Findings: GPT-4 and Reasoning</div>
+
+<p></p>
+<p></p>
+<!--<h1 id="findings">Unexpected Findings: GPT-4 and Reasoning</h1>-->
 
 <div class="text_div">
 <p>
@@ -142,14 +187,14 @@ Generally LLMs are <em>very good</em> at giving the impression that they are int
 
 <p>That said, there is a massive different between reasoning in long, complex scenarios, Aristotleing/Newtoning/Turinging your way through life; and being able to solve simple problems by performing sufficient (abductive) inference. I do <b>not</b> expect GPT-4 to be able to develop a new, unseen insight in higher category theory, but hey, it can follow an instruction like "if you see a door, press SPACE to open". Maybe it just learnt to talk as a <a href="https://www.youtube.com/watch?v=87ZF8JMVlMM">parlour trick.</a></p>
 
-<div class="img_div">
+<div>
 <div class="polaroid">
-<img src="notes/img/quigonmeme.png" class="img_center_p" style="width: 65%" alt="Extremely relevant meme." longdesc="Qui-Gon Jinn saying that being able to talk does not make you intelligent.">
+<img src="notes/img/quigonmeme.png" style="max-width: 100%" alt="Extremely relevant meme." longdesc="Qui-Gon Jinn saying that being able to talk does not make you intelligent.">
 <div class="caption">
+<p></p>
 </div>
 </div>
 </div>
-
 
 <p>
 Okay, so we will lower the bar a bit on what it means to reason <em>because we really should</em>--grandstanding aside, there are interesting things models can do by interpreting strings and returning strings. Better yet, are some fascinating things to observe about this scientific exercise (which is a grand term for "a paper that started as a shitpost"). Let's talk about some (negative) observations:
@@ -175,8 +220,15 @@ Okay, so we will lower the bar a bit on what it means to reason <em>because we r
 
 <p>Same thoughts go for GPT-4V's zero-shot output. It is remarkably good, which is great! (do you really want to write a OCR model to sort of get it to work on Doom? Sounds expensive and too much work). The descriptions are exactly what the player model needs. There are some hallucinations here and there but overall I would argue it's more of a reasoning problem, not a parsing problem, that limits GPT-4's ability to play Doom.</p>
 </div>
+</div></div></div>
 
-<h1 id="implications">Implications</h1>
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="implications">Implications</div>
+
+<p></p>
+<!--<h1 id="implications">Implications</h1>-->
 
 <div class="text_div">
 <p>
@@ -187,10 +239,17 @@ Okay, so we will lower the bar a bit on what it means to reason <em>because we r
 <p>That said, since it is a very commmon issue in videogames to get the game to be extensively playtested, this suggests that <em>eventually</em> some parts of the testing may be automated by an LLM. This means that you won't have to heavily train specialist models to play it, and it's very likely that <em>this can already be done</em> for non-real-time play (think Catan without turn time limits).</p>
 
 </div>
+</div></div></div>
 
-<h1 id="conclusion">Conclusion</h1>
 
+<div class="papers">
+<div class="papers-block">
 <div class="text_div">
+<div class="section-label--left" id="conclusion">Conclusion</div>
+
+<p></p>
+<!--<h1 id="conclusion">Conclusion</h1> -->
+
 <p>
 Right, so what have we learnt? For starters, that GPT-4 can run Doom (sort of). It also can play Doom (also sort of). But what matters the most here, in my opinion, is both that the model <em>can reason</em> a wee bit about its environment, or at least, follow verbatim instructions of the type "when you see this, do this". It fails more at the whole "when you see this, and this, and this has happened, do this", and it can't reason well about its history. So I'd argue that most of these claims around reasoning are more related to memorisation and semantic matching, and less about actual reasoning. <em>There is something there, though</em>, and I'd wager that we are just starting to see the beginning of it.
 </p>
@@ -203,13 +262,19 @@ But back to the "there is something there" thing. For this reason, and because <
 <p>So I would very much like to repeat that <a href="https://www.youtube.com/watch?v=_oNgyUAEv0Q">Jurassic Park video</a> and note that technology isn't good or bad, it <em>just is</em>. A tool reflects the value set of its creators, and it typically is <em>people</em> who give it meaning.
 </p>
 </div>
+</div>
+</div>
 
 
 <p></p>
 <hr>
+
 <p></p>
-<p class="raligned">Adrian de Wynter</br>
-9 March 2024</p>
+<p style="font-family:helvetica; display:flex; justify-content:flex-end">Adrian de Wynter</br>9 March 2024</p>
+
+</div>
+</div>
+
 </body>
 
 </html>

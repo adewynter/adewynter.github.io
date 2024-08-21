@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 Very loosely taken from Ana Enders' design -- anaenders.com
 Palette:
@@ -181,6 +182,28 @@ body .img-responsive {
 }
 
 
+.polaroid {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  object-fit: scale-down; 
+  width: 100%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 767px) {
+  .polaroid {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
+.caption {
+  font-family: Helvetica, Serif;
+  font-style: italic;  
+}
+
 /* List stuff */
 .section-item {
   display: flex;
@@ -221,7 +244,7 @@ body .img-responsive {
   } 
 }
 .section-item .paper-title {
-  font-family: Helvetica, "Archer-Book", Georgia, Serif;
+  font-family: Helvetica, Georgia, Serif;
   font-size: 16px;
   font-weight: normal; 
 }
@@ -260,6 +283,17 @@ body .img-responsive {
   font-size: 50px;
   font-family: Helvetica, Georgia, serif; 
 }
+.main-text .highlight {
+  font-family:helvetica, Serif;
+  float: none;
+  display: inline;
+  padding: .15 0;
+  font-size: 16px;
+  margin: 0;
+  background: #FFC107;
+  box-shadow: .15m 0 0 #FFC107, -.15em 0 0 #FFC107;
+}
+
 @media (max-width: 1199px) {
   .main-text p span {
     font-size: 40px; 

@@ -4,41 +4,56 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Bort: Algorithms and their Applications</title>
-  <meta name="viewport" content="width=device-width">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
   <meta name="keywords" content="Bort, FPTAS, Agora, Language models, Adrian de Wynter">
   <meta name="description" content="Bort - Algorithms and Applications.">
   <meta name="author" content="Adrian de Wynter">
-  <link rel="icon" type="image/png" href="../dewynter.jpg"/>
+  <link rel="icon" type="image/png" href="../img/dewynter.jpg"/>
 
   <!-- stuff for equations -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <!-- readability -->
-    <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+    <link href="../styles/main_index.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
-<h1>Bort: Algorithms and Applications</h1>
-<p class="note">
+
+
+<div class="content">
+<div class="header-wrapper">
+  <header>
+    <div style="display: flex; justify-content: center; text-align: center; align-items: center;">
+      <h1>Bort: Algorithms and Applications</h1>
+    </div>
+  </header>
+</div>
+
+
+<div class="main-text">
+<div class="text_div" style="font-family:helvetica">
+  <p></p><p></p><p></p>
+<p>
 <em>This is an extended version of a post that was shared <a href="https://www.amazon.science/blog/a-version-of-the-bert-language-model-thats-20-times-as-fast">here</a>. 
   All the opinions expressed here are my own. Angry mail should be directed at me. Happy mail too--I'd rather receive that one.
 </em></p>
+</div>
 
 <div class="text_div">
-<p>A few weeks ago, my colleague Danny Perry and I released <a href="https://github.com/alexa/bort">Bort</a>, a highly optimized BERT-large model that is \(20\times\) faster, \(84\%\) smaller, and consistently outperforms it in \(20/23\) natural-language understanding tasks. It was a fairly complicated task, and involved a main, applied paper (<a href="https://arxiv.org/abs/2010.10499">"Optimal Subarchitecture Extraction for BERT"</a>), as well as two more theoretical papers describing the algorithms used (<a href="https://arxiv.org/abs/2010.08512">"An Approximation Algorithm for Optimal Subarchitecture Extraction"</a> and <a href="https://arxiv.org/abs/2010.07990">"An Algorithm for Learning Smaller Representations of Models With Scarce Data"</a>).
+<em>
+<p>A few weeks ago, my colleague Danny Perry and I released <a href="https://github.com/alexa/bort">Bort</a>, a highly optimised BERT-large model that is \(20\times\) faster, \(84\%\) smaller, and consistently outperforms it in \(20/23\) natural-language understanding tasks. It was a fairly complicated task, and involved a main, applied paper (<a href="https://arxiv.org/abs/2010.10499">"Optimal Subarchitecture Extraction for BERT"</a>), as well as two more theoretical papers describing the algorithms used (<a href="https://arxiv.org/abs/2010.08512">"An Approximation Algorithm for Optimal Subarchitecture Extraction"</a> and <a href="https://arxiv.org/abs/2010.07990">"An Algorithm for Learning Smaller Representations of Models With Scarce Data"</a>).
 
-While the papers and model received an unexpected amount of attention, I think that the density behind the two more rigorous papers keeps many people from reading them. Sure, math has to be precise, and statements need to be backed with proofs (you can't go around saying "bOrT iS oPtImAl" without a proof of that!). However, <span class="highlight">the ideas are fairly intuitive without the need of a strong mathematics background</span>. 
-Besides, I love math, and I love computer science. I'd very much like to offer you a window into the research done to obtain Bort, eschewing some of the long-winded lemmas and proofs, but emphasizing the ideas. Indeed, I personally believe that the algorithms behind this research are far more interesting than the places on the leaderboard or the numbers attained. 
+While the papers and model received an unexpected amount of attention, I think that the density behind the two more rigorous papers keeps many people from reading them. Sure, maths has to be precise, and statements need to be backed with proofs (you can't go around saying "bOrT iS oPtImAl" without a proof of that!). However, <span class="highlight">the ideas are fairly intuitive without the need of a strong mathematics background</span>. 
+Besides, I love maths, and I love computer science. I'd very much like to offer you a window into the research done to obtain Bort, eschewing some of the long-winded lemmas and proofs, but emphasizing the ideas. Indeed, I personally believe that the algorithms behind this research are far more interesting than the places on the leaderboard or the numbers attained. 
 </p>
 <p>
-In this post I will informally introduce you to these ideas, and share some of my passion for this field. I'll mostly talk about the algorithms, but I will mention how they were applied to Bort/BERT-large. I apologize beforehand for any omissions and handwaving (which is absolutely necessary in this case), weird images (because I'm a computer scientist, not a graphic designer), and ugly formatting (because what is Jekyll anyway?).<sup class="comment">Update: look at me now I know more HTML!</sup> 
-Throughout my math education, I was always taught to remember that the objects studied shared progressively deeper correspondences ("here there be dragons!"). Hopefully by the end of this read, you'll want to go forth and slay some dragons of your own.
-</p>
+In this post I will informally introduce you to these ideas, and share some of my passion for this field. I'll mostly talk about the algorithms, but I will mention how they were applied to Bort/BERT-large. I apologise beforehand for any omissions and handwaving (which is absolutely necessary in this case), weird images (because I'm a computer scientist, not a graphic designer), and ugly formatting (because what is Jekyll anyway?).<sup class="comment">Update: look at me now I know more HTML!</sup> 
+Throughout my maths education, I was always taught to remember that the objects studied shared progressively deeper correspondences ("here there be dragons!"). Hopefully by the end of this read, you'll want to go forth and slay some dragons of your own.
+</p></em>
 <p>Following the great W. A. Hodges, in this post, "I" means I, and "we" means we.
 </p>
 </div>
 
+<div class="text_div" style="font-family:helvetica">
 <h1 id="outline-">Outline</h1>
 <ul>
   <li><a href="#background">Background</a>
@@ -59,17 +74,24 @@ Throughout my math education, I was always taught to remember that the objects s
     </ul></li>
   <li><a href="#conclusion">Conclusion</a></li>
 </ul>
-
+</div>
 <p></p>
 <hr>
 
-<h1 id="background">Background</h1>
-<h2 id="language-models-and-architectural-parameters">Language Models and Architectural Parameters</h2>
 
+<div class="papers">
+<div class="papers-block">
 <div class="text_div">
-<p>Some of y'all probably already know what a language model is, but the notion of an <em>architectural parameter</em> is new. I'll introduce it here by using <a href="https://arxiv.org/abs/1810.04805">BERT</a> as an example, since it is the use case for the algorithms I'll talk about.</p>
+<div class="section-label--left" id="background">Background</div>
 
-<p>A <em>language model</em> is, very informally, a mapping between strings and vectors. While one could build a big matrix of all words and assign a number based on the frequency of the words appearing together for each entry, it has become clear over the past few years that a non-linear model (i.e., a neural network) works far better. Language models usually just return the <em>embedding</em> (vectors), and it is the downstream model's problem to make sense of them and output something for the task. As an example, imagine I want to do sentiment classification on some corpus, so my input is a single sentence and my output is <code>happy</code> and <code>sad</code>. Then a standard pipeline would have a <em>pre-trained</em> language model, usually trained to output good vectors with huge datasets, and then a second model--a classifier--that takes in the language model's output and returns <code>happy</code>/<code>sad</code>. The quality of the language model will directly impact the performance of the classifier, and normally you need to "specialize" (<em>fine-tune</em>) your language-model-and-classifier combination so that it knows what to do. </p>
+<p></p>
+<h1 id="language-models-and-architectural-parameters">Language Models and Architectural Parameters</h1>
+<p></p>
+
+<div class="text_div" style="font-family:helvetica">
+<p>Some of you probably already know what a language model is, but the notion of an <em>architectural parameter</em> is new. I'll introduce it here by using <a href="https://arxiv.org/abs/1810.04805">BERT</a> as an example, since it is the use case for the algorithms I'll talk about.</p>
+
+<p>A <em>language model</em> is, very informally, a mapping between strings and vectors. While one could build a big matrix of all words and assign a number based on the frequency of the words appearing together for each entry, it has become clear over the past few years that a non-linear model (i.e., a neural network) works far better. Language models usually just return the <em>embedding</em> (vectors), and it is the downstream model's problem to make sense of them and output something for the task. As an example, imagine I want to do sentiment classification on some corpus, so my input is a single sentence and my output is <code>happy</code> and <code>sad</code>. Then a standard pipeline would have a <em>pre-trained</em> language model, usually trained to output good vectors with huge datasets, and then a second model--a classifier--that takes in the language model's output and returns <code>happy</code>/<code>sad</code>. The quality of the language model will directly impact the performance of the classifier, and normally you need to "specialise" (<em>fine-tune</em>) your language-model-and-classifier combination so that it knows what to do. </p>
 
 <p>There are A LOT of things we can say about this field, but, since we are mostly talking about applying the algorithms to BERT, we'll leave it for another time. All you need to know right now is that, at the time of writing this, the most popular, successful, and--when released--best-performing language model is BERT. Let's just skip the details about how it works, and only remark two things about it:</p>
 <ul>
@@ -80,84 +102,97 @@ Throughout my math education, I was always taught to remember that the objects s
 
 <p>The idea of architectural parameters is not new, but it was first introduced and applied to deep learning, to the best of my knowledge, in my <a href="https://arxiv.org/abs/2010.08512">paper</a>.  However, it's a bit different than your usual machine learning, as it dabbles on the frontiers of <em>meta-learning</em>. To gain an intuition for them, think of a single linear layer, \(f(x) = ReLU(Ax + b)\), where \(A\) is a \(m \times n\) real-valued matrix. The <em>trainable</em> parameters are all the (uncountably infinite) values that \(A\) can take. The <em>architectural</em> parameters are \(m\) and \(n\). <a href="https://arxiv.org/abs/2010.08512">By definition</a>, these are non-trainable and cannot be found without meta-learning methods. However, they also form a space, since it's the set of all valid combinations of \(m\) and \(n\). This has more implications than you think, and we'll cover them one or two sections from now. </p>
 
-<p>At the time of the release of the original BERT paper, the influence of specific combinations of architectural parameters on the performance of this language model was poorly understood. Nowadays, it's a bit better understood by the <a href="https://arxiv.org/pdf/1908.08593.pdf">work</a> of many great researchers. For our use case, we'll forgo the clever, specialized research mentioned before, and take it in a different, more primitive direction:</p>
+<p>At the time of the release of the original BERT paper, the influence of specific combinations of architectural parameters on the performance of this language model was poorly understood. Nowadays, it's a bit better understood by the <a href="https://arxiv.org/pdf/1908.08593.pdf">work</a> of many great researchers. For our use case, we'll forgo the clever, specialised research mentioned before, and take it in a different, more primitive direction:</p>
 
 <p><span class="highlight">Can a computer tell us what is the best combination of architectural parameters, for an arbitrary model (not just BERT)?</span></p>
 
-<p>Another thing: a general trend is that smaller models aren't always more accurate, by a small delta; but they are significantly faster. Even more so, BERT was considered underfit by its authors, and it wasn't until <a href="https://arxiv.org/abs/1907.11692">RoBERTa</a> that a highly optimized version of the <em>same</em> architecture was found. This means that RoBERTa has the same architectural parameters as BERT-large, but is better performing because it uses a different training scheme. I greatly recommend you check out these models if you're interested, since they are both quite important for the field. I think they are taught in college NLP courses nowadays! Also, note that other non-parametric variants (i.e., alterations on the graph) work really well, like <a href="https://arxiv.org/abs/1909.11942">ALBERT</a>. But our problem is different, so we'll just give credit where its due and move on.</p>
+<p>Another thing: a general trend is that smaller models aren't always more accurate, by a small delta; but they are significantly faster. Even more so, BERT was considered underfit by its authors, and it wasn't until <a href="https://arxiv.org/abs/1907.11692">RoBERTa</a> that a highly optimised version of the <em>same</em> architecture was found. This means that RoBERTa has the same architectural parameters as BERT-large, but is better performing because it uses a different training scheme. I greatly recommend you check out these models if you're interested, since they are both quite important for the field. I think they are taught in university NLP courses nowadays! Also, note that other non-parametric variants (i.e., alterations on the graph) work really well, like <a href="https://arxiv.org/abs/1909.11942">ALBERT</a>. But our problem is different, so we'll just give credit where its due and move on.</p>
 
 <p>Ok, let's forget about BERT for a moment, and get to the (more) fun stuff.</p>
 </div>
 
-<h2 id="p-np-and-fptas">P, NP, and FPTAS</h2>
+<h1 id="p-np-and-fptas">P, NP, and FPTAS</h1>
+<p></p>
 
 <div class="text_div">
-<p>Computational complexity theory, broadly speaking, studies and categorizes problems based on how "hard" they are. The definition of <em>hardness</em> is very precise; but for this post we will mostly care about polynomial-time solutions to problems, which may or may not be feasible to attain. Why polynomial? Well, mostly because polynomials compose well (so calling a poly-time algorithm from another poly-time algorithm will remain poly-time), and they do not grow too fast. This last part is quite important when talking about time and space of an algorithm--and for this post, we will be only talking about time.</p>
+<p>Computational complexity theory, broadly speaking, studies and categorises problems based on how "hard" they are. The definition of <em>hardness</em> is very precise; but for this post we will mostly care about polynomial-time solutions to problems, which may or may not be feasible to attain. Why polynomial? Well, mostly because polynomials compose well (so calling a poly-time algorithm from another poly-time algorithm will remain poly-time), and they do not grow too fast. This last part is quite important when talking about time and space of an algorithm--and for this post, we will be only talking about time.</p>
 
 <p>Think about sorting a collection of objects by trying out random permutations. Sure, if your collection of objects is \(\{A, C, B\}\), there's only \(3! = 6\) ways you can randomly arrange it. With luck, you'll be done "quickly"--or so it seems! This "algorithm" runs in a time that is a <em>factorial</em> function of the size of the input, \(an! + b\), where \(a, b\) are overhead constants that we can ignore. It follows that a really large input will break it: Think of doing the same thing with the words of the English dictionary. A quick Google search says that there are \(273,000\) words in the Oxford English dictionary. That means that you will have \(273,000! \approx 1.33 \times 10^{1365513}\) permutations. That exponent is HUGE! To put this number in perspective, another quick (Wolframalpha this time) search on the number of <em>atoms</em> in the universe puts it at a measly \(6 \times 10^{79}\) atoms.</p>
 
 <p>In sum, polynomial-time algorithms are nice. Besides, most natural problems have solutions in terms of "small"-exponent polynomials (i.e., rarely you'll see a solution bounded by \(n^{50,000}\)).</p>
 
-<p>With this, we can categorize problems more concretely:
+<p>With this, we can categorise problems more concretely:
 <ul>
 <li>The class of problems that can be solved with a polynomial-time algorithm is called <strong>P</strong>.</li>
-<li>The class of problems that can be solved by "trying out" multiple possible paths in the solution is called <strong>NP</strong> (for <strong>N</strong>on-deterministic <strong>P</strong>olynomial). A key component of problems in this class is that it's incredibly easy (read: polynomial time) to verify a solution to the problem--e.g., testing whether a trained neural network generalizes well is as easy as just feeding a new dataset through it. <em>Training the network</em>, however, is another story.</li>
-<li>Some problems in <strong>NP</strong> are especially interesting, as they appear to be analogous to the rest of the problems in <strong>NP</strong>. We say that a problem is in <strong>NP</strong>-complete if all problems in <strong>NP</strong> can be transformed in polynomial time to it. Think of coloring a graph with three colors--you could just build (in polynomial time) a matrix with a bunch of boolean formulae and solve that instead.</li>
+<li>The class of problems that can be solved by "trying out" multiple possible paths in the solution is called <strong>NP</strong> (for <strong>N</strong>on-deterministic <strong>P</strong>olynomial). A key component of problems in this class is that it's incredibly easy (read: polynomial time) to verify a solution to the problem--e.g., testing whether a trained neural network generalises well is as easy as just feeding a new dataset through it. <em>Training the network</em>, however, is another story.</li>
+<li>Some problems in <strong>NP</strong> are especially interesting, as they appear to be analogous to the rest of the problems in <strong>NP</strong>. We say that a problem is in <strong>NP</strong>-complete if all problems in <strong>NP</strong> can be transformed in polynomial time to it. Think of colouring a graph with three colours--you could just build (in polynomial time) a matrix with a bunch of boolean formulae and solve that instead.</li>
 <li>The final class is <strong>NP</strong>-Hard, which is often defined "as being at least as hard as all the other problems in <strong>NP</strong>". The key distinction between <strong>NP</strong>-complete and <strong>NP</strong>-Hard is that a problem is in <strong>NP</strong>-complete if it's in <strong>NP</strong> and it is in <strong>NP</strong>-Hard.</li>
 </ul>
-<p>Technically, the definitions above only apply to <em>decision</em> problems, and optimization problems have their own classes. Since it's relatively simple to turn the optimization problems we will discuss into their decision versions, we will just abuse notation a little. Just know that the classification of computational problems is quite deep (here there be dragons!), and I'm not telling you the full story.</p>
+<p>Technically, the definitions above only apply to <em>decision</em> problems, and optimisation problems have their own classes. Since it's relatively simple to turn the optimisation problems we will discuss into their decision versions, we will just abuse notation a little. Just know that the classification of computational problems is quite deep (here there be dragons!), and I'm not telling you the full story.</p>
 <p>These classes of problems form a very nice hierarchy:</p>
 </div>
 
 <div class="img_div">
 <div class="polaroid">
-<img src="img/pvsnp.jpg" class="img_center" style="width: 45%">
+<img src="img/pvsnp.jpg" class="img_center" style="max-width: 100%">
 <div class="caption">
-  Some classes of decision problems, assuming \(P \neq NP\).
+Some classes of decision problems, assuming \(P \neq NP\).
 </div>
 </div>
 </div>
+<p></p>
 
 <div class="text_div">
 <p>Since a polynomial-time solution to <strong>NP</strong>-complete problems appears to be impossible (i.e., unless <strong>P</strong>=<strong>NP</strong> you're never going to find one), we normally <em>approximate</em> these problems. Sometimes, it is possible to approximate a problem to within a desired approximation parameter, \(\epsilon\). </p>
 
-<p>Turns out that you can also categorize problems (surprise!) based on their <em>approximability</em>. The class of problems that admit a solution in the form mentioned above is called <strong>APX</strong>. However, the runtime may <strong>not</strong> be polynomial with respect to this \(\epsilon\), e.g., your solution could be of the form \(poly(n^\epsilon)\) (or worse!), where \(n\) is the input size, in bits. 
+<p>Turns out that you can also categorise problems (surprise!) based on their <em>approximability</em>. The class of problems that admit a solution in the form mentioned above is called <strong>APX</strong>. However, the runtime may <strong>not</strong> be polynomial with respect to this \(\epsilon\), e.g., your solution could be of the form \(poly(n^\epsilon)\) (or worse!), where \(n\) is the input size, in bits. 
 When your solution is a polynomial on \(\epsilon\) (i.e., \(poly(n, \epsilon)\)), it's called a Fully Polynomial-Approximation Scheme, or FPTAS. <a href="https://www.win.tue.nl/~gwoegi/papers/ptas.pdf">This</a> paper is worth diving into if you're interested in this field :)</p>
 </div>
 
 <div class="img_div">
 <div class="polaroid">
-<img src="img/apxfptas.jpg" class="img_center_p">
+<img src="img/apxfptas.jpg" style="max-width: 100%" class="img_center_p">
 <div class="caption">
-  Some categories of problems based on their approximability.
+Some categories of problems based on their approximability.
 </div>
 </div>
 </div>
+<p></p>
+
 
 <div class="text_div">
 <p>FPTAS is a class of problems, and it's also the type of algorithm (since, by definition, a problem is in the class FPTAS if it admits an FPTAS-type algorithm). We (computer scientists) usually refer to either as such. They are both acceptable.</p>
 <p></p>
 </div>
 
+</div></div></div>
+
 <hr>
 
-<h1 id="model-compression-the-bort-way">Model Compression -- The Bort Way</h1>
-<h2 id="model-compression">Model Compression</h2>
+
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="model-compression-the-bort-way">Model Compression -- The Bort Way</div>
+
+<!-- <h1 id="model-compression-the-bort-way">Model Compression -- The Bort Way</h1> -->
+<h1 id="model-compression">Model Compression</h1>
+<p></p>
 
 <div class="text_div">
-<p>In general, training most neural networks is known to be in <strong>NP</strong>-complete (proven by reduction from another <strong>NP</strong>-complete problem, graph coloring!). However, in practice, we approximate it ok-ishly for breakfast, all thanks to SGD, back-propagation, and a <em>healthy</em> disregard of computational hardness in favor of GPU cycles. </p>
+<p>In general, training most neural networks is known to be in <strong>NP</strong>-complete (proven by reduction from another <strong>NP</strong>-complete problem, graph colouring!). However, in practice, we approximate it ok-ishly for breakfast, all thanks to SGD, back-propagation, and a <em>healthy</em> disregard of computational hardness in favour of GPU cycles. </p>
 
-<p>It is straightforward to see, however, that model compression is in <strong>NP</strong>-complete: you must ensure generalizability of a target model, which means you need to train it (which we know is <strong>NP</strong>-complete). However, a good solution means that you'll need to train multiple nets (as defined by their architectural parameters), which quickly becomes a combinatorial problem with hardness beyond what SGD is able to handle on its own. Nonetheless, verifying a good solution would be relatively easy.</p>
+<p>It is straightforward to see, however, that model compression is in <strong>NP</strong>-complete: you must ensure generalisability of a target model, which means you need to train it (which we know is <strong>NP</strong>-complete). However, a good solution means that you'll need to train multiple nets (as defined by their architectural parameters), which quickly becomes a combinatorial problem with hardness beyond what SGD is able to handle on its own. Nonetheless, verifying a good solution would be relatively easy.</p>
 
 <p>Indeed, many approximation approaches exist that are heuristic in nature, such as:</p>
 <ul>
 <li>Knowledge distillation (which requires a fixed architecture, so it's suboptimal from a meta-learning point of view)</li>
 <li>Neural architecture search (where many approaches are problem-dependent, which is suboptimal from a computational point of view)</li>
-<li>Weight pruning (which is not meta-learning suboptimal, but might be computationally hard. This one is my favorite)
+<li>Weight pruning (which is not meta-learning suboptimal, but might be computationally hard. This one is my favourite)
 </li>
 </ul>
 <p>
-So it follows that there is quite a bit of room for improvement, especially around the computational aspect of it. Indeed, if you think about it, what we are actually doing with model compression is getting a smaller model that remains generalizable. Hence, the concept of architectural parameters has a natural correspondence in this area.</p>
+So it follows that there is quite a bit of room for improvement, especially around the computational aspect of it. Indeed, if you think about it, what we are actually doing with model compression is getting a smaller model that remains generalisable. Hence, the concept of architectural parameters has a natural correspondence in this area.</p>
 
 <p>The question, which we will be going back to frequently, is:</p>
 <p><strong>Q: Can we do better?</strong></p>
@@ -167,23 +202,25 @@ So it follows that there is quite a bit of room for improvement, especially arou
 <p>A: Errrr... Sure!</p>
 </div>
 
-<h2 id="optimal-subarchitecture-extraction-ose-">Optimal Subarchitecture Extraction (OSE)</h2>
+<h1 id="optimal-subarchitecture-extraction-ose-">Optimal Subarchitecture Extraction (OSE)</h1>
+<p></p>
 
 <div class="text_div">
-<p>OSE is a computational problem: it is an abstract, formalized way to understand and solve the (more applied) model compression problem. It's not the only way to solve this applied version, as we will see in a minute, but it it happens to have very nice computational properties (i.e., it admits an FPTAS).</p>
+<p>OSE is a computational problem: it is an abstract, formalised way to understand and solve the (more applied) model compression problem. It's not the only way to solve this applied version, as we will see in a minute, but it it happens to have very nice computational properties (i.e., it admits an FPTAS).</p>
 
 <p>The model compression problem can be semi-informally stated as follows: given an input network, and two search spaces (architectural parameters and hyperparameter sets to try out), find an optimal subarchitecture such that its <em>inference speed</em>, <em>parameter size</em>, and <em>error rate</em> are all minimal accross all possible architectures. The addition of architectural parameters in the objective is what turns model compression into OSE.</p>
 
-<p>Aside, note how <span class="highlight">OSE is different from weight pruning</span>: weight pruning takes in a trained network and returns a pruned network that is faster, smaller, and generalizes well. OSE takes in an <em>untrained</em> network, along with the architectural parameters, and returns an <em>untrained</em> network with optimal guarantees (more on this in a bit). This is because, by the <a href="https://arxiv.org/abs/1803.03635">Lottery Ticket Hypothesis</a>, there should be--loosely speaking--an optimal arrangement of the weights that is insensitive to pruning. 
+<p>Aside, note how <span class="highlight">OSE is different from weight pruning</span>: weight pruning takes in a trained network and returns a pruned network that is faster, smaller, and generalises well. OSE takes in an <em>untrained</em> network, along with the architectural parameters, and returns an <em>untrained</em> network with optimal guarantees (more on this in a bit). This is because, by the <a href="https://arxiv.org/abs/1803.03635">Lottery Ticket Hypothesis</a>, there should be--loosely speaking--an optimal arrangement of the weights that is insensitive to pruning. 
 This comparison is highlighted in the original OSE paper, and, as a matter of fact, the existence of the Lottery Ticket Hypothesis was a partial inspiration towards my work on OSE. The authors later (roughly at the time I was done with OSE) applied some algorithms to solve weight pruning via the Lottery Ticket Hypothesis to <a href="https://arxiv.org/abs/2007.12223">BERT</a> with great results. I personally think that either approach is valid depending on the user, since it's more about having the right tool for the job.</p>
 
-<p>Back to OSE, it is clear that this is a multi-objective optimization problem over a humongous-dimensional space, spanned by every possible architectural parameter combination. Surprisingly, it is an easy problem to solve when you only care about inference speed and parameter size: it's in <strong>P</strong> via a reduction from Single-source SP! On the other hand, OSE becomes highly non-trivial when we consider all three objective functions. However, as I keep mentioning, OSE admits an FPTAS.</p>
+<p>Back to OSE, it is clear that this is a multi-objective optimisation problem over a humongous-dimensional space, spanned by every possible architectural parameter combination. Surprisingly, it is an easy problem to solve when you only care about inference speed and parameter size: it's in <strong>P</strong> via a reduction from Single-source SP! On the other hand, OSE becomes highly non-trivial when we consider all three objective functions. However, as I keep mentioning, OSE admits an FPTAS.</p>
 </div>
 
-<h2 id="an-fptas-for-ose">An FPTAS for OSE</h2>
+<h1 id="an-fptas-for-ose">An FPTAS for OSE</h1>
+<p></p>
 
 <div class="text_div">
-<p>To be clear, <span class="highlight">the generalized version of <em>OSE admits an FPTAS</em></span>. However, my paper only describes an FPTAS for a (admittedly large) specific class of inputs. It is beyond my skills as a computer scientist to find an FPTAS for ALL inputs!
+<p>To be clear, <span class="highlight">the generalised version of <em>OSE admits an FPTAS</em></span>. However, my paper only describes an FPTAS for a (admittedly large) specific class of inputs. It is beyond my skills as a computer scientist to find an FPTAS for ALL inputs!
 The algorithm itself is quite simple (I'd say disappointingly short; check the <a href="https://arxiv.org/abs/2010.08512">paper</a>), and it runs in polynomial time, as desired. To be honest, the proof of "FPTAS-ness" is relatively straightforward given a few definitions, but it's quite long.</p>
 
 <p>The key observation behind the algorithm is that neural networks present a polynomial correlation between the parameter size and the architectural parameters; and also between the inference speed and their architectural parameters. As an example, let's go back to our linear layer example, \(f(x) = ReLU(Ax + b)\). The dimensionality of the matrix \(A\) is, say, \(m \times n\). Then the parameter size of this layer (in terms of the architectural parameters) is \(p(f) = n(m + 1)\)--a polynomial! The same argument can be done with the inference speed, since computation is asymptotically the same regardless of the, well, computer.</p>
@@ -197,26 +234,31 @@ Concretely, for a network of the form \(f(x) = C(B_n(\dots(B_1(A(x)))\dots))\), 
 
 <p>Networks that present the \(AB^nC\) property have an intrinsic ordering that allows us to say that partitioning the space every \(\epsilon\) architectures, and picking the best of these partitioned architectures, returns an \(\epsilon\)-optimal solution. Thanks to the error correspondence, <em>we do not need to fully train any of the networks in the space</em>, and it follows that the algorithm runs in polynomial time (on the input size and on \(\epsilon\)), and hence it is an FPTAS.</p>
 
-<p><strong>Application to BERT:</strong> It turns out that the family of BERT architectures, as parametrized by their depth, number of attention heads, and their intermediate and hidden sizes, presents the \(AB^nC\) property. This is not a hard proof, but it does require you sit down with a pencil and paper and do some calculations, plus enforce weight clipping (for "compactness") and choosing the right loss function. The proof is also in the <a href="https://arxiv.org/pdf/2010.10499.pdf">Bort</a> paper.</p>
+<p><strong>Application to BERT:</strong> It turns out that the family of BERT architectures, as parametrised by their depth, number of attention heads, and their intermediate and hidden sizes, presents the \(AB^nC\) property. This is not a hard proof, but it does require you sit down with a pencil and paper and do some calculations, plus enforce weight clipping (for "compactness") and choosing the right loss function. The proof is also in the <a href="https://arxiv.org/pdf/2010.10499.pdf">Bort</a> paper.</p>
 
-<p>I ran the FPTAS on BERT, and obtained Bort. Given that the solution is a multi-objective optimization problem, any solution that is considered (Pareto)-optimal is essentially a tradeoff between all three objective functions. However, Bort is \(20\times\) faster, and \(95\%\) smaller (effective). It only remained then to see whether it generalized as well as BERT, which will be the topic of the next section.</p>
+<p>I ran the FPTAS on BERT, and obtained Bort. Given that the solution is a multi-objective optimisation problem, any solution that is considered (Pareto)-optimal is essentially a tradeoff between all three objective functions. However, Bort is \(20\times\) faster, and \(95\%\) smaller (effective). It only remained then to see whether it generalised as well as BERT, which will be the topic of the next section.</p>
 
 <p>Why do we say <em>effective</em> compression? Well, parameter size as a metric of anything other than disk space taken up is a bit inaccurate. By the \(AB^nC\) property, the middle layers matter more than the input/output layers. It follows that even though Bort is \(16\%\) the (net) size of BERT-large (\(51\)M vs \(340\)M parameters), the <em>proportion</em> of parameters that are worth counting are the ones in the encoders, as they are the ones that actually effect an asymptotically significant change on the inference time/parameter size/error rate. Hence Bort is <em>effectively</em> \(5\%\) the size of BERT-large. This is also a nice inverse correlation with the speedup (\(20\times\) faster \(= 1/0.05\)) that gives an empirical raison d'être for the \(AB^nC\) property.</p>
 
 <p>Before moving on, we should ask ourselves:</p>
 <p><strong>Q: Can we do better?</strong></p>
-<p>A: Probably yes, since as I mentioned, the FPTAS is somewhat limited with respect to what OSE can admit. In terms of an efficient solution to OSE, probably not unless someone can find an "LPTAS" (I made that class up, but something that would run in logarithmic time). That would be AWESOME.</p>
+<p>A: Probably yes, since as I mentioned, the FPTAS is somewhat limited with respect to what OSE can admit. In terms of an efficient solution to OSE, probably not unless someone can find an "LTAS" (I made that class up, but something that would run in logarithmic time). That would be AWESOME.</p>
 <p></p>
 </div>
 
 <hr>
 
-<h1 id="fine-tuning-with-algebraic-topology">Agora: Fine-tuning with Algebraic Topology</h1>
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="fine-tuning-with-algebraic-topology">Agora: Fine-tuning with Algebraic Topology</div>
+<p></p><p></p>
 
-<h2 id="the-agora-algorithm">The Agora Algorithm</h2>
+<h1 id="the-agora-algorithm">The Agora Algorithm</h1>
+<p></p>
 
 <div class="text_div">
-<p>Fine-tuning Bort is really hard via conventional means. This is probably due to the fact that <span class="highlight">it is a small, relatively shallow model</span>. Deep networks rely on, well, their depth to learn automatically a good hierarchical feature representation of the input data. Plus the combinations of learning rate, scheduler, and optimizers I used were probably too aggressive. On the other hand, from the correctness proofs of the FPTAS we know that a model like Bort should be able to perform well on downstream tasks... assuming you have found the right starting point, learning rate, decay, etc. On top of that, the dataset might be too scarce or hard to learn (more on that later) quickly.</p>
+<p>Fine-tuning Bort is really hard via conventional means. This is probably due to the fact that <span class="highlight">it is a small, relatively shallow model</span>. Deep networks rely on, well, their depth to learn automatically a good hierarchical feature representation of the input data. Plus the combinations of learning rate, scheduler, and optimisers I used were probably too aggressive. On the other hand, from the correctness proofs of the FPTAS we know that a model like Bort should be able to perform well on downstream tasks... assuming you have found the right starting point, learning rate, decay, etc. On top of that, the dataset might be too scarce or hard to learn (more on that later) quickly.</p>
 
 <p>This means we have a <span class="highlight">theory-practice gap</span>: we <em>know</em> it should be good, but in practice nobody can wait that long to find out!</p>
 
@@ -236,20 +278,21 @@ Concretely, for a network of the form \(f(x) = C(B_n(\dots(B_1(A(x)))\dots))\), 
 <p><strong>Q: Does this algorithm work?</strong></p>
 <p> A: Yes! It's actually remarkably high-performing. For a <em>random</em> classifier, Agora will return a model that, at best, will double the accuracy of the model. In theory, you could get \(100\%\) accuracy <em>on test</em> this way (except that, you know, you won't, since it is an asymptotic result). It's better to say that at iteration \(k\), you'll have accuracy \(1 - 2^{-k}\). </p>
 
-<p>Now, you will get mad and say that attaching <code>dev</code> to <code>train</code> is dumb. Actually, attaching <code>dev</code> to <code>train</code> <strong>is</strong> dumb. Think about it: if you did that, you wouldn't be learning anything: you'd just memorize points. We aren't doing that, however--we are, instead, creating <em>similar</em> points. As long as they look similar enough (but not too similar or too distinct), we will actually be learning the original distribution. To actually prove this fact, and get a sense of what <em>similar points</em> means, we need to get technical and we need to use algebraic topology.</p>
+<p>Now, you will get mad and say that attaching <code>dev</code> to <code>train</code> is dumb. Actually, attaching <code>dev</code> to <code>train</code> <strong>is</strong> dumb. Think about it: if you did that, you wouldn't be learning anything: you'd just memorise points. We aren't doing that, however--we are, instead, creating <em>similar</em> points. As long as they look similar enough (but not too similar or too distinct), we will actually be learning the original distribution. To actually prove this fact, and get a sense of what <em>similar points</em> means, we need to get technical and we need to use algebraic topology.</p>
 <div>
 
-<h2 id="why-does-agora-work">Why Does Agora Work?</h2>
+<h1 id="why-does-agora-work">Why Does Agora Work?</h1>
+<p></p>
 
 <div class="text_div">
-<p>To prove correctness of Agora (given some assumptions) we aren't going to go into too much detail. I just want to give you the intuition behind Agora. Aside, algebraic topology is by far one of my favorite subjects: it finds most of its applied usage in data analysis (i.e., the field of topological data analysis, or TDA), but I think it's beautiful on its own. I highly recommend you go over Larry Wasserman's <a href="https://arxiv.org/abs/1609.08227">survey</a> of TDA if you're interested on diving deeper, and Allen Hatcher's <a href="http://pi.math.cornell.edu/~hatcher/AT/ATpage.html">book</a> is a really good first introduction to the subject.</p>
+<p>To prove correctness of Agora (given some assumptions) we aren't going to go into too much detail. I just want to give you the intuition behind Agora. Aside, algebraic topology is by far one of my favourite subjects: it finds most of its applied usage in data analysis (i.e., the field of topological data analysis, or TDA), but I think it's beautiful on its own. I highly recommend you go over Larry Wasserman's <a href="https://arxiv.org/abs/1609.08227">survey</a> of TDA if you're interested on diving deeper, and Allen Hatcher's <a href="http://pi.math.cornell.edu/~hatcher/AT/ATpage.html">book</a> is a really good first introduction to the subject.</p>
 
 <p>Let us focus on the <em>geometry of learning</em>, which has a fairly intuitive topological representation: to learn something you must have a notion of distance between points. Note that learning and data analysis are distinct things, but with the work behind proving Agora (a <em>data expansion learning algorithm</em>) we can find a natural correspondence between the two.</p>
 
 <p>Let's begin by introducing some definitions:</p>
 <ul>
   <li>A <em>manifold</em> is a space that looks locally Euclidean. I.e., zoom enough and you'll get something that has the Euclidean metric. We will only deal with compact, Riemannian manifolds--if you don't know what that means, it's OK; I say it mostly so I don't get lots of angry topologist mail later!</li>
-  <li>The <em>homology</em> of a manifold is, intuitively, classified by the number of \(n\)-dimensional loops it has. Here's a <a href="https://en.wikipedia.org/wiki/Homology_(mathematics)#Informal_examples">nice</a> visualization. There's many kinds of homology theories, but we won't go into detail on this (now I will for sure get lots of angry topologist mail. Sorry, y'all!)</li>
+  <li>The <em>homology</em> of a manifold is, intuitively, classified by the number of \(n\)-dimensional loops it has. Here's a <a href="https://en.wikipedia.org/wiki/Homology_(mathematics)#Informal_examples">nice</a> visualisation. There's many kinds of homology theories, but we won't go into detail on this (now I will for sure get lots of angry topologist mail. Sorry, y'all!)</li>
   <li>Equivalence of manifolds up to homology is easy to compute, and carries out a few invariants that are of interest to us. In particular, a manifold that can be continuously deformed into another happens to have isomorphic homology groups. It's not the only type of equivalence that exists, or that we as scientists should care about (for example, homology's hotshot doppelgänger, cohomology), but some stronger equivalences are undecidable (e.g., homeomorphism).</li>
   <li>We say that a task (represented by a dataset) is <em>learnable</em> if a model with good accuracy on <code>dev</code> will have good accuracy in <code>test</code>/further unseen samples. This often happens to be a probabilistic statement, by the way.</li>
   <li>We will say "homology between A and B" to denote that the <em>manifolds</em> (or the manifolds described by balls drawn around the points) where A and B lie are equivalent up to homology. </li>
@@ -258,12 +301,13 @@ Concretely, for a network of the form \(f(x) = C(B_n(\dots(B_1(A(x)))\dots))\), 
 
 <div class="img_div">
 <div class="polaroid">
-<img src="img/homology.jpg" class="img_center_p" style="width: 100%">
+<img src="img/homology.jpg" style="max-width: 100%">
 <div class="caption">
 A mug's homology groups are isomorphic to those of a donut.
 </div>
 </div>
 </div>
+<p></p>
 
 <div class="text_div">
 <p>We will make the (admittedly strong) assumption that the task we are trying to learn lies on (or around) a manifold. It is <a href="http://people.cs.uchicago.edu/~niyogi/papersps/NiySmaWeiHom.pdf">known</a> that given enough samples we can reconstruct the original manifold. 
@@ -272,7 +316,7 @@ A mug's homology groups are isomorphic to those of a donut.
 <ol>
   <li><em>Homology between the sampled dataset and the (support of the) task, implies learnability of the dataset:</em> i.e., a dataset that is equivalent up to homology to the original distribution is learnable.</li>
   <li><em>Learnability of a dataset implies homology between the (support of the) task and the dataset:</em> i.e., a dataset that is learnable can be used to reconstruct the original probability distribution.</li>
-  <li><em>Noisy sampling and labeling retain this correspondence:</em> i.e., you don't need a high-performing model to label randomized points--an ok-ish model will do just fine.</li>
+  <li><em>Noisy sampling and labeling retain this correspondence:</em> i.e., you don't need a high-performing model to label randomised points--an ok-ish model will do just fine.</li>
   <li>It follows that noisily building a manifold equivalent up to homology to the (support of the) task will make the problem learnable, <em>regardless of the model</em>.</li>
 </ol>
 
@@ -288,18 +332,30 @@ A mug's homology groups are isomorphic to those of a donut.
 <p></p>
 </div>
 
-<hr>
+</div></div></div>
 
-<h1 id="conclusion">Conclusion</h1>
+<div class="papers">
+<div class="papers-block">
+<div class="text_div">
+<div class="section-label--left" id="conclusion">Conclusion</div>
+
+<p></p>
+
+<!-- <h1 id="conclusion">Conclusion</h1> -->
 <div class="text_div">
 <p>Bort is basically an exercise on applying two algorithms backed by rigorous proofs of optimality. The numbers obtained in terms of the three objectives for OSE give us a pretty good idea of the performance of the algorithms I discussed here. </p>
-<p>There is still a lot of room for improvement (<strong>we can do better!</strong>). Choosing different losses in the FPTAS and other models will definitely smash Bort's record. As we saw earlier, Agora is also a sub-optimal algorithm. Also, the more application-inclined will note that there is no actual optimization done to the trained model (e.g., FP16 compression, tensor factorization), so Bort could be even faster and smaller.</p>
-<p>On the other hand, algorithm design is fun, and computation (and mathematics in general) is beautiful. Understanding the intrinisic hardness of a problem can yield very interesting and fruitful rewards, so you can never lose by adding some rigor on your algorithm design. It's all about the right tool for the job.</p>
+<p>There is still a lot of room for improvement (<strong>we can do better!</strong>). Choosing different losses in the FPTAS and other models will definitely smash Bort's record. As we saw earlier, Agora is also a sub-optimal algorithm. Also, the more application-inclined will note that there is no actual optimisation done to the trained model (e.g., FP16 compression, tensor factorisation), so Bort could be even faster and smaller.</p>
+<p>On the other hand, algorithm design is fun, and computation (and mathematics in general) is beautiful. Understanding the intrinisic hardness of a problem can yield very interesting and fruitful rewards, so you can never lose by adding some rigour on your algorithm design. It's all about the right tool for the job.</p>
 <p class="note">Ultimately, what matters is asking ourselves at every step: <strong>can we do better?</strong></p>
 </div>
 
-<p class="raligned">Adrian de Wynter</br>
-November 20, 2020</p>
+</div></div></div>
+
+<p></p>
+<p style="font-family:helvetica; display:flex; justify-content:flex-end">Adrian de Wynter</br>November 20, 2020</p>
+</div>
+</div>
+
 </body>
 
 </html>
