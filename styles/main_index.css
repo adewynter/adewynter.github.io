@@ -276,6 +276,8 @@ body .img-responsive {
 .main-text p a {
   font-family: Georgia;
   font-style: italic; 
+  color: #063970;
+  text-decoration: underline;
 }
 .main-text p span {
   float: left;
