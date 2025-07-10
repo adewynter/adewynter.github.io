@@ -47,20 +47,23 @@
 
               <p style="font-family:helvetica">I am a principal applied <b>scientist</b> at Microsoft and a <b>researcher</b> (PGR) at the University of York. I work in projects related to <b>natural language</b> understanding/generation and fundamental problems in deep learning, such as <b>reasoning and formal modelling of dialogue</b>, like LLMs.</p>
 
-              <p style="font-family:helvetica">My primary interest is computation, and specifically, the study of <b>reasoning as it relates to humans and machines</b>. 
-              My approach is mainly intuitionistic in nature, contrasting with some other formalisms used in this field. In English: algorithms have provable guarantees of complexity and convergence via <em>construction</em>, and this proof must be closely-related to a <em>computable</em> (e.g., realistic, decidable, production) scenario. This gives <b>meaningful answers about complex problems</b>, while also circumventing mathematical results that are rarely seen in practice. For example, we recently used <a href="https://arxiv.org/abs/2312.06562">category theory</a> to prove that some prompting strategies are objectively better than others; and that they would produce more preferrable outcomes by users.</p>
+              <p style="font-family:helvetica">At Microsoft my work involves leading, designing, and deploying Word- and Office- AI features and research. These deal with composition (what you see when you type in Word), multilinguality (e.g., expanding products to new markets), measurement (reasoning, automated evaluation), personalisation, and other workstreams. Yes, I also work on buzzwords like 'agentic workflows'. Most of the work here, you can see it in Word Copilot.</p>
+
+              <p style="font-family:helvetica">My primary research interest is <b>reasoning as it relates to language in humans and machines</b>. Lately I have focused on LLM-based reasoning capabilities (e.g. <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">here</a>, <a href="https://arxiv.org/abs/2507.01936">here</a>, and <a href="https://arxiv.org/pdf/2404.01230.pdf">here</a>). 
+              My theoretical work is intuitionistic: algorithms have guarantees of complexity and convergence via <em>constructive proofs</em>, and must relate to a <em>realistic</em> (e.g. production) scenario. This gives <b>meaningful answers about complex problems</b>.</p>
             </div>
 
             <div class="about-text">
+              <p style="font-family:helvetica">For example, we used <a href="https://arxiv.org/abs/2312.06562">category theory</a> to prove that <b>some prompting strategies are objectively better than others</b>; and that they would produce more preferrable outcomes by users (and ended up being a product in Word). I also recently wrote <a href="https://arxiv.org/abs/2506.03083">an algorithm</a> with cryptographic guarantees for determining <b>trust in LLMs-as-judges</b>.</p>
 
-              <p style="font-family:helvetica">I'm a strong proponent of training <b>small and efficient models</b>, as opposed to overspecified networks--which I call <a href="https://www.youtube.com/watch?v=_oNgyUAEv0Q">Jurassic</a> networks. This matters! The power required to train these models translates into tons of carbon emitted into the atmosphere, and it's <a href="https://arxiv.org/abs/1906.02243">devastating</a> to the environment. 
-              Although I <a href="https://arxiv.org/pdf/1908.09942.pdf">showed</a> that finding a globally optimal solution to this problem is generally undecidable, I have also <a href="https://arxiv.org/pdf/2010.08512">proved</a> that it is possible to find approximation algorithms that give near-optimal solutions in polynomial time--going as far as <a href="https://arxiv.org/pdf/2010.10499">applying</a> these results to BERT and reaching a (then) state-of-the-art on model compression. This last contribution was later adapted for quantum circuit optimization in a rather fantastic <a href="https://github.com/XanaduAI/QHack2021/issues/73">work</a> by folks at ORNL.</p>
+              <p style="font-family:helvetica">In earlier work I <a href="https://arxiv.org/pdf/1908.09942.pdf">showed</a> that finding a globally optimal solution to model compression is undecidable, but <a href="https://arxiv.org/pdf/2010.08512">proved</a> that polynomial-time approximation algorithms exist--and <a href="https://arxiv.org/pdf/2010.10499">applied</a> these results to BERT and reaching a (then) state-of-the-art on model compression. This last contribution was later adapted for quantum circuit optimisation in <a href="https://github.com/XanaduAI/QHack2021/issues/73">work</a> at ORNL.
+                I also showed (bridging learning theory and TDA) how (and when) <a href="https://link.springer.com/article/10.1007/s41884-024-00153-0">LLM-based data augmentation</a> works.</p>
 
-              <p style="font-family:helvetica">Other of my research interests are related to <b>recreational mathematics</b> (especially about games), <b>preserving endangered languages</b>, and applications of <b>LLMs to create inclusive environments</b> to traditionally excluded groups in ML (e.g., neurodiverse individuals such as myself, non-English speakers, etcetera).</p>
+              <p style="font-family:helvetica">My other research interests relate to <b>recreational mathematics</b> (games), <b>preserving endangered languages</b>, and <b>computational social science</b>. In the latter one I have worked on mitigating <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">toxicity</a> and <a href="https://arxiv.org/abs/2410.11005">other</a> <a href="https://arxiv.org/abs/2503.20302">harms</a> of LLMs, <a href="https://arxiv.org/abs/2408.15409">research on LLM research</a>, and the very first study of the impact of ChatGPT on <a href="https://arxiv.org/abs/2412.01617">loneliness</a>.</p>
 
               <p>Incidentally, I am now on <a href="https://x.com/deWynterruption">Twitter</a>.</p>
 
-              <p style="font-family:Helvetica, Serif; color: #231f20; display:flex; justify-content:flex-end">Last updated: June '25.</p>
+              <p style="font-family:Helvetica, Serif; color: #231f20; display:flex; justify-content:flex-end">Last updated: July '25.</p>
             </div>
           </div>
 
@@ -132,6 +135,24 @@
                 <div class="papers-education--desktop">
 
                   <div><p></p><p style="font-family: Helvetica"><i>Following Larry Wasserman's <a href="http://stat.cmu.edu/~larry/Peer-Review.pdf">essay</a>, I invite comments on the papers below. Feel free to email me.<br>For a longer, complete list of works see <a href="notes/older_papers.html">here</a>.<br>For how to handle my last name's weird spelling rules, see <a href="notes/tussenvoegsels.html">here</a>.</i></p></div>
+
+                  <div class="section-item">
+                    <div class="paper-title">
+                      <b>The Thin Line Between Comprehension and Persuasion in LLMs</b>
+                    </div>
+                    <div class="paper-misc">
+                      <a href="https://arxiv.org/abs/2507.01936">[pdf]</a>
+                      <a href="bibtex/thinline.html">[BibTex]</a></b>
+                      <a href="https://github.com/adewynter/the_thin_line">[Code]</a></b>
+                    </div>
+                    <div class="paper-authors">
+                      Adrian de Wynter and Tangming Yuan
+                    </div>
+                    <div class="paper-misc">
+                      Preprint
+                    </div>
+                  </div>
+
 
                   <div class="section-item">
                     <div class="paper-title">
