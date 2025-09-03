@@ -32,7 +32,7 @@
 <div class="text_div" style="font-family:helvetica">
 <p>
 <em>
-This is the TL;DR of my paper <a href="https://arxiv.org/abs/2506.03083">Labelling Data with Unknown References</a>. If you are looking for the code, it is <a href="https://https://github.com/adewynter/no_data_algorithm">here</a>.
+This is the TL;DR of my paper <a href="https://arxiv.org/abs/2506.03083">Labelling Data with Unknown References</a>. If you are looking for the code, it is <a href="https://github.com/adewynter/no_data_algorithm">here</a>.
 </em>
 <br><br>
 We have a huge problem: evaluating highly-capable LLMs is expensive. Using an LLM as labeller (i.e., LLM-as-judge) is becoming quite common, but the field is VERY divided on their effectiveness and feasibility. Add to that lack of data and pressure to scale, and you're in a pickle. 
@@ -245,10 +245,10 @@ The predictions of the paper adjusted quite well, with the LLM and the decision 
 <br>
 So for this one I got native speakers to translate a multi-domain dataset (MMLU, OpenOrca, WildChat, and OpenCode) of prompts and outputs. Both the Evaluator and the Verifier are LLMs (GPT-4.1). 
 <b>The task for the LLM-as-judge was to evaluate whether the output was 'good'</b> with respect to a rubric (below). 
-<b>The task for the No-Data Algorithm was to <span class="highlight"><em>judge the judge</em></span></b> to determine trustworthiness. So I created a separate rubric (also below) to determine how and when a model would lie. Lo and behold, the results stuck to the theory, with the LLM-as-judge showing near-random performance when the data was OOP, and somewhat okish performance in IP. 
+<b>The task for the No-Data Algorithm was to <span class="highlight"><em>judge the judge</em></span></b> to determine trustworthiness. So I created a separate rubric (also below) to determine how and when a model would lie. Lo and behold, the results stuck to the theory, with the LLM-as-judge showing near-random performance when the data was OOP, and somewhat okish performance in IP. <span class="highlight">Crucially, in this experimeent the values of the rubric were unknown</span>; and the LLMs had to label it themselves!
 <br>
 <br>
-The setup, however, was <b>slightly different than the theoretical work</b>: for example, in the empirical test the criteria was evaluated by an oracle, while here <b>both LLMs need to score the criteria <em>first</em>, and then do the whole EV protocol</b>. There was also the matter of LLMs doing whatever they want (because <em>they are machines, they really really don't know what you are talking about</em>). So, for example, if you put exemplars in the prompt, the LLMs will never pass any challenge. Turns out that they were lying for <em>both</em> IP and OOP!!
+The setup, however, was <b>slightly different than the theoretical work</b>: for example, in the empirical test the criteria was evaluated by an oracle, while here <b>both LLMs need to score the criteria <em>first</em>, and then do the whole EV protocol</b>. There was also the matter of LLMs doing whatever they want (because <em>they are machines, they really really don't know what you are talking about</em>). So, for example, if you put exemplars in the prompt, the LLMs will never pass any challenge. Turns out that they were lying for <em>both</em> IP and OOP, and the No-Data algorithm caught that!!<small>it took me two weeks to figure out why the algorithm kept saying this</small>
 <br>
 Of course, after removing the exemplars, things made more sense. But that took me a while to debug. Turns out that the outputs for every single criterion were almost the same, because it was mimicking the exemplars and not listening to the prompt. See what I mean about them not knowing what you are talking about?
 <br>
@@ -272,6 +272,19 @@ Anyway, the takeaway is that <span class="highlight">we can use the No-Data Algo
 </div>
 
 
+<br>
+<p>
+There is something cool, too. So far we have set up the problem so that one of the evaluators lies. <b>What if it's not lying, just wrong?</b> Well, the No-Data algorithm can also catch that: low success rates (like, <em>really</em> low) mean deception, but sort-of-low indicate lack of knowledge. For this I compared GPT-4.1 (which kinda knows West Frisian) with Qwen 2.5B (which definitely does not know West Frisian). See the table below for the results.
+</p>
+
+
+<div class="img_div">
+<div class="polaroid">
+<img src="img/nodata/nl_results_pic_all.png" style="max-width: 80%" alt="Experiment setup" longdesc="Experiment setup">
+</div>
+</div>
+
+
 </div>
 </div></div></div>
 
@@ -290,7 +303,7 @@ So what have we learnt?
 <li><span class="highlight">It is indeed possible to establish trust in an LLM-as-a-judge, even if you do not know the labels</span>! This does <b>not</b> mean that you can just use them: what the No-Data algorithm says is 'you likely can/cannot trust this LLM in this task'. <b>These challenges are cryptographically secure</b>.</li>  
 <li>You can get a labelled dataset with slightly better performance (slightly!!) if you flip the labels when you cannot trust the evaluator. It's not super duper useful, and frankly I would just stick to the No-Data algorithms measure of success.</li>
 </ol>
-It is worth noting that <span class="highlight">this is a very different way to think of machine learning</span>. We used to require some sort of supervision to get the labels right--nowadays, with LLMs, there's no actual reason to do that. <b>It is not me saying this</b>: it is people using LLMs-as-judges. The truth is that the field is super divided on their use. There are accounts that they work, accounts that they do not work, and I argue that <em>it is precisely because of this division</em> that we should not care about getting a proper conclusive statement.
+It is worth noting that <span class="highlight">this is a very different way to think of machine learning</span>. We used to require some sort of supervision (someone telling you if it is correct) to get 'learning' right. Nowadays, with LLMs and their bloated internet knowledge, there's no actual reason to do that. <b>It is not me saying this</b>: it is people using LLMs-as-judges. And, I mean, the field is super divided on their use. There are accounts that they work, accounts that they do not work, and I argue that <em>it is precisely because of this division</em> that we should <b>not care about getting a properly conclusive statement</b>.
 Instead, let's do it on a case-by-case basis: show (prove me) that you can trust your Evaluator on this task, and I will trust your results. Here's an algorithm to do that.
 <br>
 <br>
