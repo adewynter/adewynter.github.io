@@ -37,7 +37,7 @@ This is the TL;DR of my paper <a href="https://arxiv.org/abs/2506.03083">Labelli
 <br><br>
 We have a huge problem: evaluating highly-capable LLMs is expensive. Using an LLM as labeller (i.e., LLM-as-judge) is becoming quite common, but the field is VERY divided on their effectiveness and feasibility. Add to that lack of data and pressure to scale, and you're in a pickle. 
 <br><br>
-There are three ways you can prove that a labeller works: statistics (which won't work without data), faith (which is not science), or a formal proof. I introduce here an algorithm that (via a formal proof, obviously) allows you to <b>decide if you can trust your LLM-as-judge</b> in a cryptographically-secure manner.
+There are three ways you can prove that a labeller works: statistics (which won't work without data), faith (which is not science), or a formal proof. I introduce here an algorithm that (via a formal proof, obviously) allows you to <b>decide if you can trust your LLM-as-judge</b> in a mathematically rigorous manner.
 </p>
 </div>
 
@@ -64,7 +64,7 @@ There are three ways you can prove that a labeller works: statistics (which won'
 <p style="font-family:helvetica">
     <ul>
         <li style="font-family:helvetica">It is possible to label data without having <em>any</em> labels, provided that the 'thing' saying 'hey I know the labels!' (an LLM) proves it can be trusted.</li>
-        <li style="font-family:helvetica">This means that an <b>LLM-as-judge can be trusted</b> to be a labeller <b>iff it passes the checks from the No-Data algorithm.</b> <span class="highlight">It judges the judges</span>, if you will, in a <span class="highlight">cryptographically secure</span> manner.</li>
+        <li style="font-family:helvetica">This means that an <b>LLM-as-judge can be trusted</b> to be a labeller <b>iff it passes the checks from the No-Data algorithm.</b> <span class="highlight">It judges the judges</span>, if you will, in a <span class="highlight">mathematically rigorous</span> manner.</li>
         <li style="font-family:helvetica">In turn this suggests that <span class="highlight">we do not need labelled data to establish trust</span>. As per <a href="https://www.techinasia.com/news/microsofts-no-data-algorithm-enables-trust-without-labels">this</a> site (obviously AI-generated but a great summary; and they do say that humans check it), this has applications where this data is scarce (healthcare, market research, low-resource languages, etc), but models (LLMs) trained with lots of internet data COULD perform well.</li>
       </ul>
 </p>
@@ -126,7 +126,7 @@ Here's a picture of the algorithm.
 
 <br>
 <p>
-As you probably guessed, the important bit is the EV Protocol. This is motivated by classic results in computational complexity theory, such as the Arthur-Merlin protocol from Babai, and it is a type of <b>zero-knowledge proof</b>. This is why the No-Data Algorithm is cryptographically secure, by the way. What a zero-knowledge proof is (formally) is beyond the scope of this post, but the gist of it is that it establishes trust via challenges. They are used in blockchain, authentication systems, and other critical areas where you should not ever assume that the interlocutor (in this case, the Evaluator) is telling the truth.
+As you probably guessed, the important bit is the EV Protocol. This is motivated by classic results in computational complexity theory, such as the Arthur-Merlin protocol from Babai, and it is a type of <b>zero-knowledge proof</b>. This is why the No-Data Algorithm is mathematically rigorous secure, by the way. What a zero-knowledge proof is (formally) is beyond the scope of this post, but the gist of it is that it establishes trust via challenges. They are used in blockchain, authentication systems, and other critical areas where you should not ever assume that the interlocutor (in this case, the Evaluator) is telling the truth.
 <br><br>
 The EV Protocol has <span class="highlight">two challenges designed to provide <b>sufficient and necessary</b> information</span> as to whether you can trust your labeller. I'll explain why they are sufficient and necessary in the next section. Here I'll introduce them, but first let me explain <em>the rest</em> of the protocol. 
 <br>
@@ -300,7 +300,7 @@ There is something cool, too. So far we have set up the problem so that one of t
 <p>
 So what have we learnt?
 <ol>
-<li><span class="highlight">It is indeed possible to establish trust in an LLM-as-a-judge, even if you do not know the labels</span>! This does <b>not</b> mean that you can just use them: what the No-Data algorithm says is 'you likely can/cannot trust this LLM in this task'. <b>These challenges are cryptographically secure</b>.</li>  
+<li><span class="highlight">It is indeed possible to establish trust in an LLM-as-a-judge, even if you do not know the labels</span>! This does <b>not</b> mean that you can just use them: what the No-Data algorithm says is 'you likely can/cannot trust this LLM in this task'. <b>These challenges are mathematically rigorous</b>. As in, they are <em>proven</em> to be what you need.</li>  
 <li>You can get a labelled dataset with slightly better performance (slightly!!) if you flip the labels when you cannot trust the evaluator. It's not super duper useful, and frankly I would just stick to the No-Data algorithms measure of success.</li>
 </ol>
 It is worth noting that <span class="highlight">this is a very different way to think of machine learning</span>. We used to require some sort of supervision (someone telling you if it is correct) to get 'learning' right. Nowadays, with LLMs and their bloated internet knowledge, there's no actual reason to do that. <b>It is not me saying this</b>: it is people using LLMs-as-judges. And, I mean, the field is super divided on their use. There are accounts that they work, accounts that they do not work, and I argue that <em>it is precisely because of this division</em> that <b>we should not care about getting a properly conclusive statement</b>.
