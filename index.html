@@ -1,648 +1,1412 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <title>Adrian de Wynter</title>
-  
-  <meta name="google-site-verification" content="UhAhnWA093u8hR6zIezUozC_aTIl1dT1rPX8UEuOdDg" />
-  <meta content="Adrian de Wynter" name="author">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="Adrian, de Wynter, Adrian de Wynter">
   <meta name="description" content="Adrian de Wynter's home page, updated every two years!">
-  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
-  
-  <link href="styles/main_index.css" media="screen" rel="stylesheet" type="text/css">
-  <link rel="icon" type="image/png" href="img/dewynter.jpg"/>
+    <title>Adrian de Wynter — AI Scientist</title>
+    <link href="style.css" media="screen" rel="stylesheet" type="text/css">
 
-  </head>
+</head>
+<body>
 
-<!-- very loosely taken from Ana Enders' design -- anaenders.com -->
-  <body>
-    <div class="content">
+    <!-- ── Navigation ── -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a class="nav-logo" data-page="home">Adrian de Wynter</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a data-page="home" class="active">Home</a></li>
+                <li><a data-page="bio">Extended Bio</a></li>
+                <li><a data-page="cv">CV</a></li>
+                <li><a data-page="research">Research Statement</a></li>
+                <li><a data-page="publications">Publications</a></li>
+                <li><a data-page="writings">Writings</a></li>
+            </ul>
 
-      <div class="header-wrapper">
-        <header>
-          <div style="display: flex; justify-content: center; text-align: center; align-items: center;"><h1>Adrian de Wynter</h1>
-             
-            <p> <br/><br/>.</p>
-          </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════ -->
+    <!-- PAGE: HOME                     -->
+    <!-- ══════════════════════════════ -->
+    <div class="page active" id="page-home">
+
+        <header class="hero">
+            <div class="hero-image fade-up">
+            <img src="img/headshot.jpg" alt="Adrian de Wynter portrait" />
+            </div>
+            <div class="hero-text fade-up">
+                <h1>Adrian de Wynter</h1>
+                <div class="subtitle">AI Scientist · Microsoft & The University of York</div>
+                <p>
+                    I am a principal scientist at Microsoft and a researcher (PGR) at the University of York. 
+                    I work in projects related to fundamental problems in AI and science, such as cognition, measurement, and social impact.
+                </p>
+                <div class="social-links">
+                    <a href="mailto:adewynter@microsoft.com">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                        Email
+                    </a>
+                    <a href="https://github.com/adewynter/">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.79-.26.79-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.31-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0112 5.8c1.02.01 2.05.14 3.01.4 2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.69.8.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/adrian-de-wynter">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 11-.01-4.12 2.06 2.06 0 010 4.12zM6.84 20.45H3.83V9h3.01v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=Vg_EOYsAAAAJ&hl=en">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.24 8.11a6.76 6.76 0 1013.52 0 6.76 6.76 0 00-13.52 0zm6.76 8.64c-4.77 0-8.64-3.87-8.64-8.64S7.23 0 12 0s8.64 3.87 8.64 8.64v.11c-.05 4.73-3.9 8.53-8.64 8.53v-.53zm3.94 1.33l.78 3.92H7.28l.78-3.92h7.88zM8.84 24h6.32l-.6-3.03H9.44L8.84 24z"/></svg>
+                        G Scholar (I don't maintain it)
+                    </a>
+                </div>
+            </div>
         </header>
-      </div>
 
-      <div>
-        <div class="banner">
-          <ul>
-            <li class="slide2"></li>
-            <li class="slide1"></li>
-          </ul>
+        <!-- Recent Work -->
+        <section>
+            <div class="section-header fade-up"><h2>Recent Work &amp; News</h2></div>
+            <div class="news-grid">
+                <div class="news-card fade-up">
+                    <div class="date">May 2026<span class="tag">Talk</span></div>
+                    <h3>Word Is Not Only Text: The Document Manipulation Benchmark</h3>
+                    <p>Invited talk at LREC Industry Day (2026; and panel!)</p>
+                    <a href="assets/TDMBTalk.pdf" class="read-more">Slides</a>
+                </div>
+                <div class="news-card fade-up">
+                    <div class="date">May 2026<span class="tag">Talk</span></div>
+                    <h3>Will GPT-4 (and 5!) Run DOOM?</h3>
+                    <p>Invited talk at i3D 2026 on my paper <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10752360">Will GPT-4 Run DOOM?</a>.</p>
+                    <a href="assets/willgpt4.pptx" class="read-more">Slides</a>
+                </div>
+
+                <div class="news-card fade-up">
+                    <div class="date">May 2026 <span class="tag">Preprint</span></div>
+                    <h3>The Hrunting of AI: Where and How to Improve English Dialectal Fairness</h3>
+                    <p>With Wei Li. We show that improving dialectal performance in LLMs requires more powerful algorithmic techniques than simply stats.</p>
+                    <a href="https://arxiv.org/abs/2603.15187" class="read-more">PDF |</a>
+                    <a href="bibtex/hrunting.html" class="read-more">Code |</a>
+                    <a href="https://github.com/adewynter/beowulf" class="read-more">BibTex </a>
+                </div>
+
+
+                <div class="news-card fade-up">
+                    <div class="date">May 2026 <span class="tag">ACL (Findings) 2026</span></div>
+                    <h3>The Thin Line Between Comprehension and Persuasion in LLMs</h3>
+                    <p>With Tangming Yuan. We pose that LLMs have shallow, but not entirely void, understanding.</p>
+                    <a href="https://arxiv.org/abs/2507.01936" class="read-more">PDF |</a>
+                    <a href="https://github.com/adewynter/the_thin_line" class="read-more">Code </a>
+                    <a href="bibtex/thinline.html" class="read-more">Bibtex |</a>
+                    <a href="#media-coverage-persuasion" class="read-more">Press </a>
+                </div>
+
+                <div class="news-card fade-up">
+                    <div class="date">May 2026 <span class="tag">ACL GEM Workshop 2026</span></div>
+                    <h3>Evaluating Style-Personalized Text Generation: Challenges and Directions</h3>
+                    <p>Anubhav Jangra, Bahareh Sarrafzadeh, Silviu Cucerzan, Adrian de Wynter*, and Sujay Kumar Jauhar*</p>
+                    <a href="https://arxiv.org/abs/2508.06374" class="read-more">PDF |</a>
+                    <a href="bibtex/thinline.html" class="read-more">Bibtex |</a>
+                </div>
+
+
+                <div class="news-card fade-up">
+                    <div class="date">April 2026 <span class="tag">ICLR 2026</span></div>
+                    <h3>Is In-Context Learning Learning?</h3>
+                    <p>ICLR (2026). Chosen by the Turing Post as one of <a href="#media-coverage-icl">2025's AI papers you must read</a>.</p>
+                    <a href="https://arxiv.org/abs/2509.10414" class="read-more">PDF |</a>
+                    <a href="https://github.com/adewynter/is-icl-learning" class="read-more">Code </a>
+                    <a href="bibtex/icl.html" class="read-more">Bibtex |</a>
+                    <a href="#media-coverage-icl" class="read-more">Press </a>
+                </div>
+
+                <div class="news-card fade-up">
+                    <div class="date">March 2026 <span class="tag">News</span></div>
+                    <h3>Thinking about Thinking Fellowship!</h3>
+                    <p>Excited to have been named a Thinking about Thinking fellow for 2026!</p>
+                    <a href="#" class="read-more">Read more</a>
+                </div>
+
+                <div class="news-card fade-up">
+                    <div class="date">October 2025<span class="tag">Talk</span></div>
+                    <h3>On Interpreting Measurement with LLMs</h3>
+                    <p>Invited talk at MBZUAI's research showcase (2025)</p>
+                    <a href="assets/Measurement%20in%20LLMs.pdf" class="read-more">Slides</a>
+                </div>
+
+                <div class="news-card fade-up">
+                    <div class="date">September 2025 <span class="tag">Preprint</span></div>
+                    <h3>Algorithmically Establishing Trust in Evaluators</h3>
+                    <p>A cryptographically-secure way to perform LLM-based evaluations (and avoid cheating!)</p>
+                    <a href="https://arxiv.org/abs/2506.03083" class="read-more">PDF |</a>
+                    <a href="bibtex/unknown.html" class="read-more">Code |</a>
+                    <a href="https://github.com/adewynter/no_data_algorithm" class="read-more">BibTex </a>
+                    <a href="#media-coverage-no-data" class="read-more">Press </a>
+                </div>
+
+            </div>
+
+            <div class="section-cta fade-up">
+                <div class="cta-line"></div>
+                <a href="#" class="cta-button" data-page="publications">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                    </svg>
+                    View Full List of Publications
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <div class="cta-line"></div>
+            </div>
+        </section>
+
+        <!-- Media Coverage -->
+        <section>
+            <div class="section-header fade-up"><h2>Media Coverage</h2></div>
+            <div class="media-list">
+                <a href="https://www.turingpost.com/p/fod133" class="media-item fade-up">
+                    <div class="media-logo">The Turing<br>Post</div>
+                    <div class="media-content" id="media-coverage-icl">
+                        <div class="outlet">The Turing Post News</div>
+                        <h3>"FOD#133: 23 Research Papers That Hint Where AI Is Heading"</h3>
+                        <div class="media-date">December 29, 2025 · Feature Article and Interview!</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.techinasia.com/news/microsofts-no-data-algorithm-enables-trust-without-labels" class="media-item fade-up">
+                    <div class="media-logo">Tech in<br>Asia</div>
+                    <div class="media-content" id="media-coverage-unknown">
+                        <div class="outlet">Tech in Asia</div>
+                        <h3>"Microsoft’s No-Data Algorithm enables trust without labels"</h3>
+                        <div class="media-date">5 June, 2025 · Feature Article</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+
+                <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/gpt-4v-can-play-doom-badly-doesnt-hesitate-to-shoot-humans-and-demons" class="media-item fade-up">
+                    <div class="media-logo">Tom's<br>Hardware</div>
+                    <div class="media-content" id="media-coverage-unknown">
+                        <div class="outlet">Tom's Hardware</div>
+                        <h3>"GPT-4 can play Doom, badly — doesn't hesitate to shoot humans and demons"</h3>
+                        <div class="media-date">12 March, 2024 · Profile Feature</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+
+                <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/gpt-4v-can-play-doom-badly-doesnt-hesitate-to-shoot-humans-and-demons" class="media-item fade-up">
+                    <div class="media-logo">Tom's<br>Hardware</div>
+                    <div class="media-content" id="media-coverage-unknown">
+                        <div class="outlet">Tom's Hardware</div>
+                        <h3>"GPT-4 can play Doom, badly — doesn't hesitate to shoot humans and demons"</h3>
+                        <div class="media-date">12 March, 2024 · Profile Feature</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.pcmag.com/news/openais-gpt-4-can-play-doom-but-only-like-a-noob" class="media-item fade-up">
+                    <div class="media-logo">PC Mag</div>
+                    <div class="media-content">
+                        <div class="outlet">PC Mag</div>
+                        <h3>"OpenAI's GPT-4 Can Play Doom, But Only Like a Noob"</h3>
+                        <div class="media-date">12 March, 2024 · Feature Article</div>
+
+               </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="https://www.theregister.com/2024/03/11/gpt4_wont_run_doom/" class="media-item fade-up">
+                    <div class="media-logo">The<br>Register</div>
+                    <div class="media-content">
+                        <div class="outlet">The Register</div>
+                        <h3>"GPT-4 won't run Doom but will play the game poorly"</h3>
+                        <div class="media-date">11 March, 2024 · Feature Article</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.amazon.science/blog/a-version-of-the-bert-language-model-thats-20-times-as-fast" class="media-item fade-up">
+                    <div class="media-logo">Amazon</div>
+                    <div class="media-content">
+                        <div class="outlet">Amazon</div>
+                        <h3>"A version of the BERT language model that’s 20 times as fast"</h3>
+                        <div class="media-date">3 December, 2020 · Feature Article</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.infoq.com/news/2019/11/alexa-genetic-deep-learning/" class="media-item fade-up">
+                    <div class="media-logo">InfoQ</div>
+                    <div class="media-content">
+                        <div class="outlet">InfoQ</div>
+                        <h3>"Alexa Research Paper Shows Genetic Algorithms Offer Best Solution for Neural Network Optimization"</h3>
+                        <div class="media-date">5 November, 2019 · Feature Article</div>
+                    </div>
+                    <svg class="media-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+    </div>
+    <!-- END PAGE: HOME -->
+
+
+    <!-- ══════════════════════════════ -->
+    <!-- PAGE: EXTENDED BIO             -->
+    <!-- ══════════════════════════════ -->
+    <div class="page" id="page-bio">
+        <div class="page-section">
+            <div class="section-header fade-up"><h2>Extended Biography</h2></div>
+
+            <div class="bio-extended">
+                <div class="bio-narrative fade-up">
+
+                    Adrian de Wynter is a principal scientist at Microsoft and a researcher (PGR) at the University of York. His main work is related to fundamental problems in AI and science, such as <b>cognition</b> (e.g., reasoning) in machines, <b>measurement</b> (in science, like evals), and <b>social impact</b>.
+                </p>
+
+                <p>
+                    His primary research interest is the relationship of <b>intelligence and reasoning between humans and machines</b>. Lately he's been focused on LLM reasoning capabilities (e.g. in <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">measurement</a> and <a href="https://arxiv.org/abs/2404.01230">strategic reasoning</a>).
+                    That said, his focus is less around LLMs and more around foundational aspects of AI, such as the question of whether <a href="https://arxiv.org/abs/2507.01936"><em>understanding is required for 'good' dialogue</em></a>; or whether in-context learning is a <a href="https://arxiv.org/abs/2509.10414">form of learning</a>.
+                    He also recently wrote <a href="https://arxiv.org/abs/2506.03083">an algorithm</a> with cryptographic guarantees for determining <b>trust in LLMs-as-judges</b>.
+                </p>
+
+                <p>
+                    His industrial work involves applying these solutions to production problems. For example, his team used <a href="https://arxiv.org/abs/2312.06562">category theory</a> to prove that <b>some prompting strategies are objectively better than others</b>; and that they produce more preferrable outcomes by users (it ended up being part of Copilot!). 
+                In earlier work he <a href="https://arxiv.org/abs/1908.09942">showed</a> that finding a globally optimal solution to model compression is undecidable; but <a href="https://arxiv.org/abs/2010.08512">proved</a> that polytime approximation algorithms exist. He <a href="https://arxiv.org/abs/2010.10499">applied</a> these results to BERT, reaching a (then) SOTA on model compression. This was later adapted on quantum circuit optimisation in <a href="https://github.com/XanaduAI/QHack2021/issues/73">work</a> by ORNL.
+              He also proved (bridging learning theory and topological data analysis) how (and when) LLM-based <a href="https://link.springer.com/article/10.1007/s41884-024-00153-0">data augmentation works</a>.
+            </p>
+
+              <p>
+                His other research interests include <b>recreational mathematics</b> (games), <b>preserving endangered languages</b>, and <b>computational social science</b>. In the latter he has worked on mitigating <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">toxicity</a>, <a href="https://arxiv.org/abs/2410.11005">unfairness</a>, and <a href="https://arxiv.org/abs/2503.20302">other</a> harms of LLMs; <a href="https://arxiv.org/abs/2508.06374">personalisation</a> and <a href="https://arxiv.org/abs/2507.01936">sycophancy</a> in LLMs; <a href="https://arxiv.org/abs/2408.15409">research on LLM research</a>; and did one of the first studies of the impact of ChatGPT on <a href="https://arxiv.org/abs/2412.01617">loneliness</a>. He also has stuff in <a href="https://sigbovik.org/2025/proceedings.pdf">SIGBOVIK</a>.
+              </p>
+
+              <p>
+                In terms of service, He has--like everyone and their grandma--reviewed for AAAI, *ACL, NeurIPS, ICML, ICLR and so on. He also reviews for Nature (<em>AI & Ethics</em>; <em>Artificial Intelligence</em>, and <em>Communications</em>), IEEE Transactions on Games, and ACM TIST.
+                He was recently named a <a href="https://www.thinkingaboutthinking.org/">Thinking About Thinking</a> fellow</a>. 
+            </p>
+              
+            <p>
+            In his spare time, Adrian enjoys photography, cooking, type 2 fun, and divulging personal information to strangers on the internet.
+            </p>
+                </div>
+
+                <!--
+                <div class="bio-card fade-up">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>
+                        Education
+                    </h3>
+                    <ul>
+                        <li>
+                            <strong>PhD Computer Science</strong>
+                            University of York
+                            <span>2006 – 2010</span>
+                        </li>
+                        <li>
+                            <strong>Msc Computer Science</strong>
+                            University of Texas at Austin
+                            <span>2001 – 2005</span>
+                        </li>                        <li>
+                            <strong>BS Physics &amp; Computer Science</strong>
+                            MIT
+                            <span>2001 – 2005</span>
+                        </li>
+                    </ul>
+                </div>
+                -->
+                <!----
+                <div class="bio-card fade-up">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0114 0v2"/><path d="M17 11l2 2 4-4"/></svg>
+                        Selected Honors
+                    </h3>
+                        <div class="pub-entry fade-up" data-type="award" data-search="CELA open data award CLANDESTINO Spanish toxic language">
+                            <div class="pub-number">26</div>
+                            <div class="pub-details">
+                                <div class="pub-title">CELA Open Data Award</div>
+                                <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+                                <div class="pub-venue">For the <a href="https://github.com/microsoft/CLANDESTINO">CLANDESTINO</a> corpus, a dataset for localized Spanish toxic-language detection.</div>
+                                <div class="pub-links">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pub-entry fade-up" data-type="award" data-search="CELA open data award RTP-LX toxic multilingual">
+                            <div class="pub-number">20</div>
+                            <div class="pub-details">
+                                <div class="pub-title">CELA Open Data Award</div>
+                                <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+                                <div class="pub-venue">For the <a href="https://github.com/microsoft/RTP-LX">RTP-LX</a> corpus, a dataset for toxic multilingual prompt evaluation.</div>
+                                <div class="pub-links">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pub-entry fade-up" data-type="award" data-search="CELA open data award MCFM misgendering">
+                            <div class="pub-number">12</div>
+                            <div class="pub-details">
+                                <div class="pub-title">CELA Open Data Award</div>
+                                <div class="pub-authors">Sunayana Sitaram, <strong>Adrian de Wynter</strong>, Isobel McCrum, Qilong Gu, and Si-Qing Chen</div>
+                                <div class="pub-venue">For the <a href="https://github.com/microsoft/Multilingual-Culture-First-Misgendering-Guardrails">MCFM</a> corpus, a dataset designed to mitigate misgendering in LLMs in 42 languages and dialects.</div>
+                                <div class="pub-links">
+                                </div>
+                            </div>
+                        </div>
+
+                    <ul>
+                        <li>
+                            <strong>Thinking About Thinking Fellow</strong>
+                            <span>2026</span>
+                        </li>
+                        <li>
+                            <strong>McKnight Scholar Award</strong>
+                            <span>2021</span>
+                        </li>
+                        <li>
+                            <strong>Sloan Research Fellowship</strong>
+                            <span>2017</span>
+                        </li>
+                        <li>
+                            <strong>BNA Outstanding Thesis Award</strong>
+                            <span>2010</span>
+                        </li>
+                        <li>
+                            <strong>NSF Graduate Research Fellowship</strong>
+                            <span>2006</span>
+                        </li>
+                    </ul>
+                </div>-->
+            </div> 
         </div>
-        <div class="banner2">
-          <ul>
-          <li class="mslide1"></li>
-          <li class="mslide2"></li>
-        </ul>
+    </div>
+    <!-- END PAGE: EXTENDED BIO -->
+
+
+    <!-- ══════════════════════════════ -->
+    <!-- PAGE: CV                       -->
+    <!-- ══════════════════════════════ -->
+    <div class="page" id="page-cv">
+        <div class="page-section">
+            <div class="section-header fade-up"><h2>Curriculum Vitae</h2></div>
+
+            <div class="cv-download-bar fade-up">
+                <p>Download the full CV as a PDF for your records (I haven't uploaded it yet).</p>
+                <a href="#" class="btn-download">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download PDF
+                </a>
+            </div>
+
+            <!--
+            <div class="cv-timeline fade-up">
+
+                <div class="cv-category">
+                    <h3>Academic Appointments</h3>
+                    <div class="cv-entry">
+                        <div class="cv-role">Associate Professor (with tenure)</div>
+                        <div class="cv-place">MIT — Dept. of Brain and Cognitive Sciences</div>
+                        <div class="cv-year">2019 – Present</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Assistant Professor</div>
+                        <div class="cv-place">MIT — Dept. of Brain and Cognitive Sciences</div>
+                        <div class="cv-year">2013 – 2019</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Postdoctoral Research Fellow</div>
+                        <div class="cv-place">Gatsby Computational Neuroscience Unit, UCL</div>
+                        <div class="cv-year">2010 – 2013</div>
+                    </div>
+                </div>
+
+                <div class="cv-category">
+                    <h3>Education</h3>
+                    <div class="cv-entry">
+                        <div class="cv-role">PhD in Computational Neuroscience</div>
+                        <div class="cv-place">University College London · Advisor: Prof. Michael Hartley</div>
+                        <div class="cv-year">2006 – 2010</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">BS in Physics &amp; Computer Science (summa cum laude)</div>
+                        <div class="cv-place">Stanford University</div>
+                        <div class="cv-year">2001 – 2005</div>
+                    </div>
+                </div>
+
+                <div class="cv-category">
+                    <h3>Selected Publications</h3>
+                    <div class="cv-entry">
+                        <div class="cv-role">Neural Circuit Motifs for Rapid Perceptual Decision-Making</div>
+                        <div class="cv-place"><em>Nature Neuroscience</em> · Doe J., Chen W., Park S.</div>
+                        <div class="cv-year">2025</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Deep Predictive Coding Networks Explain V1 Response Properties</div>
+                        <div class="cv-place"><em>Science</em> · Doe J., Kumar R., Okazaki T.</div>
+                        <div class="cv-year">2025</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Biologically Plausible Credit Assignment in Recurrent Networks</div>
+                        <div class="cv-place"><em>arXiv preprint</em> · Patel A., Doe J.</div>
+                        <div class="cv-year">2024</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Energy-Efficient Neural Architectures Inspired by Cortical Microcircuits</div>
+                        <div class="cv-place"><em>Nature Machine Intelligence</em> · Doe J., Li F.</div>
+                        <div class="cv-year">2023</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">A Unified Theory of Predictive Coding and Active Inference</div>
+                        <div class="cv-place"><em>Neuron</em> · Doe J.</div>
+                        <div class="cv-year">2021</div>
+                    </div>
+                </div>
+
+                <div class="cv-category">
+                    <h3>Grants &amp; Funding</h3>
+                    <div class="cv-entry">
+                        <div class="cv-role">NIH Director's Pioneer Award</div>
+                        <div class="cv-place">Brain-inspired architectures for energy-efficient AI · $3.5M</div>
+                        <div class="cv-year">2025 – 2030</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">NSF CAREER Award</div>
+                        <div class="cv-place">Computational principles of cortical prediction · $800K</div>
+                        <div class="cv-year">2016 – 2021</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Simons Collaboration on the Global Brain</div>
+                        <div class="cv-place">Multi-region neural dynamics during decision-making · $1.2M</div>
+                        <div class="cv-year">2018 – 2023</div>
+                    </div>
+                </div>
+                
+<div class="pub-entry fade-up" data-type="award" data-search="CELA open data award CLANDESTINO Spanish toxic language">
+    <div class="pub-number">26</div>
+    <div class="pub-details">
+        <div class="pub-title">CELA Open Data Award</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">For the <a href="https://github.com/microsoft/CLANDESTINO">CLANDESTINO</a> corpus, a dataset for localized Spanish toxic-language detection.</div>
+        <div class="pub-links">
         </div>
+    </div>
+</div>
 
-        <div class="main-text">
-          <div class="about">
-            <div class="about-text">
+<div class="pub-entry fade-up" data-type="award" data-search="CELA open data award RTP-LX toxic multilingual">
+    <div class="pub-number">20</div>
+    <div class="pub-details">
+        <div class="pub-title">CELA Open Data Award</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">For the <a href="https://github.com/microsoft/RTP-LX">RTP-LX</a> corpus, a dataset for toxic multilingual prompt evaluation.</div>
+        <div class="pub-links">
+        </div>
+    </div>
+</div>
 
-              <p style="font-family:helvetica">I am a principal <b>scientist</b> at Microsoft and a <b>researcher</b> (PGR) at the University of York. I work in projects related to fundamental problems in AI and science, such as <b>reasoning</b>, <b>measurement</b>, and <b>social impact</b>.</p>
+<div class="pub-entry fade-up" data-type="award" data-search="CELA open data award MCFM misgendering">
+    <div class="pub-number">12</div>
+    <div class="pub-details">
+        <div class="pub-title">CELA Open Data Award</div>
+        <div class="pub-authors">Sunayana Sitaram, <strong>Adrian de Wynter</strong>, Isobel McCrum, Qilong Gu, and Si-Qing Chen</div>
+        <div class="pub-venue">For the <a href="https://github.com/microsoft/Multilingual-Culture-First-Misgendering-Guardrails">MCFM</a> corpus, a dataset designed to mitigate misgendering in LLMs in 42 languages and dialects.</div>
+        <div class="pub-links">
+        </div>
+    </div>
+</div>
 
-              <p style="font-family:helvetica">My primary research interest is the relationship of <b>intelligence and reasoning between humans and machines</b>. Lately I have focused on LLM reasoning capabilities (e.g. in <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">measurement</a> and <a href="https://arxiv.org/abs/2404.01230">strategic reasoning</a>). 
-              I also raised <a href="https://arxiv.org/abs/2507.01936">here</a> the question of whether <em>understanding</em> (as measured Wittgenstein-style) <em>is required for 'good' dialogue</em>; and demonstrated that in-context learning is a <a href="https://arxiv.org/abs/2509.10414">weak form of learning</a>.</p>
 
-              <p style="font-family:helvetica">I favour pragmatic/intuitionistic approaches, where proofs of complexity and convergence must be <em>constructive</em>. Since I also work in industry, these solutions typically apply to production problems. For example, we used <a href="https://arxiv.org/abs/2312.06562">category theory</a> to prove that <b>some prompting strategies are objectively better than others</b>; and that they produce more preferrable outcomes by users (it ended up being part of Copilot!). I also recently wrote <a href="https://arxiv.org/abs/2506.03083">an algorithm</a> with cryptographic guarantees for determining <b>trust in LLMs-as-judges</b>.</p>
+                <div class="cv-category">
+                    <h3>Teaching</h3>
+                    <div class="cv-entry">
+                        <div class="cv-role">9.40 — Introduction to Neural Computation</div>
+                        <div class="cv-place">MIT · Undergraduate lecture course</div>
+                        <div class="cv-year">Fall, annually since 2014</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">9.520 — Statistical Learning Theory and Applications</div>
+                        <div class="cv-place">MIT · Graduate seminar (co-taught)</div>
+                        <div class="cv-year">Spring, annually since 2017</div>
+                    </div>
+                </div>
 
+                <div class="cv-category">
+                    <h3>Service &amp; Leadership</h3>
+                    <div class="cv-entry">
+                        <div class="cv-role">Editorial Board Member</div>
+                        <div class="cv-place">Neuron · PLOS Computational Biology · Journal of Neuroscience</div>
+                        <div class="cv-year">2019 – Present</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Co-Founder, Brains &amp; Bytes Public Lecture Series</div>
+                        <div class="cv-place">MIT</div>
+                        <div class="cv-year">2016 – Present</div>
+                    </div>
+                    <div class="cv-entry">
+                        <div class="cv-role">Program Committee</div>
+                        <div class="cv-place">NeurIPS · ICLR · Cosyne</div>
+                        <div class="cv-year">2015 – Present</div>
+                    </div>
+                </div>
+            -->
             </div>
-
-            <div class="about-text">
-
-              <p style="font-family:helvetica">In earlier work I <a href="https://arxiv.org/abs/1908.09942">showed</a> that finding a globally optimal solution to model compression is undecidable; but <a href="https://arxiv.org/abs/2010.08512">proved</a> that polytime approximation algorithms exist. I <a href="https://arxiv.org/abs/2010.10499">applied</a> these results to BERT, reaching a (then) SOTA on model compression. This was later adapted on quantum circuit optimisation in <a href="https://github.com/XanaduAI/QHack2021/issues/73">work</a> by ORNL.
-              I also proved (bridging learning theory and topological data analysis) how (and when) LLM-based <a href="https://link.springer.com/article/10.1007/s41884-024-00153-0">data augmentation works</a>.</p>
-
-              <p style="font-family:helvetica">My other research interests include <b>recreational mathematics</b> (games), <b>preserving endangered languages</b>, and <b>computational social science</b>. In the latter I have worked on mitigating <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">toxicity</a>, <a href="https://arxiv.org/abs/2410.11005">unfairness</a>, and <a href="https://arxiv.org/abs/2503.20302">other</a> harms of LLMs; <a href="https://arxiv.org/abs/2508.06374">personalisation</a> and <a href="https://arxiv.org/abs/2507.01936">sycophancy</a> in LLMs; <a href="https://arxiv.org/abs/2408.15409">research on LLM research</a>; and did one of the first studies of the impact of ChatGPT on <a href="https://arxiv.org/abs/2412.01617">loneliness</a>. And I also have stuff in <a href="https://sigbovik.org/2025/proceedings.pdf">SIGBOVIK</a>, because this job is actually fun.</p>
-
-              <p style="font-family:helvetica">In terms of service, I have--like everyone and their grandma--reviewed for AAAI, *ACL, NeurIPS, ICML, ICLR and so on. I also review for Nature (<em>AI & Ethics</em>; <em>Artificial Intelligence</em>, and <em>Communications</em>), IEEE Transactions on Games, and ACM TIST.</p>
-
-              <p style="font-family:helvetica">If you are stalking me, here's my <a href="https://scholar.google.com/citations?hl=nl&user=Vg_EOYsAAAAJ">Google Scholar</a> (which I never update) and my <a href="https://www.linkedin.com/in/adrian-de-wynter/">LinkedIn</a>. I was recently named a <a href="https://www.thinkingaboutthinking.org/">Thinking About Thinking</a> fellow for 2026, if that means anything to you (it does to me :)). Media coverage of my work is <a href="#media-coverage">below</a>. </p>
-
-              <p style="font-family:Helvetica, Serif; color: #231f20; display:flex; justify-content:flex-end">Last updated: Apr '26.</p>
-            </div>
-          </div>
-
-
-
-
-          <div class="papers">
-
-              <div class="papers-block">
-                <div class="section-label--right">New and Selected Works</div>
-                <div class="papers-education--desktop">
-
-                  <div><p></p><p style="font-family: Helvetica"><i>Following Larry Wasserman's <a href="http://stat.cmu.edu/~larry/Peer-Review.pdf">essay</a>, I invite comments on the papers below. Feel free to email me.<br>For a longer, <b>complete list of works</b> see <a href="notes/older_papers.html">here</a>.<br>For how to handle my last name's weird spelling rules, see <a href="notes/tussenvoegsels.html">here</a>.</i></p></div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>The Hrunting of AI: Where and How to Improve English Dialectal Fairness</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2603.15187">[pdf]</a>
-                      <a href="bibtex/hrunting.html">[BibTex]</a></b>
-                       <a href="https://github.com/adewynter/beowulf">[Code]</a>
-                     </b> 
-                    </div>
-                    <div class="paper-authors">
-                      Wei Li and Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      Preprint (2026)
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Causal Reasoning Favors Encoders: On The Limits of Decoder-Only Models</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2512.10561">[pdf]</a>
-                      <a href="bibtex/caussl.html">[BibTex]</a></b>
-                      <!-- <a href="https://github.com/adewynter/is-icl-learning">[Code]</a></b> -->
-                    </div>
-                    <div class="paper-authors">
-                      Amartya Roy, Elamparithy M, Kripabandhu Ghosh, Ponnurangam Kumaraguru, and <b>Adrian de Wynter</b>
-                    </div>
-                    <div class="paper-misc">
-                      Preprint (2025)
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>On Interpreting Measurement with LLMs</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="assets/Measurement%20in%20LLMs.pdf">[slides]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      Invited talk at MBZUAI's research showcase (2025)
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Is In-Context Learning Learning?</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2509.10414">[pdf]</a>
-                      <a href="bibtex/icl.html">[BibTex]</a></b>
-                      <a href="https://github.com/adewynter/is-icl-learning">[Code]</a></b>
-                      <a href="#media-coverage-icl">[Press coverage]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      ICLR (2026). Chosen by the Turing Post as one of <a href="#media-coverage-icl">2025's AI papers you must read</a>.
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Evaluating Style-Personalized Text Generation: Challenges and Directions</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2508.06374">[pdf]</a>
-                      <!-- <a href="bibtex/thinline.html">[BibTex]</a></b> -->
-                      </div>
-                    <div class="paper-authors">
-                      Anubhav Jangra, Bahareh Sarrafzadeh, Silviu Cucerzan, <b>Adrian de Wynter</b>*, and Sujay Kumar Jauhar*
-                    </div>
-                    <div class="paper-misc">
-                      Preprint (2025)
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>The Thin Line Between Comprehension and Persuasion in LLMs</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2507.01936">[pdf]</a>
-                      <a href="bibtex/thinline.html">[BibTex]</a></b>
-                      <a href="https://github.com/adewynter/the_thin_line">[Code]</a></b>
-                      <a href="#media-coverage-persuasion">[Press coverage]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter and Tangming Yuan
-                    </div>
-                    <div class="paper-misc">
-                      ACL Findings 2026 (Ann. 2025)
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Algorithmically Establishing Trust in Evaluators</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2506.03083">[pdf]</a>
-                      <a href="bibtex/unknown.html">[BibTex]</a></b>
-                       <a href="https://github.com/adewynter/no_data_algorithm">[Code]</a>
-                      <a href="#media-coverage-no-data">[Press coverage]</a>
-                     </b> 
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      Preprint (2025)
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Does using LLMs in daily life help or hinder learning a second language?</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://escholarship.org/uc/item/2jh361fg">[pdf]</a>
-                      <a href="https://escholarship.org/uc/item/2jh361fg">[BibTex]</a></b>
-                      <!-- <a href="https://github.com/adewynter/awes_laws_and_flaws">[Code]</a></b> -->
-                    </div>
-                    <div class="paper-authors">
-                      Wei Li, Andy Zhao, <b>Adrian de Wynter</b>, Si-Qing Chen, Paul Karimov, Paul and Joshua K. Hartshorne 
-                    </div>
-                    <div class="paper-misc">
-                      Proceedings of the Annual Meeting of the Cognitive Science Society (2025)
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>A Multilingual, Culture-First Approach to Addressing Misgendering in LLM Applications</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2503.20302">[pdf]</a>
-                      <a href="bibtex/misgendering.html">[BibTex]</a></b>
-                      <a href="https://github.com/microsoft/Multilingual-Culture-First-Misgendering-Guardrails">[Code]</a></b>
-                    </div>
-                    <div class="paper-authors">
-                      Sunayana Sitaram, <b>Adrian de Wynter</b>, Isobel McCrum, Qilong Gu, and Si-Qing Chen
-                    </div>
-                    <div class="paper-misc">
-                      EMNLP 2025 Main
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>If Eleanor Rigby Had Met ChatGPT: A Study on Loneliness in a Post-LLM World</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2412.01617">[pdf]</a>
-                      <a href="https://aclanthology.org/2025.acl-long.976/">[BibTex]</a></b>
-                      <a href="https://github.com/adewynter/EleanorRigby">[Code]</a></b>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      ACL 2025 Main
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Awes, Laws and Flaws of Today's LLM Research</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2408.15409">[pdf]</a>
-                      <a href="https://aclanthology.org/2025.findings-acl.664/">[BibTex]</a></b>
-                      <a href="https://github.com/adewynter/awes_laws_and_flaws">[Code]</a></b>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      ACL 2025 Findings
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>LLMs Are All You Need</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://sigbovik.org/2025/proceedings.pdf">[pdf]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      SIGBOVIK 2025 (IKYK)
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Will GPT-4 Run DOOM?</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://ieeexplore.ieee.org/document/10752360">[pdf]</a>
-                      <a href="bibtex/doom.html">[BibTex]</a>
-                      <a href="https://github.com/adewynter/Doom">[Code]</a>
-                      <a href="Doom.html">[Post]</a>
-                      <a href="#media-coverage-doom">[Press coverage]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      IEEE Transactions on Games (2024).
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>LLM as a Mastermind: A Survey of Strategic Reasoning with Large Language Models</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/pdf/2404.01230.pdf">[pdf]</a>
-                      <a href="bibtex/llmmastermind.html">[BibTex]</a></b>
-                    </div>
-                    <div class="paper-authors">
-                      Yadong Zhang, Shaoguang Mao, Tao Ge, Xun Wang, <b>Adrian de Wynter</b>, Yan Xia, Wenshan Wu, Ting Song, Man Lan and Furu Wei
-                    </div>
-                    <div class="paper-misc">
-                      COLM 2024
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Assessing Dialect Fairness and Robustness of Large Language Models in Reasoning Tasks</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2410.11005">[pdf]</a>
-                      <a href="https://aclanthology.org/2025.acl-long.317/">[BibTex]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Fangru Lin, Shaoguang Mao, Emanuele La Malfa, Valentin Hofmann, <b>Adrian de Wynter</b>, Xun Wang, Si-Qing Chen, Michael J. Wooldridge, Janet B. Pierrehumbert, Furu Wei
-                    </div>
-                    <div class="paper-misc">
-                      ACL 2025 Main
-                    </div>
-                  </div>
-                  
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>RTP-LX: Can LLMs Evaluate Toxicity in Multilingual Scenarios?</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">[pdf]</a>
-                      <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011">[BibTex]</a>
-                      <a href="https://huggingface.co/datasets/adewynter/RTP-LX">[Code]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter <i>et al.</i>
-                    </div>
-                    <div class="paper-misc">
-                      AAAI 2025
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>On Meta-Prompting</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2312.06562">[pdf]</a>
-                      <a href="bibtex/metaprompting.html">[BibTex]</a>
-                      <a href="https://github.com/adewynter/metaprompting">[Code]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter, Xun Wang, Qilong Gu, and Si-Qing Chen
-                    </div>
-                    <div class="paper-misc">
-                      Preprint
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>An Evaluation of LLM Outputs: Discourse and Memorization</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://www.sciencedirect.com/science/article/pii/S2949719123000213">[pdf]</a>
-                      <a href="bibtex/llmeval.html">[BibTex]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter, Xun Wang, Alex Sokolov, Qilong Gu, and Si-Qing Chen
-                    </div>
-                    <div class="paper-misc">
-                      The Natural Language Processing Journal
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>"I'd Like to Have an Argument, Please": Argumentative Reasoning in Large Language Models</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://ebooks.iospress.nl/doi/10.3233/FAIA240311">[pdf]</a>
-                      <a href="bibtex/argumentation1.html">[BibTex]</a>
-                      <a href="https://github.com/adewynter/argumentation-llms">[Code]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter and Tangming Yuan
-                    </div>
-                    <div class="paper-misc">
-                      COMMA 2024
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Are Large Language Model-based Evaluators the Solution to Scaling Up Multilingual Evaluation?</b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://arxiv.org/abs/2309.07462">[pdf]</a>
-                      <a href="https://aclanthology.org/2024.findings-eacl.71/">[BibTex]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Rishav Hada, Varun Gumma, <b>Adrian de Wynter</b>, Harshita Diddee, Mohamed Ahmed, Monojit Choudhury, Kalika Bali, and Sunayana Sitaram
-                    </div>
-                    <div class="paper-misc">
-                      EACL 2024
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>Turing Completeness and <i>Sid Meier's Civilization</i></b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://ieeexplore.ieee.org/document/9756289">[pdf]</a>
-                      <a href="bibtex/civ.html">[BibTex]</a>
-                      <a href="https://adewynter.github.io/notes/img/BB3.gif">[The Turing Machine in Action]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      IEEE Transactions on Games
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b>An Algorithm for Learning Smaller Representations of Models With Scarce Data </b>
-                    </div>
-                    <div class="paper-misc">
-                      <a href="https://link.springer.com/article/10.1007/s41884-024-00153-0">[pdf]</a>
-                      <a href="bibtex/agora.html">[BibTex]</a>
-                      <a href="https://github.com/alexa/bort">[Code]</a>
-                    </div>
-                    <div class="paper-authors">
-                      Adrian de Wynter
-                    </div>
-                    <div class="paper-misc">
-                      Information Geometry (2024)
-                    </div>
-                  </div>
-
-              </div><!-- papers-education--desktop -->
-
-              <div><p style="font-family:helvetica; display:flex; justify-content:flex-end"><a href="notes/older_papers.html">More</a></p></div>
-
-            </div><!-- papers-filler -->
-
-
-          </div><!-- papers -->
-
-
-          <div class="papers">
-              <div class="papers-block">
-                <div class="section-label--right">TL;DRs of Some Papers</div>
-
-                <div class="papers-education--desktop">
-
-                  <div>
-                    <p></p>
-                    <p style="font-family:helvetica"><i>I've found it useful to have a series of posts about some of my works. This makes them more accessible and allows me to share my passion for mathematics. I definitely do not proofread these.
-                    <br>I'm absolutely terrible at updating this site (record: 2 years), so bear with me.</i></p>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://adriandewynter.substack.com/p/establishing-trust-in-llms-as-judges">The No-Data Algorithm</a></b>
-                    </div>
-                    <div class="paper-misc">
-                      How to enable trust in LLMs-as-judges WITHOUT labelled data! With proofs!
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://adewynter.github.io/Doom.html">Will GPT-4 Run DOOM?</a></b>
-                    </div>
-                    <div class="paper-misc">
-                      Yes but no. 
-                      Links to code, resources, TL;DR of the paper, and videos of the model playing the game.
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://adriandewynter.substack.com/p/turing-completeness-and-sid-meiers">Turing Completeness and Sid Meier's Civilization</a></b>
-                    </div>
-                    <div class="paper-misc">
-                    Building a literal computer inside Civ
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://adewynter.github.io/notes/decidability_of_nas.html">Neural architecture search is undecidable</a></b>
-                    </div>
-                    <div class="paper-misc">
-                   <!-- A post on how hard neural architecture search (NAS) and machine learning can be, from a computational perspective. It also discusses the workarounds and applications of this result, with a particular emphasis on why some NAS approaches do not do better than random search. -->
-                   A summary of my paper 'On The Bounds of Function Approximations.' 
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://adewynter.github.io/notes/bort_algorithms_and_applications.html">Bort</a></b>
-                    </div>
-                    <div class="paper-misc">
-                      (Provably) optimal model compression with algebraic topology
-                      <!--
-                      A post on the algorithms used to obtain Bort, an optimally compressed version of the BERT language model. This can be viewed as a summary of my papers "Optimal Subarchitecture Extraction for BERT", "An Algorithm for Learning Smaller Representations of Models With Scarce Data", and "An Approximation Algorithm for Optimal Subarchitecture Extraction", albeit less concise than these titles, if you can believe it. -->
-                    </div>
-                  </div>
-
-
-              </div><!-- media-education--desktop -->
-
-            </div><!-- media-filler -->
-
-
-          </div><!-- media -->
-
-
-
-          <div class="papers">
-              <div class="papers-block">
-                <div class="section-label--right" id="media-coverage">Selected Media Coverage</div>
-
-                <div class="papers-education--desktop">
-
-                  <div>
-                    <p></p>
-                    <p style="font-family: Helvetica"><i>Some media coverage of the work I do, in case my posts remain as confusing as the original papers.</i></p>
-                  </div>
-
-                  <div class="section-item" id="media-coverage-icl">
-                    <div class="paper-title">
-                      <b>The Turing Post selected this paper as one of the 23 papers from 2025 that indicate where is <a href="https://www.turingpost.com/p/fod133">AI headed</a>.</b>
-                    </div>
-                    <div class="paper-misc">
-                    Posts covering my paper 'Is In-Context Learning Learning?'. Other coverage is <a href="https://levelup.gitconnected.com/do-llm-models-really-learn-microsoft-study-exposes-the-illusion-of-in-context-learning-in-llms-02bcb54e0a86">here</a> and <a href="https://min.news/en/tech/4b434e93cef12783b4b73455ba4f2f65.html">here</a>. I like this one, too: <a href="https://bdtechtalks.substack.com/p/llm-in-context-learning-icl-is-learning">LLM in-context learning (ICL) is learning, but not how you think</a>
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title" id="media-coverage-no-data">
-                      <b><a href="https://www.techinasia.com/news/microsofts-no-data-algorithm-enables-trust-without-labels">Microsoft’s No-Data Algorithm enables trust without labels</a></b>
-                    </div>
-                    <div class="paper-misc">
-                    Brief coverage (with really cool implications I hadn't thought about) on the No-Data Algorithm. 
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title" id="media-coverage-persuasion">
-                      <b><a href="https://aibr.jp/2025/09/01/llmsにおける理解と説得の微妙な境界（the-thin-line-between-comprehension-and-persuasion-2/">LLMsにおける理解と説得の微妙な境界（The Thin Line Between Comprehension and Persuasion in LLMs）</a></b>
-                    </div>
-                    <div class="paper-misc">
-                    A post talking about our paper 'The Thin Line Between Comprehension and Persuasion in LLMs' (in Japanese, but it isn't like Google Translate doesn't exist). Other coverage is <a href="https://quantumzeitgeist.com/large-language-models-assess-debate-revealing-dialogue-comprehension-limits/">here</a> (Quantum Zeitgeist). 
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title" id="media-coverage-doom">
-                      <b><a href="https://www.tweaktown.com/news/96799/microsoft-scientist-gets-ai-to-play-doom-but-then-issued-warning/index.html">Microsoft scientist gets AI to play DOOM but then issued a warning</a></b>
-                    </div>
-
-                    <div class="paper-misc">
-                      Some of the coverage of the work I did with DOOM and GPT-4. You can also read about it <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/gpt-4v-can-play-doom-badly-doesnt-hesitate-to-shoot-humans-and-demons">here (Tom's Hardware)</a>, <a href="https://www.pcmag.com/news/openais-gpt-4-can-play-doom-but-only-like-a-noob">here (PC Mag)</a>, and <a href="https://www.theregister.com/2024/03/11/gpt4_wont_run_doom/">here (The Register)</a>.
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://www.amazon.science/blog/a-version-of-the-bert-language-model-thats-20-times-as-fast">A version of the BERT language model that’s 20 times as fast</a></b>
-                    </div>
-                    <div class="paper-misc">
-                      Another post edited by Larry Hardesty. This one talks about Bort.
-                    </div>
-                  </div>
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://www.infoq.com/articles/state-art-automl/">State of the Art in Automated Machine Learning</a></b>
-                    </div>
-                    <div class="paper-misc">
-                      This is an interview I, along with other researchers, gave for InfoQ around AutoML. It's so interesting to see people of such different backgrounds arriving to the same conclusions :)
-                    </div>
-                  </div>
-
-
-                  <div class="section-item">
-                    <div class="paper-title">
-                      <b><a href="https://www.infoq.com/news/2019/11/alexa-genetic-deep-learning/">Alexa Research Paper Shows Genetic Algorithms Offer Best Solution for Neural Network Optimization</a></b>
-                    </div>
-                    <div class="paper-misc">
-                    This post sums up very nicely my work around NAS/ASP/FA. Other coverage is <a href="https://venturebeat.com/2019/09/23/amazon-researchers-say-evolutionary-approach-improves-the-selection-of-ai-models/">here</a> (Venturebeat) and <a href="https://www.amazon.science/blog/how-to-construct-the-optimal-neural-architecture-for-your-machine-learning-task">here</a> (Amazon Science). 
-                    </div>
-                  </div>
-
-
-              </div><!-- media-education--desktop -->
-
-            </div><!-- media-filler -->
-
-
-          </div><!-- media -->
-
-
-
-
-
-          <div class="papers">
-
-              <div class="papers-block">
-              <p style="font-family:helvetica; display:flex; justify-content:flex-end">Contact: first-initial-full-last-name-including-tussenvoegsel (at) microsoft.com</p>
-
-              <p style="font-family:helvetica; display:flex; justify-content:flex-end">Factoid: my ORCID (326797241) is a prime number; it is expressible as the sum of two squares (1715 and 17996); and it is the square root (hypothenuse) of the sum of two squares (61726280 and 320914791). Yay.</p>
-            </div>
-          </div>
-
-        </div> <!-- main-text -->
-
+        </div>
     </div>
 
-  </div> <!-- content -->
+    <!-- ══════════════════════════════ -->
+    <!-- PAGE: RESEARCH STATEMENT       -->
+    <!-- ══════════════════════════════ -->
+    <div class="page" id="page-research">
+        <div class="page-section">
+            <div class="section-header fade-up"><h2>Research Statement</h2></div>
+
+            <img class="research-hero-img fade-up"
+                 src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&h=400&fit=crop"
+                 alt="Neural network visualization" />
+
+            <div class="research-content">
+
+                <div class="main-text fade-up">
+                    <h3>Vision &amp; Overview</h3>
+                    <p> I haven't filled this out loloops</p>
+                    <!--
+                    <p>
+                        The central question driving my research is deceptively simple: <em>How does the brain
+                        compute?</em> Despite decades of progress in neuroscience and artificial intelligence,
+                        we still lack a unified theoretical framework that explains how billions of neurons
+                        collectively give rise to perception, thought, and action. My lab addresses this gap
+                        by building computational models grounded in both neural data and machine learning theory.
+                    </p>
+                    <p>
+                        We take a <strong>theory-driven experimental</strong> approach: we develop mathematical
+                        models that make precise, testable predictions about neural activity, then validate (or
+                        refute) those predictions using large-scale electrophysiology and two-photon calcium
+                        imaging in behaving animals. This tight loop between theory and experiment has allowed
+                        us to uncover principles that are invisible to purely data-driven approaches.
+                    </p>
+
+                    <h3>Predictive Coding &amp; Hierarchical Inference</h3>
+                    <p>
+                        A major pillar of our work is the <strong>predictive coding</strong> framework, which
+                        posits that the brain continuously generates predictions about incoming sensory signals
+                        and updates its internal model based on prediction errors. We have developed deep
+                        predictive coding networks that not only match or exceed the performance of standard
+                        deep neural networks on vision benchmarks, but also quantitatively predict single-neuron
+                        responses in primary visual cortex (V1) and higher visual areas.
+                    </p>
+                    <p>
+                        Our 2025 <em>Science</em> paper demonstrated that these models capture orientation
+                        tuning, surround suppression, and temporal adaptation dynamics—phenomena that
+                        conventional feedforward models fail to explain. We are now extending this framework
+                        to multi-modal integration, asking how the brain combines visual, auditory, and
+                        proprioceptive predictions into a coherent percept.
+                    </p>
+
+                    <h3>Decision-Making Under Uncertainty</h3>
+                    <p>
+                        How do neural circuits make rapid, reliable decisions from noisy sensory evidence?
+                        Our recent work in <em>Nature Neuroscience</em> identified specific recurrent circuit
+                        motifs in primate prefrontal and parietal cortex that implement near-optimal evidence
+                        accumulation. We showed that these motifs can be understood as implementing a form of
+                        <strong>amortized Bayesian inference</strong>—the brain learns to approximate the
+                        posterior distribution over task-relevant variables through recurrent dynamics, rather
+                        than computing it from scratch on each trial.
+                    </p>
+
+                    <h3>Brain-Inspired AI</h3>
+                    <p>
+                        A complementary line of research asks what AI can learn from neuroscience. Modern deep
+                        learning systems are extraordinarily capable but also extraordinarily wasteful—training
+                        a large language model can consume as much energy as five cars over their lifetimes.
+                        Biological brains, by contrast, operate on roughly 20 watts. We are developing
+                        <strong>neuromorphic learning algorithms</strong> that incorporate biological principles
+                        such as local learning rules, sparse coding, and event-driven computation to build
+                        AI systems that are orders of magnitude more energy-efficient.
+                    </p>
+                    <p>
+                        Our NIH Pioneer Award (2025) funds a 5-year program to push this vision forward,
+                        with the goal of creating brain-inspired chips that can perform real-time sensory
+                        processing for medical devices such as next-generation cochlear implants and
+                        brain-computer interfaces.
+                    </p>
+
+                    <h3>Future Directions</h3>
+                    <p>
+                        Looking ahead, I see three frontiers that excite me most: (1) developing a
+                        <strong>computational theory of consciousness</strong> that can distinguish between
+                        models using empirical neural data; (2) building <strong>lifelong learning systems</strong>
+                        that, like biological brains, can continually acquire new skills without forgetting old
+                        ones; and (3) creating <strong>closed-loop neurotechnology</strong> that uses real-time
+                        neural decoding to restore lost sensory and motor function. Each of these challenges
+                        requires the kind of deep interdisciplinary collaboration that defines our lab's DNA.
+                    </p>
+                    -->
+                </div>
+
+                <div class="research-sidebar">
+                    <div class="sidebar-card fade-up">
+                        <h4>Research Areas</h4>
+                        <div class="research-area">
+                            <div class="area-icon">🧠</div>
+                            <div class="area-text">
+                                <strong>Cognition in AI</strong>
+                                How is cognition shaped/emerge in AI?
+                            </div>
+                        </div>
+                        <div class="research-area">
+                            <div class="area-icon">🔬</div>
+                            <div class="area-text">
+                                <strong>Measurement in science</strong>
+                                How do we conciliate science with LLMs? Where are we headed?
+                            </div>
+                        </div>
+                        <div class="research-area">
+                            <div class="area-icon">🤖</div>
+                            <div class="area-text">
+                                <strong>Computational social science</strong>
+                                Every researcher should care about the impact of their work.
+                            </div>
+                        </div>
+                        <!--
+                        <div class="research-area">
+                            <div class="area-icon">🔬</div>
+                            <div class="area-text">
+                                <strong>Neural Recording</strong>
+                                Large-scale electrophysiology and calcium imaging
+                            </div>
+                        </div>
+                    -->
+                    </div>
+                    <!--
+                    <div class="sidebar-card fade-up">
+                        <h4>By the Numbers</h4>
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">80+</div>
+                                <div class="stat-label">Publications</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">12K+</div>
+                                <div class="stat-label">Citations</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">15</div>
+                                <div class="stat-label">Lab Members</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">$5.5M</div>
+                                <div class="stat-label">Active Funding</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card fade-up">
+                        <h4>Key Collaborators</h4>
+                        <div class="research-area">
+                            <div class="area-icon">🇬🇧</div>
+                            <div class="area-text">
+                                <strong>Prof. Michael Hartley</strong>
+                                UCL Gatsby Unit
+                            </div>
+                        </div>
+                        <div class="research-area">
+                            <div class="area-icon">🇩🇪</div>
+                            <div class="area-text">
+                                <strong>Prof. Anna Weber</strong>
+                                Max Planck Institute, Tübingen
+                            </div>
+                        </div>
+                        <div class="research-area">
+                            <div class="area-icon">🇯🇵</div>
+                            <div class="area-text">
+                                <strong>Prof. Takeshi Okazaki</strong>
+                                RIKEN Center for Brain Science
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE: RESEARCH -->
+
+    <!-- ══════════════════════════════ -->
+    <!-- PAGE: PUBLICATIONS             -->
+    <!-- ══════════════════════════════ -->
+    <div class="page" id="page-publications">
+        <div class="page-section">
+            <div class="section-header fade-up"><h2>Publications</h2></div>
+
+            <div class="pub-controls fade-up">
+                <input type="text" class="pub-search" id="pubSearch" placeholder="Search by title, author, or venue…" />
+                <div class="pub-filter-group">
+                    <button class="pub-filter active" data-filter="all">All</button>
+                    <button class="pub-filter" data-filter="journal">Journal</button>
+                    <button class="pub-filter" data-filter="conference">Conference</button>
+                    <button class="pub-filter" data-filter="talk">Talk</button>
+                    <button class="pub-filter" data-filter="preprint">Preprint</button>
+                </div>
+            </div>
+
+            <div id="pubList">
+                <h3 class="pub-year-heading fade-up">2026</h3>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="measurement word document agentic workflows">
+    <div class="pub-number">3</div>
+    <div class="pub-details">
+        <div class="pub-title">Word Is Not Only Text: The Document Manipulation Benchmark</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at LREC Industry Day (2026; and panel!)</div>
+        <div class="pub-links">
+            <a href="assets/" class="pub-link">Slides</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="gpt-4 gpt-5 doom LLMs">
+    <div class="pub-number">3</div>
+    <div class="pub-details">
+        <div class="pub-title">Will GPT-4 (and 5!) run DOOM?</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at the 2026 ACM SIGGRAPH Symposium on Interactive 3D Graphics and Games</div>
+        <div class="pub-links">
+            <a href="assets/" class="pub-link">Slides</a>
+        </div>
+    </div>
+</div>
 
 
-  </body>
+<div class="pub-entry fade-up" data-type="conference" data-search="evaluating style personalized text generation">
+    <div class="pub-number">4</div>
+    <div class="pub-details">
+        <div class="pub-title">Evaluating Style-Personalized Text Generation: Challenges and Directions</div>
+        <div class="pub-authors">Anubhav Jangra, Bahareh Sarrafzadeh, Silviu Cucerzan, <strong>Adrian de Wynter*</strong>, and Sujay Kumar Jauhar*</div>
+        <div class="pub-venue">ACL GEM Workshop 2026 (ann. 2025)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2508.06374" class="pub-link">PDF</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="thin line comprehension persuasion LLMs">
+    <div class="pub-number">5</div>
+    <div class="pub-details">
+        <div class="pub-title">The Thin Line Between Comprehension and Persuasion in LLMs</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong> and Tangming Yuan</div>
+        <div class="pub-venue">ACL 2026 (Findings; ann. 2025)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2507.01936" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/the_thin_line" class="pub-link">Code</a>
+            <a href="../bibtex/thinline.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="pub-entry fade-up" data-type="preprint" data-search="hrunting AI English dialectal fairness">
+    <div class="pub-number">1</div>
+    <div class="pub-details">
+        <div class="pub-title">The Hrunting of AI: Where and How to Improve English Dialectal Fairness</div>
+        <div class="pub-authors">Wei Li and <strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Preprint (2026)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2603.15187" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/beowulf" class="pub-link">Code</a>
+            <a href="bibtex/hrunting.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<h3 class="pub-year-heading fade-up">2025</h3>
+
+<div class="pub-entry fade-up" data-type="preprint" data-search="causal reasoning encoders decoder-only models">
+    <div class="pub-number">2</div>
+    <div class="pub-details">
+        <div class="pub-title">Causal Reasoning Favors Encoders: On The Limits of Decoder-Only Models</div>
+        <div class="pub-authors">Amartya Roy, Elamparithy M, Kripabandhu Ghosh, Ponnurangam Kumaraguru, and <strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Preprint</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2512.10561" class="pub-link">PDF</a>
+            <a href="bibtex/caussl.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="interpreting measurement LLMs">
+    <div class="pub-number">3</div>
+    <div class="pub-details">
+        <div class="pub-title">On Interpreting Measurement with LLMs</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at MBZUAI's research showcase (2025)</div>
+        <div class="pub-links">
+            <a href="assets/Measurement%20in%20LLMs.pdf" class="pub-link">Slides</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="preprint" data-search="labelling data unknown references">
+    <div class="pub-number">6</div>
+    <div class="pub-details">
+        <div class="pub-title">Labelling Data with Unknown References</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Preprint</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2506.03083" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/no_data_algorithm" class="pub-link">Code</a>
+            <a href="bibtex/unknown.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="LLMs daily life learning second language">
+    <div class="pub-number">7</div>
+    <div class="pub-details">
+        <div class="pub-title">Does using LLMs in daily life help or hinder learning a second language?</div>
+        <div class="pub-authors">Wei Li, Andy Zhao, <strong>Adrian de Wynter</strong>, Si-Qing Chen, Paul Karimov, and Joshua K. Hartshorne</div>
+        <div class="pub-venue">CogSci (2025)</div>
+        <div class="pub-links">
+            <a href="https://escholarship.org/uc/item/2jh361fg" class="pub-link">PDF</a>
+            <a href="https://escholarship.org/uc/item/2jh361fg" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="multilingual culture misgendering LLM applications">
+    <div class="pub-number">8</div>
+    <div class="pub-details">
+        <div class="pub-title">A Multilingual, Culture-First Approach to Addressing Misgendering in LLM Applications</div>
+        <div class="pub-authors">Sunayana Sitaram, <strong>Adrian de Wynter</strong>, Isobel McCrum, Qilong Gu, and Si-Qing Chen</div>
+        <div class="pub-venue">EMNLP 2025 Main</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2503.20302" class="pub-link">PDF</a>
+            <a href="https://github.com/microsoft/Multilingual-Culture-First-Misgendering-Guardrails" class="pub-link">Code</a>
+            <a href="../bibtex/misgendering.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="Eleanor Rigby ChatGPT loneliness post-LLM world">
+    <div class="pub-number">9</div>
+    <div class="pub-details">
+        <div class="pub-title">If Eleanor Rigby Had Met ChatGPT: A Study on Loneliness in a Post-LLM World</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">ACL 2025 Main (ann. 2024)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2412.01617" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/EleanorRigby" class="pub-link">Code</a>
+            <a href="../bibtex/eleanor.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="awes laws flaws LLM research">
+    <div class="pub-number">10</div>
+    <div class="pub-details">
+        <div class="pub-title">Awes, Laws and Flaws of Today's LLM Research</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">ACL 2025 Findings (ann. 2024)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2408.15409" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/awes_laws_and_flaws" class="pub-link">Code</a>
+            <a href="../bibtex/awes.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="dialect fairness robustness large language models reasoning">
+    <div class="pub-number">11</div>
+    <div class="pub-details">
+        <div class="pub-title">Assessing Dialect Fairness and Robustness of Large Language Models in Reasoning Tasks</div>
+        <div class="pub-authors">Fangru Lin, Shaoguang Mao, Emanuele La Malfa, Valentin Hofmann, <strong>Adrian de Wynter</strong>, Xun Wang, Si-Qing Chen, Michael J. Wooldridge, Janet B. Pierrehumbert, Furu Wei</div>
+        <div class="pub-venue">ACL 2025 Main (ann. 2024)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2410.11005" class="pub-link">PDF</a>
+            <a href="https://aclanthology.org/2025.acl-long.317/" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="pub-entry fade-up" data-type="conference" data-search="RTP-LX LLMs toxicity multilingual">
+    <div class="pub-number">13</div>
+    <div class="pub-details">
+        <div class="pub-title">RTP-LX: Can LLMs Evaluate Toxicity in Multilingual Scenarios?</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong> <i>et al.</i></div>
+        <div class="pub-venue">AAAI 2025 (ann. 2024)</div>
+        <div class="pub-links">
+            <a href="https://openreview.net/forum?id=ZC0Hs5QyCw" class="pub-link">PDF</a>
+            <a href="https://huggingface.co/datasets/adewynter/RTP-LX" class="pub-link">Code</a>
+            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/35011" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="LLMs all you need SIGBOVIK">
+    <div class="pub-number">14</div>
+    <div class="pub-details">
+        <div class="pub-title">LLMs Are All You Need</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">SIGBOVIK 2025 (IKYK)</div>
+        <div class="pub-links">
+            <a href="https://sigbovik.org/2025/proceedings.pdf" class="pub-link">PDF</a>
+        </div>
+    </div>
+</div>
+
+                <h3 class="pub-year-heading fade-up">2024</h3>
+<div class="pub-entry fade-up" data-type="conference" data-search="GPT-4 DOOM games">
+    <div class="pub-number">15</div>
+    <div class="pub-details">
+        <div class="pub-title">Will GPT-4 Run DOOM?</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">IEEE Transactions on Games (2024)</div>
+        <div class="pub-links">
+            <a href="https://ieeexplore.ieee.org/document/10752360" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/Doom" class="pub-link">Code</a>
+            <a href="../bibtex/doom.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="LLM mastermind strategic reasoning survey">
+    <div class="pub-number">16</div>
+    <div class="pub-details">
+        <div class="pub-title">LLM as a Mastermind: A Survey of Strategic Reasoning with Large Language Models</div>
+        <div class="pub-authors">Yadong Zhang, Shaoguang Mao, Tao Ge, Xun Wang, <strong>Adrian de Wynter</strong>, Yan Xia, Wenshan Wu, Ting Song, Man Lan and Furu Wei</div>
+        <div class="pub-venue">COLM 2024</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2404.01230.pdf" class="pub-link">PDF</a>
+            <a href="../bibtex/llmmastermind.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="argument argumentative reasoning large language models">
+    <div class="pub-number">17</div>
+    <div class="pub-details">
+        <div class="pub-title">"I'd Like to Have an Argument, Please": Argumentative Reasoning in Large Language Models</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong> and Tangming Yuan</div>
+        <div class="pub-venue">COMMA 2024 (ann. 2023)</div>
+        <div class="pub-links">
+            <a href="https://ebooks.iospress.nl/doi/10.3233/FAIA240311" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/argumentation-llms" class="pub-link">Code</a>
+            <a href="../bibtex/argumentation1.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="large language model evaluators scaling multilingual evaluation">
+    <div class="pub-number">18</div>
+    <div class="pub-details">
+        <div class="pub-title">Are Large Language Model-based Evaluators the Solution to Scaling Up Multilingual Evaluation?</div>
+        <div class="pub-authors">Rishav Hada, Varun Gumma, <strong>Adrian de Wynter</strong>, Harshita Diddee, Mohamed Ahmed, Monojit Choudhury, Kalika Bali, and Sunayana Sitaram</div>
+        <div class="pub-venue">EACL 2024 (ann. 2023)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2309.07462" class="pub-link">PDF</a>
+            <a href="https://aclanthology.org/2024.findings-eacl.71/" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="journal" data-search="algorithm learning smaller representations models scarce data">
+    <div class="pub-number">19</div>
+    <div class="pub-details">
+        <div class="pub-title">An Algorithm for Learning Smaller Representations of Models With Scarce Data</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Information Geometry (2024; ann. 2020)</div>
+        <div class="pub-links">
+            <a href="https://link.springer.com/article/10.1007/s41884-024-00153-0" class="pub-link">PDF</a>
+            <a href="https://github.com/alexa/bort" class="pub-link">Code</a>
+            <a href="../bibtex/agora.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+
+
+<h3 class="pub-year-heading fade-up">2023</h3>
+<div class="pub-entry fade-up" data-type="conference" data-search="meta-prompting">
+    <div class="pub-number">21</div>
+    <div class="pub-details">
+        <div class="pub-title">On Meta-Prompting</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong>, Xun Wang, Qilong Gu, and Si-Qing Chen</div>
+        <div class="pub-venue">Preprint</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2312.06562" class="pub-link">PDF</a>
+            <a href="https://github.com/adewynter/metaprompting" class="pub-link">Code</a>
+            <a href="../bibtex/metaprompting.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="journal" data-search="evaluation LLM outputs discourse memorization">
+    <div class="pub-number">22</div>
+    <div class="pub-details">
+        <div class="pub-title">An Evaluation of LLM Outputs: Discourse and Memorization</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong>, Xun Wang, Alex Sokolov, Qilong Gu, and Si-Qing Chen</div>
+        <div class="pub-venue">The Natural Language Processing Journal</div>
+        <div class="pub-links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S2949719123000213" class="pub-link">PDF</a>
+            <a href="../bibtex/llmeval.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="opportunities dangers LLM-based evaluation">
+    <div class="pub-number">23</div>
+    <div class="pub-details">
+        <div class="pub-title">On the Opportunities and Dangers of LLM-Based Evaluation</div>
+        <div class="pub-authors">Chris Quirk and <strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at the 2023 MLADS Conference</div>
+        <div class="pub-links">
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="curse biased researcher pitfalls LLM-based evaluation">
+    <div class="pub-number">24</div>
+    <div class="pub-details">
+        <div class="pub-title">The Curse of the Biased Researcher: Common Pitfalls in LLM-based Evaluation</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at the 2023 MLADS Conference</div>
+        <div class="pub-links">
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="user-centered evaluation Spanish text simplification">
+    <div class="pub-number">25</div>
+    <div class="pub-details">
+        <div class="pub-title">A User-Centered Evaluation of Spanish Text Simplification</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong>, Anthony Hevia, and Si-Qing Chen</div>
+        <div class="pub-venue">Preprint</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/abs/2308.07556" class="pub-link">PDF</a>
+            <a href="https://github.com/microsoft/BrevE-CLaro" class="pub-link">Data</a>
+            <a href="../bibtex/breve.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<h3 class="pub-year-heading fade-up">Older</h3>
+<div class="pub-entry fade-up" data-type="journal" data-search="Turing completeness Sid Meier Civilization">
+    <div class="pub-number">27</div>
+    <div class="pub-details">
+        <div class="pub-title">Turing Completeness and <i>Sid Meier's Civilization</i></div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">IEEE Transactions on Games (2022)</div>
+        <div class="pub-links">
+            <a href="https://ieeexplore.ieee.org/document/9756289" class="pub-link">PDF</a>
+            <a href="https://adewynter.github.io/notes/img/BB3.gif" class="pub-link">The Turing Machine in Action</a>
+            <a href="../bibtex/civ.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="Bort algorithms applications">
+    <div class="pub-number">28</div>
+    <div class="pub-details">
+        <div class="pub-title">Bort: Algorithms and Applications</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at the 2021 Alexa Prize Summit</div>
+        <div class="pub-links">
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="preprint" data-search="optimal subarchitecture extraction BERT">
+    <div class="pub-number">29</div>
+    <div class="pub-details">
+        <div class="pub-title">Optimal Subarchitecture Extraction for BERT</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong> and Daniel J. Perry</div>
+        <div class="pub-venue">Preprint (2020)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2010.10499" class="pub-link">PDF</a>
+            <a href="https://github.com/alexa/bort" class="pub-link">Code</a>
+            <a href="../bibtex/osebert.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="preprint" data-search="approximation algorithm optimal subarchitecture extraction">
+    <div class="pub-number">30</div>
+    <div class="pub-details">
+        <div class="pub-title">An Approximation Algorithm for Optimal Subarchitecture Extraction</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Preprint (2020)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2010.08512.pdf" class="pub-link">PDF</a>
+            <a href="../bibtex/ose.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="preprint" data-search="Mischief black-box attack transformer architectures">
+    <div class="pub-number">31</div>
+    <div class="pub-details">
+        <div class="pub-title">Mischief: A Simple Black-Box Attack Against Transformer Architectures</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Preprint (2020)</div>
+        <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2010.08542" class="pub-link">PDF</a>
+            <a href="../bibtex/mischief.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="talk" data-search="harder performance measures language models">
+    <div class="pub-number">32</div>
+    <div class="pub-details">
+        <div class="pub-title">Harder Performance Measures for Language Models</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">Invited talk at the 2020 Alexa Prize Summit</div>
+        <div class="pub-links">
+        </div>
+    </div>
+</div>
+
+<div class="pub-entry fade-up" data-type="conference" data-search="bounds function approximations neural networks">
+    <div class="pub-number">33</div>
+    <div class="pub-details">
+        <div class="pub-title">On the Bounds of Function Approximations</div>
+        <div class="pub-authors"><strong>Adrian de Wynter</strong></div>
+        <div class="pub-venue">ICANN 2019 (oral presentation)</div>
+        <div class="pub-links">
+            <a href="https://link.springer.com/chapter/10.1007/978-3-030-30487-4_32" class="pub-link">PDF</a>
+            <a href="../bibtex/fa.html" class="pub-link">Bibtex</a>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE: PUBLICATIONS -->
+    <!-- ══════════════════════════════ -->
+    <!-- PAGE: WRITINGS                 -->
+    <!-- ══════════════════════════════ -->
+    <div class="page" id="page-writings">
+        <div class="page-section">
+            <div class="section-header fade-up"><h2>Writings</h2></div>
+
+            <div class="writings-grid">
+
+                <a href="https://adriandewynter.substack.com/p/will-gpt-4-and-5-run-doom" class="writing-card fade-up">
+                    <img class="writing-card-img" src="img/doom_cover.webp" alt="DOOM screenshot" />
+                    <div class="writing-card-body">
+                        <div class="writing-meta">May 2026 <span class="writing-tag">Paper summary</span></div>
+                        <h3>Will GPT-4 (and 5!) Run DOOM?</h3>
+                        <p>Yes but no. Links to code, resources, TL;DR of the paper, and videos of the model playing the game.</p>
+                        <span class="writing-read">Read →</span>
+                    </div>
+                </a>
+
+                <a href="https://adriandewynter.substack.com/p/establishing-trust-in-llms-as-judges" class="writing-card fade-up">
+                    <img class="writing-card-img" src="img/no_data_cover.webp" alt="Meme of AI making stuff up" />
+                    <div class="writing-card-body">
+                        <div class="writing-meta">April 2026 <span class="writing-tag">Tutorial</span></div>
+                        <h3>Establishing Trust in LLMs-as-Judges</h3>
+                        <p>This is the TL;DR of my paper Algorithmically Establishing Trust in Evaluators.</p>
+                        <span class="writing-read">Read →</span>
+                    </div>
+                </a>
+
+                <a href="https://adriandewynter.substack.com/p/turing-completeness-and-sid-meiers" class="writing-card fade-up">
+                    <img class="writing-card-img" src="img/civ_vi_cover.png" alt="Turing Machine in Civ VI" />
+                    <div class="writing-card-body">
+                        <div class="writing-meta">March 2026 <span class="writing-tag">Paper summary</span></div>
+                        <h3>Turing Completeness and Sid Meier's Civilization</h3>
+                        <p>This is a less rigorous version of my paper Turing Completeness and Sid Meier’s Civilization, published in IEEE’s Transactions on Games.</p>
+                        <span class="writing-read">Read  →</span>
+                    </div>
+                </a>
+
+                <a href="factoids.html" class="writing-card fade-up">
+                    <img class="writing-card-img" src="img/random_cover.jpeg" alt="Random meme" />
+                    <div class="writing-card-body">
+                        <div class="writing-meta">May 2026 <span class="writing-tag">Fun</span></div>
+                        <h3>Some factoids</h3>
+                        <p>Some random stuff that I didn't know where to put</p>
+                        <span class="writing-read">Read  →</span>
+                    </div>
+                </a>
+
+
+                <!--
+                <a href="https://adewynter.github.io/notes/decidability_of_nas.html" class="writing-card fade-up">
+                    <img class="writing-card-img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&h=360&fit=crop" alt="Energy grid visualization" />
+                    <div class="writing-card-body">
+                        <div class="writing-meta">March 2021 <span class="writing-tag">Tutorial</span></div>
+                        <h3>Neural architecture search is undecidable</h3>
+                        <p>A TL;DR of my paper ''.</p>
+                        <span class="writing-read">Read article →</span>
+                    </div>
+                </a>
+
+                <a href="https://adewynter.github.io/notes/bort_algorithms_and_applications.html" class="writing-card fade-up">
+                    <img class="writing-card-img" src="https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=700&h=360&fit=crop" alt="Chalkboard equations" />
+                    <div class="writing-card-body">
+                        <div class="writing-meta">November 2020 <span class="writing-tag">Tutorial</span></div>
+                        <h3>Bort: Algorithms and Applications</h3>
+                        <p>TL;DR of the work done to get Bort.</p>
+                        <span class="writing-read">Read notes →</span>
+                    </div>
+                </a>
+                -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ── Back to Top Button ── -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <p>&copy; 2026 Adrian de Wynter · <a href="mailto:adewynter@microsoft.com">adewynter@microsoft.com</a>.</p>
+    </footer>
+
+
+    <!-- ══════════════════════════════ -->
+    <!-- JAVASCRIPT                     -->
+    <!-- ══════════════════════════════ -->
+    <script>
+        // ── Page navigation system ──
+        const allPages = document.querySelectorAll('.page');
+        const allNavLinks = document.querySelectorAll(
+            '.nav-links a, .nav-logo, .cta-button[data-page]'
+        );
+
+        function showPage(pageId) {
+            allPages.forEach(p => p.classList.remove('active'));
+
+            const target = document.getElementById('page-' + pageId);
+            if (target) target.classList.add('active');
+
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.toggle('active', a.dataset.page === pageId);
+            });
+
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            // Reset and re-observe fade-ups in the new page
+            requestAnimationFrame(() => {
+                target.querySelectorAll('.fade-up').forEach(el => {
+                    el.classList.remove('visible');
+                });
+                requestAnimationFrame(() => {
+                    target.querySelectorAll('.fade-up').forEach(el => {
+                        observer.observe(el);
+                    });
+                });
+            });
+
+            navLinks.classList.remove('open');
+        }
+
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.dataset.page || 'home';
+                showPage(pageId);
+            });
+        });
+
+        // ── Hamburger toggle ──
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+        // ── Navbar shadow on scroll ──
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // ── Back to top ──
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ── Scroll fade-up animation ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // ── Publications: Filter buttons ──
+        const pubFilters = document.querySelectorAll('.pub-filter');
+        const pubEntries = document.querySelectorAll('.pub-entry');
+        const pubYearHeadings = document.querySelectorAll('.pub-year-heading');
+
+
+        function applyPubFilters() {
+            const activeFilter = document.querySelector('.pub-filter.active');
+            const filterVal = activeFilter ? activeFilter.dataset.filter : 'all';
+            const searchVal = document.getElementById('pubSearch')
+                ? document.getElementById('pubSearch').value.toLowerCase().trim()
+                : '';
+
+            pubEntries.forEach(entry => {
+                const matchesType =
+                    filterVal === 'all' || entry.dataset.type === filterVal;
+                const matchesSearch =
+                    searchVal === '' ||
+                    entry.dataset.search.includes(searchVal) ||
+                    entry.textContent.toLowerCase().includes(searchVal);
+
+                entry.style.display = matchesType && matchesSearch ? '' : 'none';
+            });
+
+            // Hide year headings if all entries below them are hidden
+            pubYearHeadings.forEach(heading => {
+                let next = heading.nextElementSibling;
+                let hasVisible = false;
+                while (next && !next.classList.contains('pub-year-heading')) {
+                    if (
+                        next.classList.contains('pub-entry') &&
+                        next.style.display !== 'none'
+                    ) {
+                        hasVisible = true;
+                        break;
+                    }
+                    next = next.nextElementSibling;
+                }
+                heading.style.display = hasVisible ? '' : 'none';
+            });
+        }
+
+        pubFilters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                pubFilters.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyPubFilters();
+            });
+        });
+
+        // ── Publications: Search input ──
+        const pubSearch = document.getElementById('pubSearch');
+        if (pubSearch) {
+            pubSearch.addEventListener('input', () => {
+                applyPubFilters();
+            });
+        }
+    </script>
+
+</body>
 </html>
