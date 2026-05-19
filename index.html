@@ -1288,31 +1288,48 @@ Earlier theoretical work showed with category theory that <a href="https://arxiv
             '.nav-links a, .nav-logo, .cta-button[data-page]'
         );
 
-        function showPage(pageId) {
-            allPages.forEach(p => p.classList.remove('active'));
+        function pageIdFromHash() {
+          const h = (window.location.hash || '').replace('#', '').trim();
+          return h || 'home';
+        }
 
-            const target = document.getElementById('page-' + pageId);
-            if (target) target.classList.add('active');
+        // On first load, open the page indicated by the hash
+        window.addEventListener('DOMContentLoaded', () => {
+          showPage(pageIdFromHash());
+        });
 
-            document.querySelectorAll('.nav-links a').forEach(a => {
-                a.classList.toggle('active', a.dataset.page === pageId);
-            });
+        // If the hash changes (back/forward buttons), update the page
+        window.addEventListener('hashchange', () => {
+          showPage(pageIdFromHash());
+        });
 
-            window.scrollTo({ top: 0, behavior: 'instant' });
+        function showPage(pageId, { scrollTop = true } = {}) {
+          let target = document.getElementById('page-' + pageId);
 
-            // Reset and re-observe fade-ups in the new page
+          // Fallback: if hash/default is wrong, don't blank the site
+          if (!target) {
+            pageId = 'home';
+            target = document.getElementById('page-home') || document.querySelector('.page');
+          }
+          if (!target) return;
+
+          allPages.forEach(p => p.classList.remove('active'));
+          target.classList.add('active');
+
+          document.querySelectorAll('.nav-links a').forEach(a => {
+            a.classList.toggle('active', a.dataset.page === pageId);
+          });
+
+          if (scrollTop) window.scrollTo({ top: 0, behavior: 'instant' });
+
+          requestAnimationFrame(() => {
+            target.querySelectorAll('.fade-up').forEach(el => el.classList.remove('visible'));
             requestAnimationFrame(() => {
-                target.querySelectorAll('.fade-up').forEach(el => {
-                    el.classList.remove('visible');
-                });
-                requestAnimationFrame(() => {
-                    target.querySelectorAll('.fade-up').forEach(el => {
-                        observer.observe(el);
-                    });
-                });
+              target.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
             });
+          });
 
-            navLinks.classList.remove('open');
+          navLinks.classList.remove('open');
         }
 
         allNavLinks.forEach(link => {
