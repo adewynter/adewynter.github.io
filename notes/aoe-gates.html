@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Adrian de Wynter" />
+  <title>A Perceptron in <em>Age of Empires II</em></title>
+
+  <link rel="icon" type="image/png" href="../img/headshot.jpg" />
+  <!-- MathJax (for equations) -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+  <style>
+
+    .article-hero { max-width:1100px; margin:0 auto; padding:120px 2rem 30px; }
+    .article-hero h1 { font-family:'Playfair Display',serif; color:var(--primary); font-size:2.6rem; line-height:1.15; }
+    .article-hero .subtitle { margin-top:0.6rem; color:var(--text-light); font-size:1rem; }
+    .article-hero .hero-actions { margin-top:1.2rem; display:flex; gap:0.75rem; flex-wrap:wrap; }
+
+    .card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:1.6rem; }
+    .card p { color:var(--text-light); font-size:0.98rem; margin-bottom:1rem; }
+    .card p:last-child { margin-bottom:0; }
+    .card a { color:var(--accent); text-decoration:none; font-weight:600; }
+    .card a:hover { text-decoration:underline; }
+
+    .contents-grid { display:grid; grid-template-columns: 1fr; gap: 0.8rem; }
+    .contents-grid a {
+      display:block;
+      padding:0.85rem 1rem;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--card-bg);
+      text-decoration:none;
+      color:inherit;
+    }
+    .contents-grid a:hover { border-color:var(--accent); background:var(--accent-light); }
+
+    .feature { display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 1.6rem; align-items:start; }
+    figure { margin:0; }
+    figure img { width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--border); }
+    figcaption { margin-top:0.65rem; color:var(--text-light); font-size:0.85rem; line-height:1.5; }
+
+    .backlink { display:inline-flex; align-items:center; gap:0.45rem; }
+
+    /* Offset anchor jumps because navbar is fixed */
+    :target { scroll-margin-top: 90px; }
+
+    @media (max-width: 900px) {
+      .feature { grid-template-columns: 1fr; }
+      .article-hero h1 { font-size:2.1rem; }
+    }
+
+    .media-stack { display: grid; gap: 0.75rem; }
+
+  .media-stack video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: #000; /* nice while loading */
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Navigation ── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html">Adrian de Wynter</a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#home">Home</a></li>
+      <li><a href="../index.html#bio">Extended Bio</a></li>
+      <li><a href="../index.html#cv">CV</a></li>
+      <li><a href="../index.html#research">Research Statement</a></li>
+      <li><a href="../index.html#publications">Publications</a></li>
+      <li><a href="../index.html#writings">Writings</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+  <header class="article-hero">
+    <h1>A Perceptron in <em>Age of Empires II</em></h1>
+
+    <div class="subtitle">
+      In-game constructions of NAND gates and a perceptron (forward prop and training) as described in in
+      <a href="https://arxiv.org/abs/">'If LLMs Have Human-Like Attributes, Then So Does <em>Age of Empires II</em>'</a>.
+      We begin by proving that <em>Age of Empires II</em> is functionally- and Turing- complete. Then we build a perceptron and a circuit to train it in-game. 
+      With that, we argue that changing the substrate (representation) of an LLM also alters the perception of their attributes. We then show that research in LLM anthropomorphic attributes cannot be done starting by assuming that these attributes exist (or not) in the system; even if you aim to conclude that they do not exist. 
+      This assumption can happen even when you do not make it explicitly! It also shows that there are ways to do good, sound research without needing to make that assumption.
+      If you're looking for the actual artefacts (code and so on), these are <a href="https://github.com/adewynter/aoe2-circuits">here</a>.
+      <br />
+      <br />
+      <em>
+        All products, company names, brand names, trademarks, and images are properties of their respective owners.
+        The images are used under Fair Use for educational purposes.
+      </em>
+      <br />
+    </div>
+
+      <a class="cta-button" href="https://arxiv.org/" style="text-decoration:none;">
+        Read the paper
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-header"><h2>Contents</h2></div>
+    <div class="contents-grid">
+      <a href="#InGameNAND">An operational NAND gate in <em>Age of Empires II</em></a>
+      <a href="#InGamePerceptron">An operational perceptron in <em>Age of Empires II</em></a>
+      <a href="#InGameTraining">An operational ansatz-based training circuit in <em>Age of Empires II</em></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header"><h2 id="InGameNAND">Operational NAND gate</h2></div>
+
+    <div class="card feature">
+      <div>
+        <p>
+          An operational NAND gate in <em>Age of Empires II</em>, built with the game's scenario editor. This one can also be built within the game in a two-player setup but it's a lot easier (so to speak) to just script it. 
+        </p>
+
+
+        <p>
+          This one is designed to show its internal workings, and much simpler implementations are possible. Every bit is represented by two rails (grass for 0, a bridge for 1). 
+          Only one rail is active at a time, with a goat acting as the signal carrier. 
+          When the gate fires, the bit-goats are removed (they ded) and a new bit-goat is placed in its respective output rail. 
+        </p>
+
+        <p>
+          To avoid race conditions, 'gate ready' rails (ice) are set, with a signal-goat in the rail closest to the gate indicating that it can start the calculation. In the above: in order for the AND gate to be active, the leftmost and bottom-most bit goats need to be near the pens (towards the inside of the map). This says that the gate is ready, but not that the UPSTREAM gate is ready. For that, the goat in the middle ice patch needs to be near the AND pen. 
+          When the gate fires, the goats are sent 'away' towards their upstream/downstream gates to signal readiness.
+        </p>
+
+        <p>
+          <b>To read the gate:</b> leftmost grass/bridge rails: 0/1 left-input for AND. Rightmost grass/bridge rails: right-input for AND. Middle rails: output of AND, input for NOT. In the gif, it computes AND(0, 1), places a goat in the middle grass rail (0), and NOT places a gate on the bridge (1).  
+        </p>
+      </div>
+      <figure class="media-stack">
+        <img
+          src="img/nand_gate_running.gif"
+          alt="An operational NAND gate in Age of Empires II"
+        />
+
+        <video controls preload="metadata" playsinline>
+          <source src="video/nand_gate_running.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <figcaption>
+          An operational NAND gate in <em>Age of Empires II</em>, accounting for race conditions with the ice rails.
+        </figcaption>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header"><h2 id="InGamePerceptron">An operational 1-bit perceptron</em></h2></div>
+
+    <div class="card feature">
+      <div>
+        <p>
+          An operational perceptron in <em>Age of Empires II</em> using the same logic (as in, the same core concepts) as the NAND gate above.
+        </p>
+
+        <p>
+          This is meant to be a VERY simple perceptron, so it is a bipolar 1-bit implementation. 
+          It is composed of two XNOR gates doing most of the inner product stuff, and an AND gate as the threshold (it is meant to be learning AND, but it doesn't affect this). 
+        </p>
+
+        <p>
+        This particular implementation omits the bias term and simply hardcodes it in the step function, but a bias adder is also possible. Note how for every bit on the rightmost circuit there are two bit-goats on the leftmost. This is more complex but allows for concurrency control, since otherwise the gates do weird things.
+        </p>
+
+        <p>
+          <b>To read the perceptron:</b> for an input \([ x_1, x_2]^T\), the perceptron with weights \([w_1, w_2]^T\) will have in the topmost XNOR as inputs \(x_1, w_1\) (blue-green patch and rocky patch), and same for bottom-most XNOR. Goats act as bits and as ready signals. 
+          The output of the XNOR gates can be seen in that middle section with three rails, which is in turn the input to the AND gate. In the GIF it computes \(x = [1, 1]^T\) for \(w = [1, 1]^T\), and obviously predicts 1 since this weight assignment is the correct answer.
+        </p>
+      </div>
+
+      <figure class="media-stack">
+        <img src="img/perceptron_running.gif" alt="An operational perceptron in Age of Empires II" />
+
+        <video controls preload="metadata" playsinline>
+          <source src="video/perceptron_running.mp4" type="video/mp4">
+        </video>
+
+        <figcaption>An operational perceptron in <em>Age of Empires II</em>, with goats acting as the signal carriers.</figcaption>
+      </figure>
+
+
+    </figure>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header"><h2 id="InGameTraining">Perceptron-training circuit</h2></div>
+
+    <div class="card feature">
+      <div>
+        <p>
+          An ansatz-based training circuit in <em>Age of Empires II</em>.
+        </p>
+
+        <p>
+          The ansatz algorithm is just a regular perceptron circuit and a bunch of XNORs/ANDs/ORs to determine the new weights. Check the paper for the actual circuit. 
+        </p>
+
+        <p>
+          This one is quite complex to explain, so bear with me. The inputs are (top to bottom in the watery patch): true label \(t\), and input \(x\) and current weights \(w\) vectors. The perceptron is on the first two levels from the left, and the remaining circuit computes the error and returns the new weights. 
+          To simplify the branching of the inputs, when the weights / inputs / labels are 'activated', the goats are teleported to their respective gates, but they are put on hold until the rest of the computation is done (via the ice goats).
+        </p>
+
+        <p>
+          The gates use the environment as coding. Bamboo is for XNOR, regular forests for AND, baobabs for OR, deep water for NOT, and the usual rails you know and love. 
+        </p>
+
+        <p>
+          <em>Note:</em> I tested this in verilog and works, and now I'm working on scripting it. It's just a pain and it's not like I have unlimited free time (but I'll add it to the repo and here!)
+        </p>
+      </div>
+
+
+      <figure class="media-stack">
+        <!--<img src="img/perceptron_training.gif" alt="An operational ansatz-based training circuit in Age of Empires II." />-->
+
+        <video controls preload="metadata" playsinline>
+          <source src="video/perceptron_training.mp4" type="video/mp4">
+        </video>
+
+        <figcaption>A built and soon-to-be-fully-scripted ansatz-based training circuit for a perceptron in <em>Age of Empires II</em>.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Adrian de Wynter · <a href="mailto:adewynter@microsoft.com">adewynter@microsoft.com</a>.</p>
+  </footer>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Optional: close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
+</body>
+
+</html>
