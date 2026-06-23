@@ -14,6 +14,45 @@
   <link rel="stylesheet" href="../style.css" type="text/css" />
   <style>
 
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* Prevent anything from breaking out */
+    section, .article-hero, .card, figure {
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    /* Constrain images */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Prevent MathJax from causing horizontal scroll */
+    mjx-container {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .section-header,
+    .section-header h2 {
+      overflow: visible;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    /* Also make sure MathJax inside headers doesn't force a single line */
+    .section-header mjx-container {
+      display: inline;
+      white-space: normal;
+    }
+
     .article-hero { max-width:1100px; margin:0 auto; padding:120px 2rem 30px; }
     .article-hero h1 { font-family:'Playfair Display',serif; color:var(--primary); font-size:2.6rem; line-height:1.15; }
     .article-hero .subtitle { margin-top:0.6rem; color:var(--text-light); font-size:1rem; }
@@ -48,8 +87,22 @@
     :target { scroll-margin-top: 90px; }
 
     @media (max-width: 900px) {
-      .feature { grid-template-columns: 1fr; }
-      .article-hero h1 { font-size:2.1rem; }
+      .feature {
+        grid-template-columns: 1fr; 
+      }
+      .article-hero h1 {
+        font-size: 2.1rem;
+      }
+      .article-hero {
+        padding: 100px 1rem 20px; /* reduce side padding on mobile */
+      }
+      section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -95,7 +148,6 @@
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-    </div>
   </header>
 
   <section>
